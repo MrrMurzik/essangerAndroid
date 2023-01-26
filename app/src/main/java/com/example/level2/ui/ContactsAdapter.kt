@@ -5,8 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.level2.R
 import com.example.level2.databinding.RecyclerItemBinding
 import com.example.level2.extensions.addPhoto
 import com.example.level2.model.User
