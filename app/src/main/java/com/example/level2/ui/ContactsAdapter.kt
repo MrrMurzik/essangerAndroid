@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.level2.R
 import com.example.level2.databinding.RecyclerItemBinding
+import com.example.level2.extensions.addPhoto
 import com.example.level2.model.User
 
 interface UserActionListener {
@@ -47,16 +48,7 @@ class ContactsAdapter (private val actionListener: UserActionListener)
             with (binding) {
                 tvName.text = user.name
                 tvJob.text = user.job
-                if (user.photo.isNotBlank()) {
-                    Glide.with(ivAvatar.context)
-                        .load(user.photo)
-                        .circleCrop()
-                        .placeholder(R.drawable.ic_baseline_sentiment_very_satisfied_24)
-                        .error(R.drawable.ic_baseline_sentiment_very_satisfied_24)
-                        .into(ivAvatar)
-                } else {
-                    ivAvatar.setImageResource(R.drawable.ic_baseline_sentiment_very_satisfied_24)
-                }
+                binding.ivAvatar.addPhoto(user)
                 setListeners(user)
             }
         }
