@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="largeFontSize">24sp</dimen>
+    <dimen name="marginBig">20dp</dimen>
+    <dimen name="smallFontSize">14sp</dimen>
+    <dimen name="mediumPlusFontSize">18sp</dimen>
+    <dimen name="avatarDiameter">50dp</dimen>
+    <dimen name="mediumMargin">16dp</dimen>
+    <dimen name="smallMargin">10dp</dimen>
+</resources>

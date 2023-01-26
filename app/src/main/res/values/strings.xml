@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">level2</string>
+    <string name="contacts">Contacts</string>
+    <string name="add_contacts">Add contact</string>
+    <string name="name">name</string>
+    <string name="job">job</string>
+</resources>
