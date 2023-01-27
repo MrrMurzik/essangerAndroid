@@ -4,4 +4,9 @@
     <string name="add_contacts">Add contact</string>
     <string name="name">name</string>
     <string name="job">job</string>
+
+    <!-- deletion alert dialog string -->
+    <string name="default_deletion_dialog_title">Contact deletion</string>
+    <string name="default_deletion_dialog_message">Do you really want to delete this contact?</string>
+
 </resources>

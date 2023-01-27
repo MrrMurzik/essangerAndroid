@@ -12,7 +12,6 @@ import com.example.level2.model.User
 interface UserActionListener {
 
     fun onUserDelete (user: User)
-    fun onUndoDeletion (user: User)
 
 }
 

@@ -1,9 +1,13 @@
 package com.example.level2.ui
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.level2.R
 import com.example.level2.databinding.MyContactsActivityBinding
 import com.example.level2.model.User
 import com.example.level2.viewmodel.ContactsViewModel
@@ -17,7 +21,6 @@ class ActivityMyContacts : AppCompatActivity(), UserActionListener {
     private val adapterContacts: ContactsAdapter by lazy {
         ContactsAdapter(actionListener = this@ActivityMyContacts)
     }
-
 
     private val viewModel: ContactsViewModel by viewModels()
 
@@ -48,11 +51,34 @@ class ActivityMyContacts : AppCompatActivity(), UserActionListener {
     }
 
     override fun onUserDelete(user: User) {
-        viewModel.deleteUser(user)
+        confirmDeletion(user)
     }
 
-    override fun onUndoDeletion(user: User) {
-        TODO("Not yet implemented")
+    private fun confirmDeletion(user: User) {
+
+        val alertDialogListener = DialogInterface.OnClickListener { _, which ->
+            when (which) {
+                DialogInterface.BUTTON_POSITIVE -> {
+                    viewModel.deleteUser(user)
+                    showToast("User ${user.name} has deleted")
+                }
+                DialogInterface.BUTTON_NEGATIVE -> showToast("Deletion cancelled")
+            }
+        }
+
+        val alertDialog = AlertDialog.Builder(this)
+            .setCancelable(true)
+            .setTitle(R.string.default_deletion_dialog_title)
+            .setMessage(R.string.default_deletion_dialog_message)
+            .setPositiveButton("Yes", alertDialogListener)
+            .setNegativeButton("No", alertDialogListener)
+            .create()
+        alertDialog.show()
     }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
 
 }
