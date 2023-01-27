@@ -54,7 +54,6 @@ class ContactsAdapter (private val actionListener: UserActionListener)
             binding.ibTrash.setOnClickListener {
                 actionListener.onUserDelete(user)
             }
-
         }
     }
 

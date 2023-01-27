@@ -8,5 +8,7 @@
     <!-- deletion alert dialog string -->
     <string name="default_deletion_dialog_title">Contact deletion</string>
     <string name="default_deletion_dialog_message">Do you really want to delete this contact?</string>
+    <!-- snackBar after deletion contact-->
+    <string name="deletion_snackbar_message">User has been deleted</string>
 
 </resources>

@@ -1,7 +1,9 @@
 package com.example.level2.ui
 
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -11,6 +13,7 @@ import com.example.level2.R
 import com.example.level2.databinding.MyContactsActivityBinding
 import com.example.level2.model.User
 import com.example.level2.viewmodel.ContactsViewModel
+import com.google.android.material.snackbar.Snackbar
 
 // dependency injection (hilt, coin, dagger)
 
@@ -51,33 +54,50 @@ class ActivityMyContacts : AppCompatActivity(), UserActionListener {
     }
 
     override fun onUserDelete(user: User) {
-        confirmDeletion(user)
+        showDeletionAlertDialog(getAlertDialogListener(user))
     }
 
-    private fun confirmDeletion(user: User) {
-
-        val alertDialogListener = DialogInterface.OnClickListener { _, which ->
+    private fun getAlertDialogListener(user: User): DialogInterface.OnClickListener {
+        return DialogInterface.OnClickListener { _, which ->
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
+                    val userPosition = viewModel.getUserPosition(user)
                     viewModel.deleteUser(user)
-                    showToast("User ${user.name} has deleted")
+                    showUndoSnackbar(user, userPosition)
                 }
-                DialogInterface.BUTTON_NEGATIVE -> showToast("Deletion cancelled")
+                DialogInterface.BUTTON_NEGATIVE -> showToast("Deletion has cancelled")
             }
         }
+    }
 
-        val alertDialog = AlertDialog.Builder(this)
+    private fun showDeletionAlertDialog(alertDialogListener: DialogInterface.OnClickListener) {
+        AlertDialog.Builder(this)
             .setCancelable(true)
             .setTitle(R.string.default_deletion_dialog_title)
             .setMessage(R.string.default_deletion_dialog_message)
             .setPositiveButton("Yes", alertDialogListener)
             .setNegativeButton("No", alertDialogListener)
             .create()
-        alertDialog.show()
+            .show()
+    }
+
+    private fun showUndoSnackbar(user: User, position: Int) {
+        Snackbar
+            .make(
+                binding.root,
+                R.string.deletion_snackbar_message,
+                5000)
+            .setAction("Undo") {addUser(user, position)}
+            .setActionTextColor(Color.CYAN)
+            .show()
     }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun addUser(user: User, position: Int) {
+        viewModel.addUser(user, position)
     }
 
 

@@ -22,4 +22,14 @@ class ContactsViewModel : ViewModel() {
             remove(user)
         }
     }
+
+    fun addUser(user: User, position: Int) {
+        _contactsLiveData.value = _contactsLiveData.value?.toMutableList()?.apply {
+            add(position, user)
+        }
+    }
+
+    fun getUserPosition(user: User): Int {
+        return _contactsLiveData.value?.indexOf(user) ?: -1
+    }
 }
