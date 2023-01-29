@@ -1,5 +1,6 @@
 package com.example.level2.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,6 +24,13 @@ class ContactsViewModel : ViewModel() {
         }
     }
 
+    fun deleteUser(position: Int) {
+        _contactsLiveData.value = _contactsLiveData.value?.toMutableList()?.apply {
+            Log.d("delete user", "delete user ${position}")
+            removeAt(position)
+        }
+    }
+
     fun addUser(user: User, position: Int) {
         _contactsLiveData.value = _contactsLiveData.value?.toMutableList()?.apply {
             add(position, user)
@@ -32,4 +40,10 @@ class ContactsViewModel : ViewModel() {
     fun getUserPosition(user: User): Int {
         return _contactsLiveData.value?.indexOf(user) ?: -1
     }
+
+    fun getUser(position: Int): User {
+        return _contactsLiveData.value?.toMutableList()?.get(position)!!
+    }
+
+
 }

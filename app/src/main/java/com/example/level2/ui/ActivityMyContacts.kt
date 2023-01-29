@@ -3,16 +3,18 @@ package com.example.level2.ui
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.level2.R
 import com.example.level2.databinding.MyContactsActivityBinding
 import com.example.level2.model.User
 import com.example.level2.viewmodel.ContactsViewModel
+import com.example.level2.viewmodel.SwipeToDeleteCallback
 import com.google.android.material.snackbar.Snackbar
 
 // dependency injection (hilt, coin, dagger)
@@ -36,8 +38,21 @@ class ActivityMyContacts : AppCompatActivity(), UserActionListener {
 
         initRecycler()
 
+        addSwipeToDeleteFeature()
+
         setObservers()
 
+    }
+
+    private fun addSwipeToDeleteFeature() {
+        val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val userPosition = viewHolder.absoluteAdapterPosition
+                onUserDelete(viewModel.getUser(userPosition))
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerContacts)
     }
 
     private fun initRecycler() {

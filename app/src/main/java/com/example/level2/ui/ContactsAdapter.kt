@@ -3,16 +3,16 @@ package com.example.level2.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.level2.databinding.RecyclerItemBinding
 import com.example.level2.extensions.addPhoto
 import com.example.level2.model.User
+import com.example.level2.viewmodel.SwipeToDeleteCallback
 
 interface UserActionListener {
-
     fun onUserDelete (user: User)
-
 }
 
 
