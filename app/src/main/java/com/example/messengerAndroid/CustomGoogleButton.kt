@@ -1,66 +1,103 @@
 package com.example.messengerAndroid
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
+import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
+import androidx.core.graphics.toColor
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.example.messengerAndroid.databinding.CustomGoogleButtonBinding
 
 
-class CustomGoogleButton(
-    context: Context,
-    attrs: AttributeSet?,
-    defStyle: Int,
-    defStyleRes: Int
-) : LinearLayout(context, attrs, defStyle, defStyleRes) {
+private const val RADIUS = 10f
 
-    private var binding: CustomGoogleButtonBinding
+class CustomGoogleButton @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr) {
 
-    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : this(context, attrs, defStyle, 0)
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context) : this(context, null)
-
-    init {
-        val inflater = LayoutInflater.from(context)
-        inflater.inflate(R.layout.custom_google_button, this, true)
-        binding = CustomGoogleButtonBinding.bind(this)
-        initAttrs(attrs, defStyle, defStyleRes)
+    private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.FILL
+        textAlign = Paint.Align.CENTER
+        typeface = Typeface.create("open_sans", Typeface.NORMAL)
     }
 
-    private fun initAttrs(attrs: AttributeSet?, defStyle: Int, defStyleRes: Int) {
-        if (attrs == null) return
+    private val googleIconDrawable = VectorDrawableCompat.create(resources, R.drawable.ic_google_logo, null)
 
-        val typedArray = context.obtainStyledAttributes(
-            attrs,
-            R.styleable.CustomGoogleButton,
-            defStyle,
-            defStyleRes)
-        with(binding) {
-            val text = typedArray.getString(R.styleable.CustomGoogleButton_text)
-            textViewGoogleText.text = text ?: context.getString(R.string.google)
+    private val rect = RectF(0f, 0f, 0f, 0f)
 
-            val srcLogo = typedArray.getResourceId(R.styleable.CustomGoogleButton_logoSrc, R.drawable.ic_google_logo)
-            imageViewLogo.setImageResource(srcLogo)
+    init {
+        isClickable = true
+        calculateRect()
+    }
 
-            val textSize = typedArray.getDimension(R.styleable.CustomGoogleButton_textSize, 16f)
-            textViewGoogleText.textSize = textSize
+    @SuppressLint("ResourceAsColor")
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        paint.color = Color.WHITE
+        canvas.drawRoundRect(rect, RADIUS, RADIUS, paint)
 
-            val fontFamily = typedArray.getFont(R.styleable.CustomGoogleButton_fontName)
-            textViewGoogleText.typeface = fontFamily
+        paint.color = Color.BLACK
+        canvas.drawText("GOOGLE", width * 0.52f, height * 0.66f, paint)
 
-            val textColor = typedArray.getColor(R.styleable.CustomGoogleButton_textColor, Color.BLACK)
-            textViewGoogleText.setTextColor(textColor)
+        googleIconDrawable?.draw(canvas)
+    }
 
-            val backgroundColor = typedArray.getColor(R.styleable.CustomGoogleButton_backgroundColor, Color.WHITE)
-            root.setBackgroundColor(backgroundColor)
 
-            val allCaps = typedArray.getBoolean(R.styleable.CustomGoogleButton_allCaps, false)
-            textViewGoogleText.isAllCaps = allCaps
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    }
 
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        calculateRect()
+        calculateDrawablePos()
+        paint.textSize = height / 2f
+
+    }
+
+    private fun calculateDrawablePos() {
+        var top = (height * 0.25).toInt()
+        var bottom = (height * 0.75).toInt()
+        var left = (width * 0.33).toInt()
+        var right = (width * 0.39).toInt()
+
+        val topBottomDiagonal = bottom - top
+        val leftRightDiagonal = right - left
+
+        if (topBottomDiagonal > leftRightDiagonal) {
+            val excessOfBiggerDiagonal = topBottomDiagonal - leftRightDiagonal
+            top += excessOfBiggerDiagonal / 2
+            bottom -= excessOfBiggerDiagonal / 2
+        } else if (topBottomDiagonal < leftRightDiagonal) {
+            val excessOfBiggerDiagonal = topBottomDiagonal - leftRightDiagonal
+            left += excessOfBiggerDiagonal / 2
+            right -= excessOfBiggerDiagonal / 2
         }
 
-        typedArray.recycle()
+        googleIconDrawable?.setBounds(left, top, right, bottom)
+    }
+
+    private fun calculateRect() {
+        rect.left = 0f
+        rect.right = width.toFloat()
+        rect.bottom = height.toFloat()
+        rect.top = 0f
+    }
+
+    private fun convertDpToPx(dp: Float) : Float {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics
+        )
     }
 
 }

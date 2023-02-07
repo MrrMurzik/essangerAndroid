@@ -14,4 +14,9 @@
         <!-- Customize your theme here. -->
         <item name="android:windowActivityTransitions">true</item>
     </style>
+    
+    <style name="CustomButtonStyle">
+        <item name="backgroundColor">#005555</item>
+        <item name="textColor">#2385fa</item>
+    </style>
 </resources>

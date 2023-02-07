@@ -112,18 +112,13 @@
     <com.example.messengerAndroid.CustomGoogleButton
         android:id="@+id/btnGoogle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="40dp"
         app:layout_constraintBottom_toTopOf="@id/tvOr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPassword"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintVertical_bias="1"
-        app:logoSrc="@drawable/ic_google_logo"
-        app:backgroundColor="@color/white"
-        android:text="@string/google"
-        app:allCaps="true"
-        android:textColor="@color/black" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
 
 
