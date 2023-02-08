@@ -7,18 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clUpperBlock"
+    <View
+        android:id="@+id/viewUpperBlock"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/default_color"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.5">
+        app:layout_constraintHeight_percent="0.5"/>
 
-        <TextView
-            android:id="@+id/tvSetting"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,12 +32,12 @@
             />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ibPicture"
+            android:id="@+id/imageButtonPicture"
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
             android:scaleType="centerCrop"
             android:src="@drawable/babyyoda"
-            app:layout_constraintBottom_toTopOf="@id/tvName"
+            app:layout_constraintBottom_toTopOf="@id/textViewName"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,12 +46,12 @@
             android:contentDescription="@string/userPhoto"
             />
 
-        <TextView
-            android:id="@+id/tvName"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/ibPicture"
-            app:layout_constraintBottom_toTopOf="@id/tvCareer"
+            app:layout_constraintTop_toBottomOf="@id/imageButtonPicture"
+            app:layout_constraintBottom_toTopOf="@id/textViewJob"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/Name"
@@ -60,14 +60,14 @@
             android:fontFamily="@font/montserrat_regular"
             />
 
-        <TextView
-            android:id="@+id/tvCareer"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewJob"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@id/textViewName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tvAddress"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/textViewAddress"
+            app:layout_constraintBottom_toBottomOf="@id/viewUpperBlock"
             android:layout_marginTop="@dimen/smallMargin"
             android:text="@string/job"
             android:textColor="@color/gray"
@@ -76,13 +76,13 @@
             android:layout_marginBottom="@dimen/smallMargin"
             />
 
-        <TextView
-            android:id="@+id/tvAddress"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/tvCareer"
-            app:layout_constraintBottom_toBottomOf="@id/tvCareer"
-            app:layout_constraintStart_toEndOf="@id/tvCareer"
+            app:layout_constraintTop_toTopOf="@id/textViewJob"
+            app:layout_constraintBottom_toBottomOf="@id/textViewJob"
+            app:layout_constraintStart_toEndOf="@id/textViewJob"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/home_address"
             android:textColor="@color/gray"
@@ -90,51 +90,50 @@
             android:fontFamily="@font/montserrat_regular"
             />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clLowerBlock"
+    <View
+        android:id="@+id/viewLowerBlock"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@color/lower_block"
-        app:layout_constraintTop_toBottomOf="@id/clUpperBlock">
+        app:layout_constraintTop_toBottomOf="@id/viewUpperBlock"/>
 
-        <ImageButton
-            android:id="@+id/ibFbLogo"
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/imageButtonFbLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ibLinkednLogo"
+            app:layout_constraintEnd_toStartOf="@id/imageButtonLinkednLogo"
             android:background="@drawable/ic_fb_logo"
-            app:layout_constraintTop_toTopOf="@id/ibLinkednLogo"
-            app:layout_constraintBottom_toBottomOf="@id/ibLinkednLogo" />
+            app:layout_constraintTop_toTopOf="@id/imageButtonLinkednLogo"
+            app:layout_constraintBottom_toBottomOf="@id/imageButtonLinkednLogo" />
 
-        <ImageButton
-            android:id="@+id/ibLinkednLogo"
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/imageButtonLinkednLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/ibFbLogo"
-            app:layout_constraintEnd_toStartOf="@id/ibInstLogo"
+            app:layout_constraintStart_toEndOf="@id/imageButtonFbLogo"
+            app:layout_constraintEnd_toStartOf="@id/imageButtonInstLogo"
             android:background="@drawable/ic_linkedn_logo"
             android:layout_marginStart="@dimen/margin_between_socials"
             android:layout_marginEnd="@dimen/margin_between_socials"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvFillProfile" />
+            app:layout_constraintTop_toTopOf="@id/viewLowerBlock"
+            app:layout_constraintBottom_toTopOf="@id/textViewFillProfile" />
 
-        <ImageButton
-            android:id="@+id/ibInstLogo"
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/imageButtonInstLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/ibLinkednLogo"
+            app:layout_constraintStart_toEndOf="@id/imageButtonLinkednLogo"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/ic_inst_logo"
-            app:layout_constraintTop_toTopOf="@id/ibLinkednLogo"
-            app:layout_constraintBottom_toBottomOf="@id/ibLinkednLogo" />
+            app:layout_constraintTop_toTopOf="@id/imageButtonLinkednLogo"
+            app:layout_constraintBottom_toBottomOf="@id/imageButtonLinkednLogo" />
 
-        <TextView
-            android:id="@+id/tvFillProfile"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewFillProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/mediumMargin"
@@ -142,12 +141,12 @@
             android:text="@string/fill_out_profile"
             android:textColor="@color/edit_button_color"
             android:textSize="@dimen/smallFontSize"
-            app:layout_constraintBottom_toTopOf="@id/btnEditButton"
+            app:layout_constraintBottom_toTopOf="@id/buttonEditProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnEditButton"
+            android:id="@+id/buttonEditProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/mediumMargin"
@@ -160,13 +159,13 @@
             android:text="@string/edit_profile"
             android:textColor="@color/dark_gray"
             android:textSize="@dimen/smallFontSize"
-            app:layout_constraintTop_toTopOf="@id/btnContactsButton"
+            app:layout_constraintTop_toTopOf="@id/buttonContacts"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/btnContactsButton"
-            app:layout_constraintStart_toEndOf="@id/btnContactsButton" />
+            app:layout_constraintBottom_toBottomOf="@id/buttonContacts"
+            app:layout_constraintStart_toEndOf="@id/buttonContacts" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnContactsButton"
+            android:id="@+id/buttonContacts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/mediumMargin"
@@ -174,11 +173,10 @@
             android:backgroundTint="@color/buttonsColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnEditButton"
+            app:layout_constraintEnd_toStartOf="@id/buttonEditProfile"
             android:text="@string/view_my_contacts"
             android:textColor="@color/lower_block"
             android:fontFamily="@font/montserrat_medium"
             android:textSize="@dimen/mediumFontSize"
             />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
