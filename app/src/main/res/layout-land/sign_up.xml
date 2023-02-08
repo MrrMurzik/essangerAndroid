@@ -111,25 +111,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPassword" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.example.messengerAndroid.CustomGoogleButton
         android:id="@+id/btnGoogle"
         android:layout_width="0dp"
         android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tvOr"
         android:layout_marginBottom="@dimen/smallMargin"
-        android:background="@drawable/slightly_rounded_corner"
-        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@id/tvAgree"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintTop_toBottomOf="@id/cbRememberMe"
-        app:backgroundTint="@color/white"
-        android:text="@string/google"
-        app:icon="@drawable/ic_google_logo"
-        android:textColor="@color/black"
-        app:iconTint="@null"
-        app:iconGravity="textStart"
-        app:iconPadding="8dp"
         />
 
     <TextView

@@ -112,12 +112,13 @@
     <com.example.messengerAndroid.CustomGoogleButton
         android:id="@+id/btnGoogle"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/tvOr"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPassword"
         app:layout_constraintVertical_bias="1"
+        android:layout_marginBottom="@dimen/smallMargin"
         app:layout_constraintVertical_chainStyle="packed" />
 
 
@@ -142,16 +143,15 @@
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="@string/register"
+        android:layout_marginBottom="@dimen/smallMargin"
+        android:background="@drawable/rounded_corner_and_stroke"
         android:fontFamily="@font/montserrat_regular"
         android:padding="@dimen/inner_button_padding"
-        android:background="@drawable/rounded_corner_and_stroke"
-        app:layout_constraintVertical_chainStyle="packed"
+        android:text="@string/register"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/tvAgree"
         app:layout_constraintTop_toBottomOf="@id/tvOr"
-        android:layout_marginBottom="@dimen/smallMargin">
-    </androidx.appcompat.widget.AppCompatButton>
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/tvAgree"
