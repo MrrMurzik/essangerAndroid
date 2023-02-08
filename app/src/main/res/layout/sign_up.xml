@@ -10,13 +10,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewGetAcquainted"
+        style="@style/BigBrightText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/smallMargin"
-        android:fontFamily="@font/montserrat_regular"
         android:text="@string/get_acquainted"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/largeFontSize"
         app:layout_constraintBottom_toTopOf="@id/textViewSmallInvite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,14 +24,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSmallInvite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/smallInfoText"
+        android:textColor="@color/text_color"
+
         android:layout_marginBottom="@dimen/largeMargin"
-        android:fontFamily="@font/montserrat_regular"
         android:gravity="center"
         android:text="@string/fill_text_invite"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/smallFontSize"
         app:layout_constraintBottom_toTopOf="@id/textViewEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,33 +55,55 @@
         android:backgroundTint="@color/gray"
         android:textColor="@color/white"
         android:textSize="@dimen/largeFontSize"
-        app:layout_constraintBottom_toTopOf="@id/textViewPassword"
+        app:layout_constraintBottom_toTopOf="@id/inputLayoutPassword"
         app:layout_constraintTop_toBottomOf="@id/textViewEmail" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_for_input"
-        android:layout_marginTop="@dimen/largeMargin"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="@string/password"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/smallFontSize"
-        app:layout_constraintBottom_toTopOf="@id/editTextPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextEmail" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editTextPassword"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/gray"
-        android:inputType="textPassword"
-        android:textColor="@color/white"
-        android:textSize="@dimen/largeFontSize"
-        app:layout_constraintBottom_toTopOf="@id/checkBoxRememberMe"
-        app:layout_constraintTop_toBottomOf="@id/textViewPassword" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextEmail"
+        app:layout_constraintBottom_toTopOf="@id/checkBoxRememberMe">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/default_color"
+            android:hint="@string/password"
+            android:textColor="@color/gray"
+            android:textColorHint="@color/gray"
+            />
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/textViewPassword"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/margin_for_input"-->
+<!--        android:layout_marginTop="@dimen/largeMargin"-->
+<!--        android:fontFamily="@font/montserrat_regular"-->
+<!--        android:text="@string/password"-->
+<!--        android:textColor="@color/gray"-->
+<!--        android:textSize="@dimen/smallFontSize"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/editTextPassword"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/editTextEmail" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatEditText-->
+<!--        android:id="@+id/editTextPassword"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="@color/gray"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="@dimen/largeFontSize"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/checkBoxRememberMe"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/textViewPassword" />-->
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkBoxRememberMe"
@@ -102,7 +120,7 @@
         android:textSize="@dimen/smallFontSize"
         app:layout_constraintBottom_toTopOf="@id/buttonGoogle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutPassword" />
 
     <com.example.messengerAndroid.CustomGoogleButton
         android:id="@+id/buttonGoogle"
@@ -112,7 +130,7 @@
         app:layout_constraintBottom_toTopOf="@id/textViewOr"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutPassword"
         app:layout_constraintVertical_bias="1"
         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -138,9 +156,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/smallMargin"
         android:background="@drawable/rounded_corner_and_stroke"
-        android:fontFamily="@font/montserrat_regular"
+        android:fontFamily="@font/open_sans_bold"
         android:padding="@dimen/inner_button_padding"
         android:text="@string/register"
+        android:textSize="16sp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/textViewAgree"
         app:layout_constraintTop_toBottomOf="@id/textViewOr"
@@ -163,13 +182,10 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewAlreadyHaveAcc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/smallInfoText"
+
         android:layout_marginEnd="@dimen/margin12dp"
-        android:fontFamily="@font/montserrat_regular"
         android:text="@string/already_have_an_account"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/smallFontSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/textViewSignIn"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -178,12 +194,10 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="@string/sign_in"
+        style="@style/smallInfoText"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/smallFontSize"
+
+        android:text="@string/sign_in"
         app:layout_constraintBottom_toBottomOf="@id/textViewAlreadyHaveAcc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textViewAlreadyHaveAcc"

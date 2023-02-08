@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default parent style -->
+    <style name="Text">
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+    </style>
+
+
+    <!-- Button styles -->
+    <style name="Button" parent="Text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+    <style name="MainBottomButton" parent="Button">
+        <item name="android:textColor">#FAFAFA</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/slightly_rounded_corner</item>
+        <item name="android:backgroundTint">#FB5E06</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="secondaryBottomButton" parent="Button">
+        <item name="android:background">@drawable/medium_rounded_corner</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textSize">@dimen/smallFontSize</item>
+        <item name="android:padding">@dimen/smallPadding</item>
+    </style>
+
+    <!-- Text view styles -->
+    <style name="BigBrightText" parent="Text">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#FAFAFA</item>
+    </style>
+
+
+
+
+    <style name="smallInfoText" parent="Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/smallFontSize</item>
+    </style>
+
+
+
+</resources>

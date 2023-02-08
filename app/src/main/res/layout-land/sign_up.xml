@@ -27,13 +27,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSmallInvite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/largeMargin"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="@string/fill_text_invite"
+        style="@style/smallInfoText"
         android:textColor="@color/white"
-        android:textSize="@dimen/smallFontSize"
+
+        android:layout_marginBottom="@dimen/largeMargin"
+        android:text="@string/fill_text_invite"
         app:layout_constraintBottom_toBottomOf="@id/textViewEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -164,13 +162,10 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewAlreadyHaveAcc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/smallInfoText"
+
         android:layout_marginEnd="@dimen/margin12dp"
-        android:fontFamily="@font/montserrat_regular"
         android:text="@string/already_have_an_account"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/smallFontSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/textViewSignIn"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -178,12 +173,10 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="@string/sign_in"
+        style="@style/smallInfoText"
         android:textColor="@color/white"
-        android:textSize="@dimen/smallFontSize"
+
+        android:text="@string/sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textViewAlreadyHaveAcc" />
