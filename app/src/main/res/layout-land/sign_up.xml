@@ -1,74 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/margin_from_start"
     android:background="@color/default_color"
     android:paddingStart="@dimen/SignUpPagePadding"
-    android:paddingEnd="@dimen/SignUpPagePadding"
-    android:layout_marginTop="@dimen/margin_from_start">
-    <TextView
-        android:id="@+id/tvGetAcquainted"
+    android:paddingEnd="@dimen/SignUpPagePadding">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewGetAcquainted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:textColor="@color/white"
+        android:layout_marginBottom="@dimen/smallMargin"
+        android:fontFamily="@font/montserrat_regular"
         android:text="@string/get_acquainted"
-        android:textSize="@dimen/largeFontSize"
-        app:layout_constraintBottom_toTopOf="@id/tvSmallInvite"
-        android:fontFamily="@font/montserrat_regular"
-        app:layout_constraintVertical_bias="0.3"
-        android:layout_marginBottom="@dimen/smallMargin">
-    </TextView>
-
-    <TextView
-        android:id="@+id/tvSmallInvite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="@string/fill_text_invite"
-        android:textSize="@dimen/smallFontSize"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/largeFontSize"
+        app:layout_constraintBottom_toTopOf="@id/textViewSmallInvite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvGetAcquainted"
-        app:layout_constraintBottom_toBottomOf="@id/tvEmail"
-        android:fontFamily="@font/montserrat_regular"
-        android:layout_marginBottom="@dimen/largeMargin">
-    </TextView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/tvEmail"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewSmallInvite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_color"
-        android:text="@string/e_mail"
-        android:textSize="@dimen/smallFontSize"
-        app:layout_constraintStart_toStartOf="@id/etEmail"
-        app:layout_constraintTop_toTopOf="@id/etEmail"
+        android:layout_marginBottom="@dimen/largeMargin"
         android:fontFamily="@font/montserrat_regular"
-        android:layout_marginStart="@dimen/margin_for_input">
-    </TextView>
+        android:text="@string/fill_text_invite"
+        android:textColor="@color/white"
+        android:textSize="@dimen/smallFontSize"
+        app:layout_constraintBottom_toBottomOf="@id/textViewEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewGetAcquainted" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_for_input"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/e_mail"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/smallFontSize"
+        app:layout_constraintStart_toStartOf="@id/editTextEmail"
+        app:layout_constraintTop_toTopOf="@id/editTextEmail" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etEmail"
+        android:id="@+id/editTextEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvSmallInvite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/etPassword"
-        app:layout_constraintBottom_toTopOf="@id/tvOr"
+        android:backgroundTint="@color/gray"
         android:textColor="@color/white"
-        app:layout_constraintHorizontal_chainStyle="spread"
         android:textSize="@dimen/largeFontSize"
-        android:backgroundTint="@color/gray">
-    </androidx.appcompat.widget.AppCompatEditText>
+        app:layout_constraintBottom_toTopOf="@id/textViewOr"
+        app:layout_constraintEnd_toStartOf="@id/editTextPassword"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSmallInvite" />
 
-    <TextView
-        android:id="@+id/tvPassword"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_for_input"
@@ -76,126 +73,118 @@
         android:text="@string/password"
         android:textColor="@color/gray"
         android:textSize="@dimen/smallFontSize"
-        app:layout_constraintStart_toStartOf="@id/etPassword"
-        app:layout_constraintTop_toTopOf="@id/etPassword">
-    </TextView>
+        app:layout_constraintStart_toStartOf="@id/editTextPassword"
+        app:layout_constraintTop_toTopOf="@id/editTextPassword" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etPassword"
+        android:id="@+id/editTextPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/etEmail"
-        app:layout_constraintTop_toBottomOf="@id/etEmail"
-        app:layout_constraintStart_toEndOf="@id/etEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintBottom_toBottomOf="@id/etEmail"
+        android:backgroundTint="@color/gray"
+        android:inputType="textPassword"
         android:textColor="@color/white"
         android:textSize="@dimen/largeFontSize"
-        android:backgroundTint="@color/gray"
-        android:inputType="textPassword">
-    </androidx.appcompat.widget.AppCompatEditText>
+        app:layout_constraintBottom_toBottomOf="@id/editTextEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@id/editTextEmail"
+        app:layout_constraintTop_toBottomOf="@id/editTextEmail"
+        app:layout_constraintTop_toTopOf="@id/editTextEmail" />
 
     <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/cbRememberMe"
+        android:id="@+id/checkBoxRememberMe"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginStart="@dimen/margin_for_input"
         android:button="@drawable/ic_radio_button_empty"
         android:buttonTint="@color/white"
-        android:text="@string/remember_me"
         android:checked="false"
+        android:paddingStart="@dimen/smallMargin"
+        android:text="@string/remember_me"
         android:textColor="@color/gray"
         android:textSize="@dimen/smallFontSize"
-        android:paddingStart="@dimen/smallMargin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+        app:layout_constraintTop_toBottomOf="@id/editTextPassword" />
 
     <com.example.messengerAndroid.CustomGoogleButton
-        android:id="@+id/btnGoogle"
+        android:id="@+id/buttonGoogle"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvOr"
         android:layout_marginBottom="@dimen/smallMargin"
-        app:layout_constraintBottom_toTopOf="@id/tvAgree"
+        app:layout_constraintBottom_toTopOf="@id/textViewAgree"
+        app:layout_constraintEnd_toStartOf="@id/textViewOr"
         app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintTop_toBottomOf="@id/cbRememberMe"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkBoxRememberMe" />
 
-    <TextView
-        android:id="@+id/tvOr"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewOr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/landscape_margin_or"
+        android:layout_marginEnd="@dimen/landscape_margin_or"
+        android:layout_marginBottom="@dimen/smallMargin"
+        android:fontFamily="@font/montserrat_regular"
         android:text="@string/or"
         android:textColor="@color/white"
-        android:fontFamily="@font/montserrat_regular"
         android:textSize="@dimen/largeFontSize"
-        app:layout_constraintTop_toTopOf="@id/btnGoogle"
-        app:layout_constraintBottom_toBottomOf="@id/btnGoogle"
-        app:layout_constraintStart_toEndOf="@id/btnGoogle"
-        app:layout_constraintEnd_toStartOf="@id/btnRegister"
+        app:layout_constraintBottom_toBottomOf="@id/buttonGoogle"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="@dimen/smallMargin"
-        android:layout_marginStart="@dimen/landscape_margin_or"
-        android:layout_marginEnd="@dimen/landscape_margin_or">
-    </TextView>
+        app:layout_constraintEnd_toStartOf="@id/buttonRegister"
+        app:layout_constraintStart_toEndOf="@id/buttonGoogle"
+        app:layout_constraintTop_toTopOf="@id/buttonGoogle" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnRegister"
+        android:id="@+id/buttonRegister"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:textColor="@color/white"
-        android:text="@string/register"
+        android:layout_marginBottom="@dimen/smallMargin"
+        android:background="@drawable/rounded_corner_and_stroke"
         android:fontFamily="@font/montserrat_regular"
         android:padding="@dimen/inner_button_padding"
-        android:background="@drawable/rounded_corner_and_stroke"
-        app:layout_constraintStart_toEndOf="@id/tvOr"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/buttonGoogle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btnGoogle"
-        app:layout_constraintBottom_toBottomOf="@id/btnGoogle"
-        android:layout_marginBottom="@dimen/smallMargin">
-    </androidx.appcompat.widget.AppCompatButton>
+        app:layout_constraintStart_toEndOf="@id/textViewOr"
+        app:layout_constraintTop_toTopOf="@id/buttonGoogle" />
 
-    <TextView
-        android:id="@+id/tvAgree"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAgree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/agree"
-        android:textColor="@color/white"
         android:fontFamily="@font/montserrat_regular"
         android:gravity="center"
+        android:text="@string/agree"
+        android:textColor="@color/white"
         android:textSize="@dimen/smallestFontSize"
-        app:layout_constraintBottom_toTopOf="@id/tvAlreadyHaveAcc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-    </TextView>
+        app:layout_constraintBottom_toTopOf="@id/textViewAlreadyHaveAcc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tvAlreadyHaveAcc"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAlreadyHaveAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin12dp"
+        android:fontFamily="@font/montserrat_regular"
         android:text="@string/already_have_an_account"
         android:textColor="@color/gray"
-        android:fontFamily="@font/montserrat_regular"
         android:textSize="@dimen/smallFontSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvSignIn"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textViewSignIn"
         app:layout_constraintHorizontal_chainStyle="packed"
-        android:layout_marginEnd="@dimen/margin12dp">
-    </TextView>
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tvSignIn"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
         android:text="@string/sign_in"
         android:textColor="@color/white"
-        android:fontFamily="@font/montserrat_regular"
         android:textSize="@dimen/smallFontSize"
-        app:layout_constraintStart_toEndOf="@id/tvAlreadyHaveAcc"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </TextView>
+        app:layout_constraintStart_toEndOf="@id/textViewAlreadyHaveAcc" />
 </androidx.constraintlayout.widget.ConstraintLayout>

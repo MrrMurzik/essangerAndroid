@@ -22,23 +22,23 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind = SignUpBinding.inflate(layoutInflater)
         setContentView(bind.root)
-        bind.cbRememberMe.setOnCheckedChangeListener {
+        bind.checkBoxRememberMe.setOnCheckedChangeListener {
                 _, _ ->
-            if (bind.cbRememberMe.isChecked) {
-                bind.cbRememberMe.setButtonDrawable(R.drawable.ic_radio_button)
+            if (bind.checkBoxRememberMe.isChecked) {
+                bind.checkBoxRememberMe.setButtonDrawable(R.drawable.ic_radio_button)
             } else {
-                bind.cbRememberMe.setButtonDrawable(R.drawable.ic_radio_button_empty)
+                bind.checkBoxRememberMe.setButtonDrawable(R.drawable.ic_radio_button_empty)
             }
         }
-        bind.btnRegister.setOnClickListener { registerNewUser() }
+        bind.buttonRegister.setOnClickListener { registerNewUser() }
     }
 
     private fun registerNewUser() {
-        val email = bind.etEmail.text.toString().lowercase()
-        val password = bind.etPassword.text.toString()
+        val email = bind.editTextEmail.text.toString().lowercase()
+        val password = bind.editTextPassword.text.toString()
         if (getValidityEmail(email) && getValidityPassword(password)) {
             val name = getName(email)
-            if (bind.cbRememberMe.isChecked) {
+            if (bind.checkBoxRememberMe.isChecked) {
                 createPreference(name)
             }
             goNextActivity(name)
@@ -49,10 +49,10 @@ class AuthActivity : AppCompatActivity() {
 
     private fun showError(validityEmail: Boolean, validityPassword: Boolean) {
         if (!validityEmail) {
-            bind.etEmail.error = getString(R.string.invalid_email)
+            bind.editTextEmail.error = getString(R.string.invalid_email)
         }
         if (!validityPassword) {
-            bind.etPassword.error = getString(R.string.invalid_password)
+            bind.editTextPassword.error = getString(R.string.invalid_password)
         }
     }
 
