@@ -11,7 +11,7 @@
         android:id="@+id/viewUpperBlock"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/default_color"
+        android:background="?attr/colorPrimary"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,12 +19,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSettings"
-        style="@style/BigBrightText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Headline"
+
+        android:text="@string/settings"
+
         android:layout_marginStart="@dimen/settings_margin"
         android:layout_marginTop="@dimen/settings_margin"
-        android:text="@string/settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,10 +45,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewName"
-        style="@style/BigBrightText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Headline2"
+
         android:text="@string/Name"
+
         app:layout_constraintBottom_toTopOf="@id/textViewJob"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,11 +57,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewJob"
-        style="@style/smallInfoText"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
+
+        android:text="@string/job"
 
         android:layout_marginTop="@dimen/smallMargin"
         android:layout_marginBottom="@dimen/smallMargin"
-        android:text="@string/job"
         app:layout_constraintBottom_toBottomOf="@id/viewUpperBlock"
         app:layout_constraintEnd_toStartOf="@id/textViewAddress"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +71,8 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewAddress"
-        style="@style/smallInfoText"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
 
         android:text="@string/home_address"
         app:layout_constraintBottom_toBottomOf="@id/textViewJob"
@@ -80,7 +85,7 @@
         android:id="@+id/viewLowerBlock"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/lower_block"
+        android:background="?attr/backgroundColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewUpperBlock" />
 
@@ -119,12 +124,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewFillProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance"
+
         android:layout_margin="@dimen/mediumMargin"
-        android:fontFamily="@font/montserrat_medium"
         android:text="@string/fill_out_profile"
-        android:textColor="@color/edit_button_color"
         android:textSize="@dimen/smallFontSize"
         app:layout_constraintBottom_toTopOf="@id/buttonEditProfile"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,6 +151,8 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonContacts"
         style="@style/MainBottomButton"
+        android:textAppearance="@style/MyTextAppearance.MainBottomButton"
+
         android:layout_width="0dp"
         android:layout_margin="@dimen/mediumMargin"
         android:text="@string/view_my_contacts"

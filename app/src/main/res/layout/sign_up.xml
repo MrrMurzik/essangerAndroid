@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/margin_from_start"
-    android:background="@color/default_color"
+    android:background="?attr/colorPrimary"
     android:padding="@dimen/SignUpPagePadding">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewGetAcquainted"
-        style="@style/BigBrightText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Headline"
+
         android:layout_marginBottom="@dimen/smallMargin"
         android:text="@string/get_acquainted"
         app:layout_constraintBottom_toTopOf="@id/textViewSmallInvite"
@@ -24,99 +24,90 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSmallInvite"
-        style="@style/smallInfoText"
-        android:textColor="@color/text_color"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
+
+        android:textColor="?attr/colorOnSecondary"
 
         android:layout_marginBottom="@dimen/largeMargin"
         android:gravity="center"
         android:text="@string/fill_text_invite"
-        app:layout_constraintBottom_toTopOf="@id/textViewEmail"
+        app:layout_constraintBottom_toTopOf="@id/inputLayoutEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewGetAcquainted" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_for_input"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="@string/e_mail"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/smallFontSize"
-        app:layout_constraintBottom_toTopOf="@id/editTextEmail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewSmallInvite" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editTextEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/gray"
-        android:textColor="@color/white"
-        android:textSize="@dimen/largeFontSize"
-        app:layout_constraintBottom_toTopOf="@id/inputLayoutPassword"
-        app:layout_constraintTop_toBottomOf="@id/textViewEmail" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayoutPassword"
-        android:layout_width="match_parent"
+        android:id="@+id/inputLayoutEmail"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+        app:helperTextTextAppearance="@style/HelperTextAppearance"
+
+        app:boxBackgroundColor="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorOnPrimaryContainer"
+        android:textColorHint="?attr/colorOnPrimaryContainer"
+        app:hintTextColor="?attr/colorOnPrimaryContainer"
+
+        app:errorEnabled="true"
+        android:hint="@string/e_mail"
+
+        app:layout_constraintBottom_toTopOf="@id/inputLayoutPassword"
+        android:layout_marginBottom = "8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextEmail"
-        app:layout_constraintBottom_toTopOf="@id/checkBoxRememberMe">
+        app:layout_constraintTop_toBottomOf="@id/textViewSmallInvite">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/default_color"
-            android:hint="@string/password"
-            android:textColor="@color/gray"
-            android:textColorHint="@color/gray"
-            />
+            android:inputType="textEmailAddress"
+            android:paddingStart="4dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
 
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:passwordToggleEnabled="true"
 
+        app:boxBackgroundColor="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorOnPrimaryContainer"
+        android:textColorHint="?attr/colorOnPrimaryContainer"
+        app:hintTextColor="?attr/colorOnPrimaryContainer"
+        android:hint="@string/password"
+
+        android:layout_marginBottom ="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/checkBoxRememberMe"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="4dp"
+            android:inputType="textPassword"
+            android:textColor="#FAFAFA"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
-<!--    <androidx.appcompat.widget.AppCompatTextView-->
-<!--        android:id="@+id/textViewPassword"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="@dimen/margin_for_input"-->
-<!--        android:layout_marginTop="@dimen/largeMargin"-->
-<!--        android:fontFamily="@font/montserrat_regular"-->
-<!--        android:text="@string/password"-->
-<!--        android:textColor="@color/gray"-->
-<!--        android:textSize="@dimen/smallFontSize"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/editTextPassword"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/editTextEmail" />-->
-
-<!--    <androidx.appcompat.widget.AppCompatEditText-->
-<!--        android:id="@+id/editTextPassword"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:backgroundTint="@color/gray"-->
-<!--        android:inputType="textPassword"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="@dimen/largeFontSize"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/checkBoxRememberMe"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/textViewPassword" />-->
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkBoxRememberMe"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginStart="@dimen/margin_for_input"
-        android:layout_marginTop="@dimen/mediumMargin"
         android:button="@drawable/ic_radio_button_empty"
-        android:buttonTint="@color/white"
         android:checked="false"
         android:paddingStart="@dimen/littlePadding"
         android:text="@string/remember_me"
-        android:textColor="@color/gray"
+        android:textColor="@color/light_grey"
         android:textSize="@dimen/smallFontSize"
         app:layout_constraintBottom_toTopOf="@id/buttonGoogle"
         app:layout_constraintStart_toStartOf="parent"
@@ -137,13 +128,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewOr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Headline2"
+
         android:layout_marginBottom="@dimen/smallMargin"
-        android:fontFamily="@font/montserrat_regular"
         android:text="@string/or"
-        android:textColor="@color/white"
-        android:textSize="@dimen/mediumPlusFontSize"
         app:layout_constraintBottom_toTopOf="@id/buttonRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -152,27 +141,26 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MainBottomButton"
+        android:textAppearance="@style/MyTextAppearance.MainBottomButton"
+
         android:layout_marginBottom="@dimen/smallMargin"
         android:background="@drawable/rounded_corner_and_stroke"
-        android:fontFamily="@font/open_sans_bold"
         android:padding="@dimen/inner_button_padding"
         android:text="@string/register"
-        android:textSize="16sp"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/textViewAgree"
         app:layout_constraintTop_toBottomOf="@id/textViewOr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewAgree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_regular"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
+
         android:gravity="center"
         android:text="@string/agree"
-        android:textColor="@color/text_color"
         android:textSize="@dimen/smallestFontSize"
         app:layout_constraintBottom_toTopOf="@id/textViewAlreadyHaveAcc"
         app:layout_constraintEnd_toEndOf="parent"
@@ -182,7 +170,8 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewAlreadyHaveAcc"
-        style="@style/smallInfoText"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
 
         android:layout_marginEnd="@dimen/margin12dp"
         android:text="@string/already_have_an_account"
@@ -194,8 +183,8 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignIn"
-        style="@style/smallInfoText"
-        android:textColor="@color/text_color"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
 
         android:text="@string/sign_in"
         app:layout_constraintBottom_toBottomOf="@id/textViewAlreadyHaveAcc"
