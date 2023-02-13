@@ -14,8 +14,11 @@
     <!-- secondary colors -->
     <color name="orange">#FB5E06</color>
 
+    <!-- overrided color to handle default state of bottom line in textInputLayout-->
     <color name="mtrl_textinput_default_box_stroke_color"
         tools:override="true">#B2B2B2</color>
+
+    <color name="error_color">#F93E3E</color>
 
 
 

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/margin_from_start"
     android:background="?attr/colorPrimary"
     android:paddingStart="@dimen/SignUpPagePadding"
     android:paddingEnd="@dimen/SignUpPagePadding">
@@ -14,13 +13,11 @@
         style="@style/defaultTextView"
         android:textAppearance="@style/MyTextAppearance.Headline"
 
-        android:layout_marginBottom="@dimen/smallMargin"
         android:text="@string/get_acquainted"
         app:layout_constraintBottom_toTopOf="@id/textViewSmallInvite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -30,79 +27,87 @@
 
         android:textColor="?attr/colorOnSecondary"
 
-        android:layout_marginBottom="@dimen/largeMargin"
         android:text="@string/fill_text_invite"
-        app:layout_constraintBottom_toBottomOf="@id/textViewEmail"
+        app:layout_constraintBottom_toBottomOf="@id/inputLayoutEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewGetAcquainted" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_for_input"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="@string/e_mail"
-        android:textColor="#000000"
-        android:textSize="@dimen/smallFontSize"
-        app:layout_constraintStart_toStartOf="@id/editTextEmail"
-        app:layout_constraintTop_toTopOf="@id/editTextEmail" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editTextEmail"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#000000"
-        android:textColor="#000000"
-        android:textSize="@dimen/largeFontSize"
-        app:layout_constraintBottom_toTopOf="@id/textViewOr"
-        app:layout_constraintEnd_toStartOf="@id/editTextPassword"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewSmallInvite" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_for_input"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="@string/password"
-        android:textColor="#000000"
-        android:textSize="@dimen/smallFontSize"
-        app:layout_constraintStart_toStartOf="@id/editTextPassword"
-        app:layout_constraintTop_toTopOf="@id/editTextPassword" />
+        app:errorTextAppearance="@style/ErrorTextAppearance"
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#000000"
-        android:inputType="textPassword"
-        android:textColor="#000000"
-        android:textSize="@dimen/largeFontSize"
-        app:layout_constraintBottom_toBottomOf="@id/editTextEmail"
+        app:boxBackgroundColor="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorOnPrimaryContainer"
+        android:textColorHint="?attr/colorOnPrimaryContainer"
+        app:hintTextColor="?attr/colorOnPrimaryContainer"
+
+        app:errorEnabled="true"
+        android:hint="@string/e_mail"
+
+        app:layout_constraintBottom_toTopOf="@id/inputLayoutPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@id/editTextEmail"
-        app:layout_constraintTop_toBottomOf="@id/editTextEmail"
-        app:layout_constraintTop_toTopOf="@id/editTextEmail" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSmallInvite">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:paddingStart="4dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+
+        app:boxBackgroundColor="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorOnPrimaryContainer"
+        android:textColorHint="?attr/colorOnPrimaryContainer"
+        app:hintTextColor="?attr/colorOnPrimaryContainer"
+        android:hint="@string/password"
+
+        app:endIconMode="password_toggle"
+        app:endIconTint="?attr/colorOnPrimaryContainer"
+
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/checkBoxRememberMe"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="4dp"
+            android:inputType="textPassword"
+            android:textColor="#FAFAFA"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkBoxRememberMe"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="@dimen/checkbox_height"
         android:layout_marginStart="@dimen/margin_for_input"
-        android:button="@drawable/ic_radio_button_empty"
-        android:buttonTint="?attr/colorOnPrimary"
+        android:button="@drawable/checkbox_selector"
         android:checked="false"
         android:paddingStart="@dimen/smallMargin"
         android:text="@string/remember_me"
         android:textColor="?attr/colorOnSurface"
         android:textSize="@dimen/smallFontSize"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextPassword" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutPassword"
+        app:layout_constraintBottom_toTopOf="@id/textViewOr"/>
 
     <com.example.messengerAndroid.CustomGoogleButton
         android:id="@+id/buttonGoogle"
@@ -151,7 +156,7 @@
         android:textAppearance="@style/MyTextAppearance.Body"
 
         android:gravity="center"
-        android:text="@string/agree"
+        android:text="@string/agree_land"
         android:textSize="@dimen/smallestFontSize"
         app:layout_constraintBottom_toTopOf="@id/textViewAlreadyHaveAcc"
         app:layout_constraintEnd_toEndOf="parent"

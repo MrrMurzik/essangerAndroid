@@ -17,6 +17,7 @@
     <string name="or">or</string>
     <string name="register">REGISTER</string>
     <string name="agree">By clicking Register you agree to our Terms\nand Conditions</string>
+    <string name="agree_land">By clicking Register you agree to our Terms and Conditions</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign in</string>
     <string name="invalid_password">Minimum eight characters, at least one uppercase letter, one lowercase letter and one number</string>
