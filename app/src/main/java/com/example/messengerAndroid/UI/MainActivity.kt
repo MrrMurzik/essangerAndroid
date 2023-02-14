@@ -1,4 +1,4 @@
-package com.example.messengerAndroid
+package com.example.messengerAndroid.UI
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

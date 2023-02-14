@@ -1,4 +1,4 @@
-package com.example.messengerAndroid
+package com.example.messengerAndroid.UI
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.messengerAndroid.R
 import com.example.messengerAndroid.databinding.SignUpBinding
 
 
