@@ -54,10 +54,7 @@
         app:layout_constraintTop_toBottomOf="@id/textViewSmallInvite">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:paddingStart="4dp" />
+            style="@style/TextInputEditTextStyle"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -86,11 +83,7 @@
         app:layout_constraintTop_toBottomOf="@id/inputLayoutEmail">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="4dp"
-            android:inputType="textPassword"
-            android:textColor="#FAFAFA"/>
+            style="@style/TextInputEditTextStyle"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatCheckBox
@@ -112,8 +105,7 @@
     <com.example.messengerAndroid.CustomGoogleButton
         android:id="@+id/buttonGoogle"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="@dimen/smallMargin"
+        android:layout_height="@dimen/button_width_height"
         app:layout_constraintBottom_toTopOf="@id/textViewAgree"
         app:layout_constraintEnd_toStartOf="@id/textViewOr"
         app:layout_constraintHorizontal_chainStyle="spread"
@@ -137,18 +129,18 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonRegister"
-        android:textAppearance="@style/MyTextAppearance.MainBottomButton"
-
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="@dimen/smallMargin"
+
+        android:layout_height="@dimen/button_width_height"
         android:background="@drawable/rounded_corner_and_stroke"
         android:padding="@dimen/inner_button_padding"
         android:text="@string/register"
+        android:textAppearance="@style/MyTextAppearance.MainBottomButton"
         app:layout_constraintBottom_toBottomOf="@id/buttonGoogle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textViewOr"
-        app:layout_constraintTop_toTopOf="@id/buttonGoogle" />
+        app:layout_constraintTop_toTopOf="@id/buttonGoogle"
+ />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewAgree"
@@ -167,7 +159,7 @@
         style="@style/defaultTextView"
         android:textAppearance="@style/MyTextAppearance.Body"
 
-        android:layout_marginEnd="@dimen/margin12dp"
+        android:layout_marginEnd="@dimen/smallPlusMargin"
         android:text="@string/already_have_an_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/textViewSignIn"

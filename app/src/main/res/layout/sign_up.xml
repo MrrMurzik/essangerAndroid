@@ -54,16 +54,14 @@
         android:hint="@string/e_mail"
 
         app:layout_constraintBottom_toTopOf="@id/inputLayoutPassword"
-        android:layout_marginBottom = "8dp"
+        android:layout_marginBottom = "@dimen/smallMargin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewSmallInvite">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:paddingStart="4dp" />
+            style="@style/TextInputEditTextStyle"
+            android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -86,18 +84,15 @@
         app:endIconTint="?attr/colorOnPrimaryContainer"
 
 
-        android:layout_marginBottom ="8dp"
+        android:layout_marginBottom ="@dimen/smallMargin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/checkBoxRememberMe"
         app:layout_constraintTop_toBottomOf="@id/inputLayoutEmail">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="4dp"
-            android:inputType="textPassword"
-            android:textColor="#FAFAFA"/>
+            style="@style/TextInputEditTextStyle"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -177,7 +172,7 @@
         style="@style/defaultTextView"
         android:textAppearance="@style/MyTextAppearance.Body"
 
-        android:layout_marginEnd="@dimen/margin12dp"
+        android:layout_marginEnd="@dimen/smallPlusMargin"
         android:text="@string/already_have_an_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/textViewSignIn"

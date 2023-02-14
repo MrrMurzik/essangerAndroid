@@ -14,10 +14,10 @@
     <dimen name="largeMargin">24dp</dimen>
     <dimen name="settings_margin">18dp</dimen>
     <dimen name="mediumMargin">16dp</dimen>
-    <dimen name="margin12dp">12dp</dimen>
+    <dimen name="smallPlusMargin">12dp</dimen>
     <dimen name="smallMargin">8dp</dimen>
     <dimen name="margin_for_input">4dp</dimen>
-    <dimen name="textedit_negative_margin">-4dp</dimen>
+    <dimen name="hint_offset">4dp</dimen>
 
     <dimen name="mediumPadding">16dp</dimen>
     <dimen name="SignUpPagePadding">16dp</dimen>
@@ -28,5 +28,6 @@
 
     <dimen name="space_size">10dp</dimen>
     <dimen name="checkbox_height">20dp</dimen>
+    <dimen name="button_width_height">50dp</dimen>
 
 </resources>
