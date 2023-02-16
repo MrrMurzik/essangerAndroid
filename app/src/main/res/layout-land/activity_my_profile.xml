@@ -5,7 +5,7 @@
     android:id="@+id/myProfile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.MainActivity">
+    tools:context=".ui.MyProfileActivity">
 
     <View
         android:id="@+id/viewUpperBlock"
@@ -29,13 +29,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageButtonPicture"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/buttonSignOut"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Headline2"
+        android:text="Sign out"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="20dp"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewPicture"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
         android:contentDescription="@string/userPhoto"
-        android:scaleType="centerCrop"
-        android:src="@drawable/babyyoda"
+        android:src="@drawable/ic_baseline_sentiment_very_satisfied_24"
         app:layout_constraintBottom_toTopOf="@id/textViewName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +61,7 @@
         app:layout_constraintBottom_toTopOf="@id/textViewJob"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageButtonPicture" />
+        app:layout_constraintTop_toBottomOf="@id/imageViewPicture" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewJob"

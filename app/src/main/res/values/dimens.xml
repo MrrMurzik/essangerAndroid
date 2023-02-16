@@ -7,17 +7,20 @@
     <dimen name="smallestFontSize">12sp</dimen>
 
     <dimen name="icon_size">113dp</dimen>
+    <dimen name="avatar_diameter">50dp</dimen>
 
     <dimen name="landscape_margin_or">100dp</dimen>
     <dimen name="margin_from_start">32dp</dimen>
     <dimen name="margin_between_socials">32dp</dimen>
     <dimen name="largeMargin">24dp</dimen>
+    <dimen name="bigMargin">20dp</dimen>
     <dimen name="settings_margin">18dp</dimen>
     <dimen name="mediumMargin">16dp</dimen>
     <dimen name="smallPlusMargin">12dp</dimen>
     <dimen name="smallMargin">8dp</dimen>
     <dimen name="margin_for_input">4dp</dimen>
     <dimen name="hint_offset">4dp</dimen>
+    <dimen name="tiny_padding">4dp</dimen>
 
     <dimen name="mediumPadding">16dp</dimen>
     <dimen name="SignUpPagePadding">16dp</dimen>

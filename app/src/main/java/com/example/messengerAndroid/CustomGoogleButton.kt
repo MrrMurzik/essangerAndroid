@@ -12,7 +12,7 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 private const val RADIUS = 20f
 private const val MIN_HEIGHT_DP = 40f
 private const val ICON_SIZE = 20f
-private const val ICON_TEXT_INTERVAL = 48f
+private const val ICON_TEXT_DISTANCE = 48f
 private const val TEXT_SIZE = 18f
 
 class CustomGoogleButton @JvmOverloads constructor(
@@ -91,7 +91,7 @@ class CustomGoogleButton @JvmOverloads constructor(
     }
 
     private fun calculateTextStartPos(iconRightPos: Int) {
-        textStartX = iconRightPos + convertDpToPx(ICON_TEXT_INTERVAL).toFloat()
+        textStartX = iconRightPos + convertDpToPx(ICON_TEXT_DISTANCE).toFloat()
         textStartY = height / 2 + textHeight / 2.5f
     }
 
