@@ -70,8 +70,8 @@ class MyContactsActivity : AppCompatActivity() {
 
                 val position = viewHolder.absoluteAdapterPosition
                 val user = viewModel.contactsLiveData.value?.get(position)!!
-                val listener = getDeletionAlertDialogListener(user)
-                showDeletionAlertDialog(listener)
+                viewModel.deleteUser(user)
+                showUndoSnackbar(user, position, viewModel, binding)
 
             }
         }
@@ -115,8 +115,9 @@ class MyContactsActivity : AppCompatActivity() {
                     viewModel.deleteUser(user)
                     showUndoSnackbar(user, userPosition, viewModel, binding)
                 }
-                DialogInterface.BUTTON_NEGATIVE ->
-                    showToast(R.string.toast_cancelled_deletion.toString())
+                DialogInterface.BUTTON_NEGATIVE -> {
+                    showToast(getString(R.string.toast_cancelled_deletion))
+                }
             }
         }
     }
