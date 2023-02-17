@@ -3,9 +3,9 @@ package com.example.messengerAndroid.ui
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.messengerAndroid.R
 import com.example.messengerAndroid.databinding.ActivityMyContactsBinding
 import com.example.messengerAndroid.databinding.DialogAddContactBinding
-import com.example.messengerAndroid.extensions.showAddUserAlertDialog
-import com.example.messengerAndroid.extensions.showDeletionAlertDialog
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.ui.contactsViewModel.ContactsViewModel
 import com.example.messengerAndroid.ui.contactsViewModel.SwipeToDeleteCallback
@@ -54,7 +52,14 @@ class MyContactsActivity : AppCompatActivity() {
         binding.textViewAddContacts.setOnClickListener {
             val dialogBinding = DialogAddContactBinding.inflate(layoutInflater)
             val listener = getAddUserDialogListener(dialogBinding)
-            showAddUserAlertDialog(listener)
+
+            AlertDialog.Builder(this)
+                .setTitle(R.string.add_contact_title)
+                .setView(dialogBinding.root)
+                .setPositiveButton(R.string.action_confirmed, listener)
+                .setNegativeButton(R.string.action_cancelled, null)
+                .create()
+                .show()
         }
     }
 
@@ -65,8 +70,8 @@ class MyContactsActivity : AppCompatActivity() {
 
                 val position = viewHolder.absoluteAdapterPosition
                 val user = viewModel.contactsLiveData.value?.get(position)!!
-                val listener = getDeletionAlertDialogListener(user)
-                showDeletionAlertDialog(listener)
+                viewModel.deleteUser(user)
+                showUndoSnackbar(user, position, viewModel, binding)
 
             }
         }
@@ -96,8 +101,6 @@ class MyContactsActivity : AppCompatActivity() {
                         dialogBinding.textInputName.editText?.text.toString(),
                         dialogBinding.textInputJob.editText?.text.toString())
                 }
-                DialogInterface.BUTTON_NEGATIVE ->
-                    showToast(R.string.toast_cancelled_deletion.toString())
             }
         }
     }
@@ -110,8 +113,9 @@ class MyContactsActivity : AppCompatActivity() {
                     viewModel.deleteUser(user)
                     showUndoSnackbar(user, userPosition, viewModel, binding)
                 }
-                DialogInterface.BUTTON_NEGATIVE ->
-                    showToast(R.string.toast_cancelled_deletion.toString())
+                DialogInterface.BUTTON_NEGATIVE -> {
+                    showToast(getString(R.string.toast_cancelled_deletion))
+                }
             }
         }
     }
@@ -128,9 +132,23 @@ class MyContactsActivity : AppCompatActivity() {
             .make(
                 binding.root,
                 R.string.deletion_snackbar_message,
-                5000)
+                Snackbar.LENGTH_LONG)
             .setAction(R.string.undo_delete_action) {viewModel.addExistingUser(user, position)}
             .setActionTextColor(Color.CYAN)
+            .show()
+    }
+
+    private fun showDeletionAlertDialog(listener: DialogInterface.OnClickListener) {
+
+        AlertDialog.Builder(this)
+            .setCancelable(true)
+            .setTitle(R.string.default_deletion_dialog_title)
+            .setMessage(R.string.default_deletion_dialog_message)
+            .setTitle(R.string.default_deletion_dialog_title)
+            .setMessage(R.string.default_deletion_dialog_message)
+            .setPositiveButton(R.string.action_confirmed, listener)
+            .setNegativeButton(R.string.action_cancelled, listener)
+            .create()
             .show()
     }
 
