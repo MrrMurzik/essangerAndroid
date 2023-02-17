@@ -55,7 +55,7 @@ class MyContactsActivity : AppCompatActivity() {
 
             AlertDialog.Builder(this)
                 .setTitle(R.string.add_contact_title)
-                .setView(binding.root)
+                .setView(dialogBinding.root)
                 .setPositiveButton(R.string.action_confirmed, listener)
                 .setNegativeButton(R.string.action_cancelled, listener)
                 .create()
