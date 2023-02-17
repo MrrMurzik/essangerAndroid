@@ -57,7 +57,7 @@ class MyContactsActivity : AppCompatActivity() {
                 .setTitle(R.string.add_contact_title)
                 .setView(dialogBinding.root)
                 .setPositiveButton(R.string.action_confirmed, listener)
-                .setNegativeButton(R.string.action_cancelled, listener)
+                .setNegativeButton(R.string.action_cancelled, null)
                 .create()
                 .show()
         }
@@ -101,8 +101,6 @@ class MyContactsActivity : AppCompatActivity() {
                         dialogBinding.textInputName.editText?.text.toString(),
                         dialogBinding.textInputJob.editText?.text.toString())
                 }
-                DialogInterface.BUTTON_NEGATIVE ->
-                    showToast(getString(R.string.toast_cancelled_deletion))
             }
         }
     }
