@@ -31,17 +31,8 @@ class ContactsViewModel : ViewModel() {
     }
 
     fun addNewUser(name: String, job: String) {
-        Log.d("myTag", "$name")
-        Log.d("myTag", "$job")
         _contactsLiveData.value = _contactsLiveData.value?.toMutableList()?.apply {
-            add(
-                User(
-                _contactsLiveData.value!!.size.toLong(),
-                "...",
-                name,
-                job
-            )
-            )
+            add(User(_contactsLiveData.value!!.size.toLong(), "...", name, job))
         }
     }
 
