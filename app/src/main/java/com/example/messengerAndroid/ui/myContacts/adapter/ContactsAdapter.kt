@@ -8,10 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.messengerAndroid.databinding.ItemContactBinding
 import com.example.messengerAndroid.extensions.addPhoto
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
-
-interface UserActionListener {
-    fun onUserDelete (user: User)
-}
+import com.example.messengerAndroid.ui.myContacts.adapter.UserActionListener
 
 
 class UserItemDiffCallback : DiffUtil.ItemCallback<User>() {

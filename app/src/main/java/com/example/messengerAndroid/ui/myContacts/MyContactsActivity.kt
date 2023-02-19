@@ -14,6 +14,7 @@ import com.example.messengerAndroid.R
 import com.example.messengerAndroid.databinding.ActivityMyContactsBinding
 import com.example.messengerAndroid.databinding.DialogAddContactBinding
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
+import com.example.messengerAndroid.ui.myContacts.adapter.UserActionListener
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.ContactsViewModel
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.SwipeToDeleteCallback
 import com.google.android.material.snackbar.Snackbar
