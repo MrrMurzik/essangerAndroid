@@ -35,5 +35,13 @@ class ContactsViewModel : ViewModel() {
         }
     }
 
+    fun getUserPosition(user: User): Int {
+        return contactsLiveData.value?.indexOf(user) ?: -1
+    }
+
+    fun getUser(position: Int): User {
+        return contactsLiveData.value?.toMutableList()?.get(position)!!
+    }
+
 
 }
