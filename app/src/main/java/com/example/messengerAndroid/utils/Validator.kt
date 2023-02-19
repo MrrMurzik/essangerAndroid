@@ -1,7 +1,5 @@
 package com.example.messengerAndroid.utils
 
-import com.example.messengerAndroid.ui.SignUpActivity
-
 object Validator {
 
     private const val PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
