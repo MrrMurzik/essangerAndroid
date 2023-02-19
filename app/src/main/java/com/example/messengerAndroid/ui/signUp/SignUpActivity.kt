@@ -7,6 +7,8 @@ import com.example.messengerAndroid.R
 import com.example.messengerAndroid.data.preferences.SharedPreferencesHelper
 import com.example.messengerAndroid.databinding.ActivitySignUpBinding
 import com.example.messengerAndroid.ui.myProfile.MyProfileActivity
+import com.example.messengerAndroid.utils.Constants.EMAIL_DIVIDER_PATTERN
+import com.example.messengerAndroid.utils.Constants.USER_NAME_KEY
 import com.example.messengerAndroid.utils.Validator
 
 
@@ -60,7 +62,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun goMyProfileActivity(name: String) {
         val intent = Intent(this, MyProfileActivity::class.java)
-        intent.putExtra("name", name)
+        intent.putExtra(USER_NAME_KEY, name)
 //        ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
 //        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
         startActivity(intent)
@@ -69,7 +71,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun getName(email: String): String {
         val partOfName = email.substring(0, email.indexOf('@'))
-        return partOfName.replace("[-._]".toRegex(), " ")
+        return partOfName.replace(EMAIL_DIVIDER_PATTERN.toRegex(), " ")
     }
 
 

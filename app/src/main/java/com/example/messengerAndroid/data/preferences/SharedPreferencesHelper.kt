@@ -2,9 +2,9 @@ package com.example.messengerAndroid.data.preferences
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.messengerAndroid.utils.Constants.APP_PREFERENCES
+import com.example.messengerAndroid.utils.Constants.USER_NAME_KEY
 
-private const val APP_PREFERENCES = "login_preferences"
-private const val NAME = "NAME"
 
 object SharedPreferencesHelper {
 
@@ -20,9 +20,9 @@ object SharedPreferencesHelper {
         editor.apply()
     }
 
-    fun set(value: String) = prefs.edit { it.putString(NAME, value) }
+    fun set(value: String) = prefs.edit { it.putString(USER_NAME_KEY, value) }
 
-    fun get() : String = prefs.getString(NAME,"")!!
+    fun get() : String = prefs.getString(USER_NAME_KEY,"")!!
 
     fun clearPrefs() {
         prefs.edit().clear().apply()

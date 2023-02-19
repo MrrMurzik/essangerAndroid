@@ -9,6 +9,7 @@ import com.example.messengerAndroid.databinding.ActivityMyProfileBinding
 import com.example.messengerAndroid.extensions.cropPhoto
 import com.example.messengerAndroid.ui.signUp.SignUpActivity
 import com.example.messengerAndroid.ui.myContacts.MyContactsActivity
+import com.example.messengerAndroid.utils.Constants.USER_NAME_KEY
 
 class MyProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyProfileBinding
@@ -17,7 +18,7 @@ class MyProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMyProfileBinding.inflate(layoutInflater)
         binding.imageViewPicture.cropPhoto()
-        binding.textViewName.text = intent.getStringExtra("name")
+        binding.textViewName.text = intent.getStringExtra(USER_NAME_KEY)
         setContentView(binding.root)
 
         setListeners()

@@ -1,10 +1,11 @@
 package com.example.messengerAndroid.utils
 
+import com.example.messengerAndroid.utils.Constants.PASSWORD_PATTERN
+import com.example.messengerAndroid.utils.Constants.EMAIL_PATTERN
+
 object Validator {
 
-    private const val PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
-    private const val EMAIL_PATTERN = "([\\w.\\-_]+?@\\w+?\\x2E.+)"
-    const val EMAIL_DIVIDER_PATTERN = "[-._]"
+
 
     fun getValidityPassword(password: String): Boolean {
         /*
