@@ -1,7 +1,7 @@
 package com.example.messengerAndroid.utils
 
+import android.util.Patterns
 import com.example.messengerAndroid.utils.Constants.PASSWORD_PATTERN
-import com.example.messengerAndroid.utils.Constants.EMAIL_PATTERN
 
 object Validator {
 
@@ -21,8 +21,7 @@ object Validator {
 
     fun getValidityEmail(email: String): Boolean {
         // regex for parsing valid email address from regexlib.com
-        val pattern = Regex(EMAIL_PATTERN)
-        return pattern.containsMatchIn(email)
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
 }

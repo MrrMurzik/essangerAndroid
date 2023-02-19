@@ -4,7 +4,6 @@ object Constants {
 
     // constants for Validator
     const val PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
-    const val EMAIL_PATTERN = "([\\w.\\-_]+?@\\w+?\\x2E.+)"
     const val EMAIL_DIVIDER_PATTERN = "[-._]"
 
     // constants for user data
