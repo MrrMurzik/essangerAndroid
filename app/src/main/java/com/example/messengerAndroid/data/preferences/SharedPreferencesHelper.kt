@@ -3,13 +3,10 @@ package com.example.messengerAndroid.data.preferences
 import android.content.Context
 import android.content.SharedPreferences
 
+private const val APP_PREFERENCES = "login_preferences"
+private const val NAME = "NAME"
+
 object SharedPreferencesHelper {
-
-    private const val APP_PREFERENCES = "login_preferences"
-
-    private const val NAME = "NAME"
-
-
 
     lateinit var prefs: SharedPreferences
 

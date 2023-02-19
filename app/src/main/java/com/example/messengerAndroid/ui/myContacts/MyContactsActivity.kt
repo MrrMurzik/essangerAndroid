@@ -16,13 +16,13 @@ import com.example.messengerAndroid.databinding.DialogAddContactBinding
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.ContactsViewModel
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.SwipeToDeleteCallback
-import com.example.messengerAndroid.ui.myContacts.contactsViewModel.getUserPosition
 import com.google.android.material.snackbar.Snackbar
 
 
 class MyContactsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyContactsBinding
+    private val viewModel: ContactsViewModel by viewModels()
 
     private val adapterContacts: ContactsAdapter by lazy {
         ContactsAdapter(actionListener = object : UserActionListener {
@@ -34,35 +34,26 @@ class MyContactsActivity : AppCompatActivity() {
         })
     }
 
-    private val viewModel: ContactsViewModel by viewModels()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initRecycler()
+
         addSwipeToDeleteFeature()
         setListeners()
         setObservers()
 
     }
 
-    private fun setListeners() {
-        binding.textViewAddContacts.setOnClickListener {
-            val dialogBinding = DialogAddContactBinding.inflate(layoutInflater)
-            val listener = getAddUserDialogListener(dialogBinding)
-
-            AlertDialog.Builder(this)
-                .setTitle(R.string.add_contact_title)
-                .setView(dialogBinding.root)
-                .setPositiveButton(R.string.action_confirmed, listener)
-                .setNegativeButton(R.string.action_cancelled, null)
-                .create()
-                .show()
+    private fun initRecycler() {
+        binding.recyclerContacts.run {
+            adapter = adapterContacts
+            layoutManager = LinearLayoutManager(this@MyContactsActivity)
         }
     }
-
 
     private fun addSwipeToDeleteFeature() {
         val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
@@ -79,17 +70,19 @@ class MyContactsActivity : AppCompatActivity() {
         itemTouchHelper.attachToRecyclerView(binding.recyclerContacts)
     }
 
-    private fun initRecycler() {
-        binding.recyclerContacts.run {
-            adapter = adapterContacts
-            layoutManager = LinearLayoutManager(this@MyContactsActivity)
-        }
-    }
+    private fun setListeners() {
+        binding.textViewAddContacts.setOnClickListener {
+            val dialogBinding = DialogAddContactBinding.inflate(layoutInflater)
+            val listener = getAddUserDialogListener(dialogBinding)
 
-    private fun setObservers() {
-       viewModel.contactsLiveData.observe(this){
-            adapterContacts.submitList(it.toMutableList())
-       }
+            AlertDialog.Builder(this)
+                .setTitle(R.string.add_contact_title)
+                .setView(dialogBinding.root)
+                .setPositiveButton(R.string.action_confirmed, listener)
+                .setNegativeButton(R.string.action_cancelled, null)
+                .create()
+                .show()
+        }
     }
 
     private fun getAddUserDialogListener(dialogBinding: DialogAddContactBinding):
@@ -150,6 +143,12 @@ class MyContactsActivity : AppCompatActivity() {
             .setNegativeButton(R.string.action_cancelled, listener)
             .create()
             .show()
+    }
+
+    private fun setObservers() {
+        viewModel.contactsLiveData.observe(this){
+            adapterContacts.submitList(it.toMutableList())
+        }
     }
 
 }
