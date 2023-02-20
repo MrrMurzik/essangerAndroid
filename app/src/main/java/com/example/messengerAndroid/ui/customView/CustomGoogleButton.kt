@@ -1,4 +1,4 @@
-package com.example.messengerAndroid
+package com.example.messengerAndroid.ui.customView
 
 import android.content.Context
 import android.graphics.*
@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import com.example.messengerAndroid.R
 
 
 private const val RADIUS = 20f
