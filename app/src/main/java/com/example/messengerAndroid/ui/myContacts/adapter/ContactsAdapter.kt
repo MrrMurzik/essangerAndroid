@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.ui.myContacts
+package com.example.messengerAndroid.ui.myContacts.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.messengerAndroid.databinding.ItemContactBinding
 import com.example.messengerAndroid.extensions.addPhoto
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
-import com.example.messengerAndroid.ui.myContacts.adapter.UserActionListener
 
 
 class UserItemDiffCallback : DiffUtil.ItemCallback<User>() {

@@ -39,8 +39,8 @@ class ContactsViewModel : ViewModel() {
         return contactsLiveData.value?.indexOf(user) ?: -1
     }
 
-    fun getUser(position: Int): User {
-        return contactsLiveData.value?.toMutableList()?.get(position)!!
+    fun getUser(position: Int): User? {
+        return contactsLiveData.value?.toMutableList()?.get(position)
     }
 
 
