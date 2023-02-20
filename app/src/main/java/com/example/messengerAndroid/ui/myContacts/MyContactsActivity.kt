@@ -86,6 +86,12 @@ class MyContactsActivity : AppCompatActivity() {
         }
     }
 
+    private fun setObservers() {
+        viewModel.contactsLiveData.observe(this){
+            adapterContacts.submitList(it.toMutableList())
+        }
+    }
+
     private fun getAddUserDialogListener(dialogBinding: DialogAddContactBinding):
             DialogInterface.OnClickListener {
         return DialogInterface.OnClickListener { _, which ->
@@ -144,12 +150,6 @@ class MyContactsActivity : AppCompatActivity() {
             .setNegativeButton(R.string.action_cancelled, listener)
             .create()
             .show()
-    }
-
-    private fun setObservers() {
-        viewModel.contactsLiveData.observe(this){
-            adapterContacts.submitList(it.toMutableList())
-        }
     }
 
 }
