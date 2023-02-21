@@ -5,7 +5,7 @@
     android:id="@+id/myProfile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MyProfileActivity">
+    tools:context=".ui.myProfile.MyProfileActivity">
 
     <View
         android:id="@+id/viewUpperBlock"

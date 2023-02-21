@@ -16,15 +16,15 @@
         android:theme="@style/Theme.messengerAndroid"
         tools:targetApi="31">
         <activity
-            android:name=".ui.MyProfileActivity"
+            android:name=".ui.myProfile.MyProfileActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".ui.MyContactsActivity"
+            android:name=".ui.myContacts.MyContactsActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".ui.SignUpActivity"
+            android:name=".ui.signUp.SignUpActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,12 +1,11 @@
 package com.example.messengerAndroid.utils
 
-import com.example.messengerAndroid.ui.SignUpActivity
+import android.util.Patterns
+import com.example.messengerAndroid.utils.Constants.PASSWORD_PATTERN
 
 object Validator {
 
-    private const val PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
-    private const val EMAIL_PATTERN = "([\\w.\\-_]+?@\\w+?\\x2E.+)"
-    const val EMAIL_DIVIDER_PATTERN = "[-._]"
+
 
     fun getValidityPassword(password: String): Boolean {
         /*
@@ -22,8 +21,7 @@ object Validator {
 
     fun getValidityEmail(email: String): Boolean {
         // regex for parsing valid email address from regexlib.com
-        val pattern = Regex(EMAIL_PATTERN)
-        return pattern.containsMatchIn(email)
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
 }
