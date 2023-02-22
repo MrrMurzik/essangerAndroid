@@ -6,15 +6,15 @@ import androidx.lifecycle.ViewModel
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.data.contactsRepository.UsersListGenerator
 
-class ContactsViewModel : ViewModel() {
+
+class ContactsViewModel(private val usersDataSelector: UsersDataSelector) : ViewModel() {
 
     private val _contactsLiveData = MutableLiveData<List<User>>()
     val contactsLiveData: LiveData<List<User>> = _contactsLiveData
 
-    private val db = UsersListGenerator()
 
     init {
-        _contactsLiveData.value = db.getUsers()
+        _contactsLiveData.value = usersDataSelector.getUsers()
     }
 
     fun deleteUser(user: User) {

@@ -14,4 +14,8 @@ object Constants {
 
     const val APP_PREFERENCES = "login_preferences"
 
+    // constants for permissions
+
+    const val READ_CONTACTS_REQUEST_CODE = 42
+
 }
