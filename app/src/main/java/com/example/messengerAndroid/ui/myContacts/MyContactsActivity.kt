@@ -31,14 +31,14 @@ import com.google.android.material.snackbar.Snackbar
 class MyContactsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyContactsBinding
-    private val isCheckedFetching = true
+    private var isCheckedFetching = false
 
     private val viewModel: ContactsViewModel by viewModels {
         ContactsViewModelFactory(usersDataSelector = object : UsersDataSelector {
 
             override fun getUsers(): MutableList<User> {
                 return if (isCheckedFetching) {
-                    requestPermissions(arrayOf(READ_CONTACTS), READ_CONTACTS_REQUEST_CODE)
+
                     if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                         fetchContacts()
                     } else {
@@ -67,14 +67,12 @@ class MyContactsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMyContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
+        isCheckedFetching = intent.getBooleanExtra("Fetching key", false)
         initRecycler()
 
-        addSwipeToDeleteFeature()
-        setListeners()
-        setObservers()
-
+        if (isCheckedFetching) {
+            requestPermissions(arrayOf(READ_CONTACTS), READ_CONTACTS_REQUEST_CODE)
+        }
     }
 
     private fun initRecycler() {
@@ -82,6 +80,28 @@ class MyContactsActivity : AppCompatActivity() {
             adapter = adapterContacts
             layoutManager = LinearLayoutManager(this@MyContactsActivity)
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            READ_CONTACTS_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    addSwipeToDeleteFeature()
+                    setListeners()
+                    setObservers()
+                } else {
+                    addSwipeToDeleteFeature()
+                    setListeners()
+                    setObservers()
+                }
+                return
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     private fun addSwipeToDeleteFeature() {

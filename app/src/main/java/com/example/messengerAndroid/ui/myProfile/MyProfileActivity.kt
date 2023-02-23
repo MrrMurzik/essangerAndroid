@@ -38,6 +38,8 @@ class MyProfileActivity : AppCompatActivity() {
     private fun setListeners() {
         binding.buttonContacts.setOnClickListener {
             val intent = Intent(this, MyContactsActivity::class.java)
+            val isFetchedContact = binding.checkBoxFetchContacts?.isChecked
+            intent.putExtra("Fetching key", isFetchedContact)
             startActivity(intent)
         }
 
