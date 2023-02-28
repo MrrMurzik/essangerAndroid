@@ -9,6 +9,7 @@ import com.example.messengerAndroid.databinding.ActivityMyProfileBinding
 import com.example.messengerAndroid.extensions.cropPhoto
 import com.example.messengerAndroid.ui.signUp.SignUpActivity
 import com.example.messengerAndroid.ui.myContacts.MyContactsActivity
+import com.example.messengerAndroid.utils.Constants.IS_FETCHING_REQUIRED_KEY
 import com.example.messengerAndroid.utils.Constants.USER_NAME_KEY
 
 class MyProfileActivity : AppCompatActivity() {
@@ -23,7 +24,6 @@ class MyProfileActivity : AppCompatActivity() {
 
         setListeners()
         updateBackButtonBehavior()
-
     }
 
     private fun updateBackButtonBehavior() {
@@ -39,7 +39,7 @@ class MyProfileActivity : AppCompatActivity() {
         binding.buttonContacts.setOnClickListener {
             val intent = Intent(this, MyContactsActivity::class.java)
             val isFetchedContact = binding.checkBoxFetchContacts?.isChecked
-            intent.putExtra("Fetching key", isFetchedContact)
+            intent.putExtra(IS_FETCHING_REQUIRED_KEY, isFetchedContact)
             startActivity(intent)
         }
 
