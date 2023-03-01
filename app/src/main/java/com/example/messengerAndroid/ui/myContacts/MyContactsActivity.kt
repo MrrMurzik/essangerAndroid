@@ -95,7 +95,7 @@ class MyContactsActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (!isRecyclerInitialized && checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            recreate()
+            setupRecyclerView()
         }
     }
 
