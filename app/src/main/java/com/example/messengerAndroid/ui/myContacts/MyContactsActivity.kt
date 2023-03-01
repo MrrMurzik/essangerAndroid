@@ -49,7 +49,7 @@ class MyContactsActivity : AppCompatActivity() {
                 return if (isCheckedFetching &&
                     checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    fetchContacts()
+                    ContactFetcher().fetchContacts(this@MyContactsActivity)
                 } else {
                     UsersListGenerator().getUsers()
                 }
@@ -204,29 +204,6 @@ class MyContactsActivity : AppCompatActivity() {
             .setNegativeButton(R.string.action_cancelled, listener).create().show()
     }
 
-
-    fun fetchContacts(): MutableList<User> {
-
-        val contacts = mutableListOf<User>()
-        val cursor = this@MyContactsActivity.contentResolver.query(
-            ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null
-        )
-        cursor?.use {
-            while (it.moveToNext()) {
-                val id =
-                    it.getLong(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
-                val name =
-                    it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-                val photo: String? =
-                    it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI))
-                val job: String? =
-                    it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Organization.COMPANY))
-                val contact = User(id, photo?: "", name, job?: "")
-                contacts.add(contact)
-            }
-        }
-        return contacts
-    }
 
     private fun requestPermission() {
         requestPermissionLauncher.launch(READ_CONTACTS)

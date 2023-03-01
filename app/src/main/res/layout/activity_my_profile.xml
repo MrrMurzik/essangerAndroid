@@ -180,7 +180,7 @@
         android:text="fetch phone contacts"
         android:textSize="@dimen/smallFontSize"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/smallMargin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
