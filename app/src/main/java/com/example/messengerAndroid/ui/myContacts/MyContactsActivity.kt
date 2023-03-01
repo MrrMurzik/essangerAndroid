@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -40,7 +41,6 @@ class MyContactsActivity : AppCompatActivity() {
     private var isCheckedFetching = false
 
     // Global flag to ensure that recycler view created only once
-    private var isRecyclerInitialized = false
 
     private val viewModel: ContactsViewModel by viewModels {
         ContactsViewModelFactory(usersDataSelector = object : UsersDataSelector {
@@ -92,9 +92,9 @@ class MyContactsActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (!isRecyclerInitialized && checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+    override fun onRestart() {
+        super.onRestart()
+        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             setupRecyclerView()
         }
     }
@@ -112,7 +112,6 @@ class MyContactsActivity : AppCompatActivity() {
             adapter = adapterContacts
             layoutManager = LinearLayoutManager(this@MyContactsActivity)
         }
-        isRecyclerInitialized = true
     }
 
     private fun addSwipeToDeleteFeature() {
@@ -218,9 +217,11 @@ class MyContactsActivity : AppCompatActivity() {
                     it.getLong(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
                 val name =
                     it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-                val photo =
+                val photo: String? =
                     it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI))
-                val contact = User(id, "", name, "")
+                val job: String? =
+                    it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Organization.COMPANY))
+                val contact = User(id, photo?: "", name, job?: "")
                 contacts.add(contact)
             }
         }
