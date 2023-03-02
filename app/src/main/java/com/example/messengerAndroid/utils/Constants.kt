@@ -24,4 +24,8 @@ object Constants {
 
     const val SETTINGS_PACKAGE_SCHEME = "package"
 
+    // constants for toasts
+
+    const val ERROR_ADDING_PHOTO = "Error! Unable to upload pic. Try again"
+
 }

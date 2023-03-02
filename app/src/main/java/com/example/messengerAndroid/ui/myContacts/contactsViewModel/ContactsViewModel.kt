@@ -1,5 +1,6 @@
 package com.example.messengerAndroid.ui.myContacts.contactsViewModel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,9 +30,9 @@ class ContactsViewModel(private val usersDataSelector: UsersDataSelector) : View
         }
     }
 
-    fun addNewUser(name: String, job: String) {
+    fun addNewUser(name: String, job: String, photo: String) {
         _contactsLiveData.value = _contactsLiveData.value?.toMutableList()?.apply {
-            add(User(_contactsLiveData.value!!.size.toLong(), "", name, job))
+            add(User(_contactsLiveData.value!!.size.toLong(), photo, name, job))
         }
     }
 

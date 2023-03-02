@@ -1,16 +1,17 @@
 package com.example.messengerAndroid.ui.myContacts
 
 import android.Manifest.permission.READ_CONTACTS
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.provider.Settings
-import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -33,6 +34,7 @@ import com.example.messengerAndroid.ui.myContacts.contactsViewModel.factory.Cont
 import com.example.messengerAndroid.utils.Constants.IS_FETCHING_REQUIRED_KEY
 import com.example.messengerAndroid.utils.Constants.SETTINGS_PACKAGE_SCHEME
 import com.google.android.material.snackbar.Snackbar
+import java.net.URI
 
 
 class MyContactsActivity : AppCompatActivity() {
@@ -40,7 +42,8 @@ class MyContactsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyContactsBinding
     private var isCheckedFetching = false
 
-    // Global flag to ensure that recycler view created only once
+    private var uri = Uri.EMPTY
+
 
     private val viewModel: ContactsViewModel by viewModels {
         ContactsViewModelFactory(usersDataSelector = object : UsersDataSelector {
@@ -68,7 +71,7 @@ class MyContactsActivity : AppCompatActivity() {
         })
     }
 
-    private val requestPermissionLauncher = registerForActivityResult(
+    private val requestReadContactsPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
         if (it) {
@@ -76,6 +79,16 @@ class MyContactsActivity : AppCompatActivity() {
         } else {
             showPermissionDeniedDialog()
         }
+    }
+
+    private val requestGalleryAccessPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ){
+
+    }
+
+    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        this.uri = uri?: Uri.EMPTY
     }
 
 
@@ -86,7 +99,7 @@ class MyContactsActivity : AppCompatActivity() {
         isCheckedFetching = intent.getBooleanExtra(IS_FETCHING_REQUIRED_KEY, false)
 
         if (isCheckedFetching && checkSelfPermission(READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            requestPermission()
+            requestReadContactsPermission()
         } else {
             setupRecyclerView()
         }
@@ -132,16 +145,32 @@ class MyContactsActivity : AppCompatActivity() {
     private fun setListeners() {
         binding.textViewAddContacts.setOnClickListener {
             val dialogBinding = DialogAddContactBinding.inflate(layoutInflater)
-            val listener = getAddUserDialogListener(dialogBinding)
+            setListenerForAddImageViews(dialogBinding)
+            val positiveButtonListener = getAddUserDialogListener(dialogBinding)
 
             AlertDialog.Builder(this).setTitle(R.string.add_contact_title)
                 .setView(dialogBinding.root)
-                .setPositiveButton(R.string.action_confirmed, listener)
+                .setPositiveButton(R.string.action_confirmed, positiveButtonListener)
                 .setNegativeButton(R.string.action_cancelled, null)
                 .create()
                 .show()
         }
     }
+
+    private fun setListenerForAddImageViews(dialogBinding: DialogAddContactBinding) {
+        requestGalleryAccessPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
+        val listener = View.OnClickListener {
+            if (checkSelfPermission(READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestGalleryAccessPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
+            } else {
+                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                dialogBinding.imageViewAvatar.setImageURI(uri)
+            }
+        }
+        dialogBinding.textViewAddPhoto.setOnClickListener(listener)
+        dialogBinding.imageViewAvatar.setOnClickListener(listener)
+    }
+
 
     private fun setObservers() {
         viewModel.contactsLiveData.observe(this) {
@@ -157,7 +186,8 @@ class MyContactsActivity : AppCompatActivity() {
                 DialogInterface.BUTTON_POSITIVE -> {
                     viewModel.addNewUser(
                         dialogBinding.textInputName.editText?.text.toString(),
-                        dialogBinding.textInputJob.editText?.text.toString()
+                        dialogBinding.textInputJob.editText?.text.toString(),
+                        uri.toString()
                     )
                 }
             }
@@ -205,8 +235,8 @@ class MyContactsActivity : AppCompatActivity() {
     }
 
 
-    private fun requestPermission() {
-        requestPermissionLauncher.launch(READ_CONTACTS)
+    private fun requestReadContactsPermission() {
+        requestReadContactsPermissionLauncher.launch(READ_CONTACTS)
     }
 
     private fun showPermissionDeniedDialog() {
@@ -224,7 +254,7 @@ class MyContactsActivity : AppCompatActivity() {
     ) {
         dialogBinding.buttonGrantPermission.setOnClickListener {
             if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-                requestPermission()
+                requestReadContactsPermission()
             } else {
                 openAppSettings()
             }

@@ -8,7 +8,24 @@
     android:paddingStart="@dimen/bigPadding"
     android:paddingEnd="@dimen/bigPadding"
     android:paddingTop="@dimen/defaultPadding"
-    android:paddingBottom="@dimen/defaultPadding">
+    android:paddingBottom="@dimen/defaultPadding"
+    android:background="?attr/colorPrimary">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewAvatar"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_baseline_sentiment_very_satisfied_24"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAddPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_photo"
+        android:layout_gravity="center"
+        android:textColor="?attr/colorOnPrimary"
+        android:layout_marginBottom="@dimen/bigMargin"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputName"
