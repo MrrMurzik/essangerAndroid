@@ -42,7 +42,7 @@ class MyContactsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyContactsBinding
     private var isCheckedFetching = false
 
-    private var uri = Uri.EMPTY
+    private val imagePicker = ImagePicker(this)
 
 
     private val viewModel: ContactsViewModel by viewModels {
@@ -160,12 +160,21 @@ class MyContactsActivity : AppCompatActivity() {
     private fun setListenerForAddImageViews(dialogBinding: DialogAddContactBinding) {
         requestGalleryAccessPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
         val listener = View.OnClickListener {
-            if (checkSelfPermission(READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                requestGalleryAccessPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
-            } else {
-                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                dialogBinding.imageViewAvatar.setImageURI(uri)
+//            if (checkSelfPermission(READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                requestGalleryAccessPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
+//            } else {
+//                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+//                dialogBinding.imageViewAvatar.setImageURI(uri)
+//            }
+            with(imagePicker) {
+                handlePermission()
+                if (isPermissionGranted) {
+                    providePhotoFromGallery()
+                } else {
+                    provideStockPhoto()
+                }
             }
+
         }
         dialogBinding.textViewAddPhoto.setOnClickListener(listener)
         dialogBinding.imageViewAvatar.setOnClickListener(listener)
@@ -271,8 +280,4 @@ class MyContactsActivity : AppCompatActivity() {
         intent.data = uri
         startActivity(intent)
     }
-
-
-
-
 }

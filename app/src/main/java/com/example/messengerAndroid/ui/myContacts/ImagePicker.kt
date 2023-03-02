@@ -20,31 +20,23 @@ class ImagePicker(private val activity: ComponentActivity) {
 
     private lateinit var uri: Uri
 
+    private val isPermissionGranted =
+        activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        get() = field
 
 
     private val pickMedia = activity.registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        if (uri != null) {
-            this.uri = uri
-        } else {
-            showError()
-        }
+
     }
 
     private val requestGalleryAccessPermissionLauncher = activity.registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
-        if (it) {
-
-        } else {
-
-        }
-    }
-
-    init {
 
     }
 
-    public fun getUri(): Uri {
+
+    public fun getPhoto(): Uri {
         return uri
     }
 
@@ -89,6 +81,10 @@ class ImagePicker(private val activity: ComponentActivity) {
         val uri = Uri.fromParts(Constants.SETTINGS_PACKAGE_SCHEME, activity.packageName, null)
         intent.data = uri
         activity.startActivity(intent)
+    }
+
+    fun handlePermission() {
+        requestGalleryAccessPermission()
     }
 
 }
