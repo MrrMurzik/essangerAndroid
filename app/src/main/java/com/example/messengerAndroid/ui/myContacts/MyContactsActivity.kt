@@ -1,9 +1,17 @@
 package com.example.messengerAndroid.ui.myContacts
 
+import android.Manifest.permission.READ_CONTACTS
 import android.content.DialogInterface
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -11,20 +19,44 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messengerAndroid.R
+import com.example.messengerAndroid.data.contactsRepository.UsersListGenerator
 import com.example.messengerAndroid.databinding.ActivityMyContactsBinding
 import com.example.messengerAndroid.databinding.DialogAddContactBinding
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
+import com.example.messengerAndroid.databinding.DialogDeniedPermissionBinding
 import com.example.messengerAndroid.ui.myContacts.adapter.ContactsAdapter
 import com.example.messengerAndroid.ui.myContacts.adapter.UserActionListener
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.ContactsViewModel
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.SwipeToDeleteCallback
+import com.example.messengerAndroid.ui.myContacts.contactsViewModel.UsersDataSelector
+import com.example.messengerAndroid.ui.myContacts.contactsViewModel.factory.ContactsViewModelFactory
+import com.example.messengerAndroid.utils.Constants.IS_FETCHING_REQUIRED_KEY
+import com.example.messengerAndroid.utils.Constants.SETTINGS_PACKAGE_SCHEME
 import com.google.android.material.snackbar.Snackbar
 
 
 class MyContactsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyContactsBinding
-    private val viewModel: ContactsViewModel by viewModels()
+    private var isCheckedFetching = false
+
+    // Global flag to ensure that recycler view created only once
+
+    private val viewModel: ContactsViewModel by viewModels {
+        ContactsViewModelFactory(usersDataSelector = object : UsersDataSelector {
+
+            override fun getUsers(): MutableList<User> {
+                return if (isCheckedFetching &&
+                    checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    ContactFetcher().fetchContacts(this@MyContactsActivity)
+                } else {
+                    UsersListGenerator().getUsers()
+                }
+            }
+
+        })
+    }
 
     private val adapterContacts: ContactsAdapter by lazy {
         ContactsAdapter(actionListener = object : UserActionListener {
@@ -36,19 +68,44 @@ class MyContactsActivity : AppCompatActivity() {
         })
     }
 
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) {
+        if (it) {
+            setupRecyclerView()
+        } else {
+            showPermissionDeniedDialog()
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        isCheckedFetching = intent.getBooleanExtra(IS_FETCHING_REQUIRED_KEY, false)
 
+        if (isCheckedFetching && checkSelfPermission(READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermission()
+        } else {
+            setupRecyclerView()
+        }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+            setupRecyclerView()
+        }
+    }
+
+    private fun setupRecyclerView() {
         initRecycler()
-
         addSwipeToDeleteFeature()
         setListeners()
         setObservers()
-
     }
+
 
     private fun initRecycler() {
         binding.recyclerContacts.run {
@@ -77,8 +134,7 @@ class MyContactsActivity : AppCompatActivity() {
             val dialogBinding = DialogAddContactBinding.inflate(layoutInflater)
             val listener = getAddUserDialogListener(dialogBinding)
 
-            AlertDialog.Builder(this)
-                .setTitle(R.string.add_contact_title)
+            AlertDialog.Builder(this).setTitle(R.string.add_contact_title)
                 .setView(dialogBinding.root)
                 .setPositiveButton(R.string.action_confirmed, listener)
                 .setNegativeButton(R.string.action_cancelled, null)
@@ -88,22 +144,25 @@ class MyContactsActivity : AppCompatActivity() {
     }
 
     private fun setObservers() {
-        viewModel.contactsLiveData.observe(this){
+        viewModel.contactsLiveData.observe(this) {
             adapterContacts.submitList(it.toMutableList())
         }
     }
 
     private fun getAddUserDialogListener(dialogBinding: DialogAddContactBinding):
             DialogInterface.OnClickListener {
+
         return DialogInterface.OnClickListener { _, which ->
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
                     viewModel.addNewUser(
                         dialogBinding.textInputName.editText?.text.toString(),
-                        dialogBinding.textInputJob.editText?.text.toString())
+                        dialogBinding.textInputJob.editText?.text.toString()
+                    )
                 }
             }
         }
+
     }
 
     private fun getDeletionAlertDialogListener(user: User): DialogInterface.OnClickListener {
@@ -125,32 +184,65 @@ class MyContactsActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showUndoSnackbar(user: User,
-                                 position: Int,
-                                 viewModel: ContactsViewModel,
-                                 binding: ActivityMyContactsBinding) {
-        Snackbar
-            .make(
-                binding.root,
-                R.string.deletion_snackbar_message,
-                Snackbar.LENGTH_LONG)
-            .setAction(R.string.undo_delete_action) {viewModel.addExistingUser(user, position)}
-            .setActionTextColor(Color.CYAN)
-            .show()
+    private fun showUndoSnackbar(
+        user: User, position: Int, viewModel: ContactsViewModel, binding: ActivityMyContactsBinding
+    ) {
+        Snackbar.make(
+            binding.root, R.string.deletion_snackbar_message, Snackbar.LENGTH_LONG
+        ).setAction(R.string.undo_delete_action) { viewModel.addExistingUser(user, position) }
+            .setActionTextColor(Color.CYAN).show()
     }
 
     private fun showDeletionAlertDialog(listener: DialogInterface.OnClickListener) {
 
-        AlertDialog.Builder(this)
-            .setCancelable(true)
+        AlertDialog.Builder(this).setCancelable(true)
             .setTitle(R.string.default_deletion_dialog_title)
             .setMessage(R.string.default_deletion_dialog_message)
             .setTitle(R.string.default_deletion_dialog_title)
             .setMessage(R.string.default_deletion_dialog_message)
             .setPositiveButton(R.string.action_confirmed, listener)
-            .setNegativeButton(R.string.action_cancelled, listener)
-            .create()
-            .show()
+            .setNegativeButton(R.string.action_cancelled, listener).create().show()
     }
+
+
+    private fun requestPermission() {
+        requestPermissionLauncher.launch(READ_CONTACTS)
+    }
+
+    private fun showPermissionDeniedDialog() {
+        val dialogBinding = DialogDeniedPermissionBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogBinding.root)
+            .create()
+        dialog.show()
+        setPermissionDeniedDialogListeners(dialogBinding, dialog)
+    }
+
+    private fun setPermissionDeniedDialogListeners(
+        dialogBinding: DialogDeniedPermissionBinding,
+        dialog: AlertDialog
+    ) {
+        dialogBinding.buttonGrantPermission.setOnClickListener {
+            if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
+                requestPermission()
+            } else {
+                openAppSettings()
+            }
+            dialog.dismiss()
+        }
+        dialogBinding.buttonCancel.setOnClickListener {
+            this@MyContactsActivity.finish()
+        }
+    }
+
+    private fun openAppSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts(SETTINGS_PACKAGE_SCHEME, packageName, null)
+        intent.data = uri
+        startActivity(intent)
+    }
+
+
+
 
 }

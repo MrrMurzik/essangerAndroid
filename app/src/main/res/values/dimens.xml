@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="biggestFontSize">40sp</dimen>
     <dimen name="largeFontSize">24sp</dimen>
     <dimen name="mediumPlusFontSize">18sp</dimen>
     <dimen name="mediumFontSize">16sp</dimen>
@@ -10,6 +11,7 @@
     <dimen name="avatar_diameter">50dp</dimen>
 
     <dimen name="landscape_margin_or">100dp</dimen>
+    <dimen name="very_big_margin">60dp</dimen>
     <dimen name="margin_from_start">32dp</dimen>
     <dimen name="margin_between_socials">32dp</dimen>
     <dimen name="largeMargin">24dp</dimen>
