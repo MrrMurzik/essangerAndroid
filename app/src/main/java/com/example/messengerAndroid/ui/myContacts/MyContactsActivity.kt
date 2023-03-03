@@ -112,6 +112,11 @@ class MyContactsActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        requestReadContactsPermissionLauncher.unregister()
+    }
+
     private fun setupRecyclerView() {
         initRecycler()
         addSwipeToDeleteFeature()
@@ -169,9 +174,10 @@ class MyContactsActivity : AppCompatActivity() {
             with(imagePicker) {
                 handlePermission()
                 if (isPermissionGranted) {
-                    providePhotoFromGallery()
+                    getPhotoFromGallery()
+                    dialogBinding.imageViewAvatar.setImageURI(getPhotoUri())
                 } else {
-                    provideStockPhoto()
+//                    chooseStockPhoto()
                 }
             }
 
@@ -196,7 +202,7 @@ class MyContactsActivity : AppCompatActivity() {
                     viewModel.addNewUser(
                         dialogBinding.textInputName.editText?.text.toString(),
                         dialogBinding.textInputJob.editText?.text.toString(),
-                        uri.toString()
+                        dialogBinding.imageViewAvatar.
                     )
                 }
             }

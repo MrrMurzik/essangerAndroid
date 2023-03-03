@@ -18,15 +18,14 @@ import com.example.messengerAndroid.utils.Constants.ERROR_ADDING_PHOTO
 class ImagePicker(private val activity: ComponentActivity) {
 
 
-    private lateinit var uri: Uri
+    private var uri: Uri? = null
 
-    private val isPermissionGranted =
+    val isPermissionGranted =
         activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-        get() = field
 
 
     private val pickMedia = activity.registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-
+        this.uri = uri
     }
 
     private val requestGalleryAccessPermissionLauncher = activity.registerForActivityResult(
@@ -35,13 +34,25 @@ class ImagePicker(private val activity: ComponentActivity) {
 
     }
 
+    fun handlePermission() {
+        requestGalleryAccessPermission()
+    }
 
-    public fun getPhoto(): Uri {
+    fun getPhotoFromGallery() {
+        launchPhotoChoosing()
+    }
+
+
+    fun getPhotoUri(): Uri? {
         return uri
     }
 
     private fun requestGalleryAccessPermission() {
         requestGalleryAccessPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+    }
+
+    private fun launchPhotoChoosing() {
+        pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
     private fun showError() {
@@ -83,8 +94,6 @@ class ImagePicker(private val activity: ComponentActivity) {
         activity.startActivity(intent)
     }
 
-    fun handlePermission() {
-        requestGalleryAccessPermission()
-    }
+
 
 }
