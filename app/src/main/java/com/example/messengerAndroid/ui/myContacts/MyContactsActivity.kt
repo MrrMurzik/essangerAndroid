@@ -42,7 +42,7 @@ class MyContactsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyContactsBinding
     private var isCheckedFetching = false
 
-    private val imagePicker = ImagePicker(this)
+//    private val imagePicker = ImagePicker(this)
 
 
     private val viewModel: ContactsViewModel by viewModels {
@@ -87,9 +87,6 @@ class MyContactsActivity : AppCompatActivity() {
 
     }
 
-    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        this.uri = uri?: Uri.EMPTY
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -149,42 +146,43 @@ class MyContactsActivity : AppCompatActivity() {
 
     private fun setListeners() {
         binding.textViewAddContacts.setOnClickListener {
-            val dialogBinding = DialogAddContactBinding.inflate(layoutInflater)
-            setListenerForAddImageViews(dialogBinding)
-            val positiveButtonListener = getAddUserDialogListener(dialogBinding)
-
-            AlertDialog.Builder(this).setTitle(R.string.add_contact_title)
-                .setView(dialogBinding.root)
-                .setPositiveButton(R.string.action_confirmed, positiveButtonListener)
-                .setNegativeButton(R.string.action_cancelled, null)
-                .create()
-                .show()
+            ImagePickerFragmentDialog().show(supportFragmentManager, "lol")
+//            val dialogBinding = DialogAddContactBinding.inflate(layoutInflater)
+//            setListenerForAddImageViews(dialogBinding)
+//            val positiveButtonListener = getAddUserDialogListener(dialogBinding)
+//
+//            AlertDialog.Builder(this).setTitle(R.string.add_contact_title)
+//                .setView(dialogBinding.root)
+//                .setPositiveButton(R.string.action_confirmed, positiveButtonListener)
+//                .setNegativeButton(R.string.action_cancelled, null)
+//                .create()
+//                .show()
         }
     }
 
-    private fun setListenerForAddImageViews(dialogBinding: DialogAddContactBinding) {
-        requestGalleryAccessPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
-        val listener = View.OnClickListener {
-//            if (checkSelfPermission(READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//                requestGalleryAccessPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
-//            } else {
-//                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-//                dialogBinding.imageViewAvatar.setImageURI(uri)
+//    private fun setListenerForAddImageViews(dialogBinding: DialogAddContactBinding) {
+////        requestGalleryAccessPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
+//        val listener = View.OnClickListener {
+////            if (checkSelfPermission(READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+////                requestGalleryAccessPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
+////            } else {
+////                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+////                dialogBinding.imageViewAvatar.setImageURI(uri)
+////            }
+//            with(imagePicker) {
+//                handlePermission()
+//                if (isPermissionGranted) {
+//                    getPhotoFromGallery()
+//                    dialogBinding.imageViewAvatar.setImageURI(getPhotoUri())
+//                } else {
+////                    chooseStockPhoto()
+//                }
 //            }
-            with(imagePicker) {
-                handlePermission()
-                if (isPermissionGranted) {
-                    getPhotoFromGallery()
-                    dialogBinding.imageViewAvatar.setImageURI(getPhotoUri())
-                } else {
-//                    chooseStockPhoto()
-                }
-            }
-
-        }
-        dialogBinding.textViewAddPhoto.setOnClickListener(listener)
-        dialogBinding.imageViewAvatar.setOnClickListener(listener)
-    }
+//
+//        }
+//        dialogBinding.textViewAddPhoto.setOnClickListener(listener)
+//        dialogBinding.imageViewAvatar.setOnClickListener(listener)
+//    }
 
 
     private fun setObservers() {
@@ -193,22 +191,22 @@ class MyContactsActivity : AppCompatActivity() {
         }
     }
 
-    private fun getAddUserDialogListener(dialogBinding: DialogAddContactBinding):
-            DialogInterface.OnClickListener {
-
-        return DialogInterface.OnClickListener { _, which ->
-            when (which) {
-                DialogInterface.BUTTON_POSITIVE -> {
-                    viewModel.addNewUser(
-                        dialogBinding.textInputName.editText?.text.toString(),
-                        dialogBinding.textInputJob.editText?.text.toString(),
-                        dialogBinding.imageViewAvatar.
-                    )
-                }
-            }
-        }
-
-    }
+//    private fun getAddUserDialogListener(dialogBinding: DialogAddContactBinding):
+//            DialogInterface.OnClickListener {
+//
+//        return DialogInterface.OnClickListener { _, which ->
+//            when (which) {
+//                DialogInterface.BUTTON_POSITIVE -> {
+//                    viewModel.addNewUser(
+//                        dialogBinding.textInputName.editText?.text.toString(),
+//                        dialogBinding.textInputJob.editText?.text.toString(),
+//                        dialogBinding.imageViewAvatar.
+//                    )
+//                }
+//            }
+//        }
+//
+//    }
 
     private fun getDeletionAlertDialogListener(user: User): DialogInterface.OnClickListener {
         return DialogInterface.OnClickListener { _, which ->
