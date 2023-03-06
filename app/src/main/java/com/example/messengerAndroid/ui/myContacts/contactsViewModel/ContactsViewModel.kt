@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.data.contactsRepository.UsersListGenerator
+import com.example.messengerAndroid.utils.UniqueIdGenerator.getUniqueId
 
 
 class ContactsViewModel(private val usersDataSelector: UsersDataSelector) : ViewModel() {
@@ -18,21 +19,22 @@ class ContactsViewModel(private val usersDataSelector: UsersDataSelector) : View
         _contactsLiveData.value = usersDataSelector.getUsers()
     }
 
-    fun deleteUser(user: User) {
+    fun deleteUser(user: User?) {
         _contactsLiveData.value = _contactsLiveData.value?.toMutableList()?.apply {
             remove(user)
         }
     }
 
-    fun addExistingUser(user: User, position: Int) {
+    fun addExistingUser(user: User?, position: Int) {
         _contactsLiveData.value = _contactsLiveData.value?.toMutableList()?.apply {
-            add(position, user)
+            if (user != null)
+                add(position, user)
         }
     }
 
     fun addNewUser(name: String, job: String, photo: String) {
         _contactsLiveData.value = _contactsLiveData.value?.toMutableList()?.apply {
-            add(User(_contactsLiveData.value!!.size.toLong(), photo, name, job))
+            add(User(getUniqueId(), photo, name, job))
         }
     }
 

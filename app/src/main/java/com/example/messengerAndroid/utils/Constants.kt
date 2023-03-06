@@ -28,4 +28,10 @@ object Constants {
 
     const val ERROR_ADDING_PHOTO = "Error! Unable to upload pic. Try again"
 
+    // constants for savedInstanceState of AddContactDialog
+
+    const val KEY_SAVE_STATE_NAME = "editTextName"
+    const val KEY_SAVE_STATE_JOB = "editTextJob"
+    const val KEY_SAVE_STATE_PHOTO_URI = "avatarPhotoUri"
+
 }

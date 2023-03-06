@@ -1,7 +1,6 @@
 package com.example.messengerAndroid.ui.myContacts
 
 import android.Manifest.permission.READ_CONTACTS
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,9 +8,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.view.View
 import android.widget.Toast
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -22,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.messengerAndroid.R
 import com.example.messengerAndroid.data.contactsRepository.UsersListGenerator
 import com.example.messengerAndroid.databinding.ActivityMyContactsBinding
-import com.example.messengerAndroid.databinding.DialogAddContactBinding
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.databinding.DialogDeniedPermissionBinding
 import com.example.messengerAndroid.ui.myContacts.adapter.ContactsAdapter
@@ -34,7 +30,6 @@ import com.example.messengerAndroid.ui.myContacts.contactsViewModel.factory.Cont
 import com.example.messengerAndroid.utils.Constants.IS_FETCHING_REQUIRED_KEY
 import com.example.messengerAndroid.utils.Constants.SETTINGS_PACKAGE_SCHEME
 import com.google.android.material.snackbar.Snackbar
-import java.net.URI
 
 
 class MyContactsActivity : AppCompatActivity() {
@@ -42,7 +37,6 @@ class MyContactsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyContactsBinding
     private var isCheckedFetching = false
 
-//    private val imagePicker = ImagePicker(this)
 
 
     private val viewModel: ContactsViewModel by viewModels {
@@ -80,13 +74,6 @@ class MyContactsActivity : AppCompatActivity() {
             showPermissionDeniedDialog()
         }
     }
-
-    private val requestGalleryAccessPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ){
-
-    }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,7 +121,7 @@ class MyContactsActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
                 val position = viewHolder.absoluteAdapterPosition
-                val user = viewModel.contactsLiveData.value?.get(position)!!
+                val user = viewModel.contactsLiveData.value?.get(position)
                 viewModel.deleteUser(user)
                 showUndoSnackbar(user, position, viewModel, binding)
 
@@ -146,43 +133,21 @@ class MyContactsActivity : AppCompatActivity() {
 
     private fun setListeners() {
         binding.textViewAddContacts.setOnClickListener {
-            ImagePickerFragmentDialog().show(supportFragmentManager, "lol")
-//            val dialogBinding = DialogAddContactBinding.inflate(layoutInflater)
-//            setListenerForAddImageViews(dialogBinding)
-//            val positiveButtonListener = getAddUserDialogListener(dialogBinding)
-//
-//            AlertDialog.Builder(this).setTitle(R.string.add_contact_title)
-//                .setView(dialogBinding.root)
-//                .setPositiveButton(R.string.action_confirmed, positiveButtonListener)
-//                .setNegativeButton(R.string.action_cancelled, null)
-//                .create()
-//                .show()
+            ImagePickerFragmentDialog()
+                .setListener(listener = object : DialogListener {
+                override fun onDialogPositiveClick(name: String, job: String, photo: String) {
+                    viewModel.addNewUser(name, job, photo)
+                }
+            })
+                .show(supportFragmentManager, "lol")
+
+        }
+
+        binding.imageButtonArrowBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
-//    private fun setListenerForAddImageViews(dialogBinding: DialogAddContactBinding) {
-////        requestGalleryAccessPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
-//        val listener = View.OnClickListener {
-////            if (checkSelfPermission(READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-////                requestGalleryAccessPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
-////            } else {
-////                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-////                dialogBinding.imageViewAvatar.setImageURI(uri)
-////            }
-//            with(imagePicker) {
-//                handlePermission()
-//                if (isPermissionGranted) {
-//                    getPhotoFromGallery()
-//                    dialogBinding.imageViewAvatar.setImageURI(getPhotoUri())
-//                } else {
-////                    chooseStockPhoto()
-//                }
-//            }
-//
-//        }
-//        dialogBinding.textViewAddPhoto.setOnClickListener(listener)
-//        dialogBinding.imageViewAvatar.setOnClickListener(listener)
-//    }
 
 
     private fun setObservers() {
@@ -191,22 +156,6 @@ class MyContactsActivity : AppCompatActivity() {
         }
     }
 
-//    private fun getAddUserDialogListener(dialogBinding: DialogAddContactBinding):
-//            DialogInterface.OnClickListener {
-//
-//        return DialogInterface.OnClickListener { _, which ->
-//            when (which) {
-//                DialogInterface.BUTTON_POSITIVE -> {
-//                    viewModel.addNewUser(
-//                        dialogBinding.textInputName.editText?.text.toString(),
-//                        dialogBinding.textInputJob.editText?.text.toString(),
-//                        dialogBinding.imageViewAvatar.
-//                    )
-//                }
-//            }
-//        }
-//
-//    }
 
     private fun getDeletionAlertDialogListener(user: User): DialogInterface.OnClickListener {
         return DialogInterface.OnClickListener { _, which ->
@@ -228,7 +177,7 @@ class MyContactsActivity : AppCompatActivity() {
     }
 
     private fun showUndoSnackbar(
-        user: User, position: Int, viewModel: ContactsViewModel, binding: ActivityMyContactsBinding
+        user: User?, position: Int, viewModel: ContactsViewModel, binding: ActivityMyContactsBinding
     ) {
         Snackbar.make(
             binding.root, R.string.deletion_snackbar_message, Snackbar.LENGTH_LONG

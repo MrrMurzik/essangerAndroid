@@ -1,6 +1,7 @@
 package com.example.messengerAndroid.data.contactsRepository
 
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
+import com.example.messengerAndroid.utils.UniqueIdGenerator.getUniqueId
 import com.github.javafaker.Faker
 
 class UsersListGenerator {
@@ -11,7 +12,7 @@ class UsersListGenerator {
         val faker = Faker.instance()
         users = (1..20).map {
             User(
-            id = it.toLong(),
+            id = getUniqueId(),
             name = faker.name().name(),
             job = faker.company().name(),
             photo = IMAGES[it % IMAGES.size]
