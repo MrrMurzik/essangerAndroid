@@ -63,8 +63,6 @@ class SignUpActivity : AppCompatActivity() {
     private fun goMyProfileActivity(name: String) {
         val intent = Intent(this, MyProfileActivity::class.java)
         intent.putExtra(USER_NAME_KEY, name)
-//        ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
-//        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
         startActivity(intent)
     }
 
