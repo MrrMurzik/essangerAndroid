@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.ui.myContacts.contactsViewModel
+package com.example.messengerAndroid.ui.myContacts.contactsViewModel.contract
 
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 

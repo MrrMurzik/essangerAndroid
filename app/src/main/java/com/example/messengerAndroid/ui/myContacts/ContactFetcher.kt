@@ -18,8 +18,6 @@ class ContactFetcher {
         )
         cursor?.use {
             while (it.moveToNext()) {
-//                val id =
-//                    it.getLong(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
                 val name =
                     it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
                 val photo: String? =

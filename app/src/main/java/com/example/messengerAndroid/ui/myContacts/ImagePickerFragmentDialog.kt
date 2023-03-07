@@ -12,18 +12,22 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.example.messengerAndroid.databinding.DialogAddContactBinding
 import com.example.messengerAndroid.databinding.DialogDeniedPermissionBinding
+import com.example.messengerAndroid.ui.myContacts.contactsViewModel.ContactsViewModel
 import com.example.messengerAndroid.utils.Constants
 import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_JOB
 import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_NAME
 import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_PHOTO_URI
 
-class ImagePickerFragmentDialog() : DialogFragment() {
+class ImagePickerFragmentDialog : DialogFragment() {
 
     private var uri = Uri.EMPTY
     private lateinit var dialogBinding: DialogAddContactBinding
     private lateinit var listener: DialogListener
+
+    private val viewModel: ContactsViewModel by activityViewModels()
 
     private val requestGalleryAccessPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -41,6 +45,7 @@ class ImagePickerFragmentDialog() : DialogFragment() {
     }
 
 
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         dialogBinding = DialogAddContactBinding.inflate(layoutInflater)
         with(dialogBinding) {
@@ -48,7 +53,11 @@ class ImagePickerFragmentDialog() : DialogFragment() {
                 textInputName.editText?.setText(savedInstanceState.getString(KEY_SAVE_STATE_NAME))
                 textInputJob.editText?.setText(savedInstanceState.getString(KEY_SAVE_STATE_JOB))
                 uri = Uri.parse(savedInstanceState.getString(KEY_SAVE_STATE_PHOTO_URI))
+                if (uri != Uri.EMPTY) {
+                    dialogBinding.imageViewAvatar.setImageURI(uri)
+                }
             }
+
             val dialog = AlertDialog.Builder(requireContext()).setView(root).create()
             setListenerForAddImageViews(this)
             buttonConfirm.setOnClickListener(getAddUserDialogListener())
@@ -98,11 +107,9 @@ class ImagePickerFragmentDialog() : DialogFragment() {
     private fun getAddUserDialogListener(): View.OnClickListener {
 
         return View.OnClickListener {
-            listener.onDialogPositiveClick(
-                dialogBinding.textInputName.editText?.text.toString(),
+            viewModel.addNewUser(dialogBinding.textInputName.editText?.text.toString(),
                 dialogBinding.textInputJob.editText?.text.toString(),
-                uri.toString()
-            )
+                uri.toString())
             dialog?.dismiss()
         }
 
@@ -140,7 +147,5 @@ class ImagePickerFragmentDialog() : DialogFragment() {
         intent.data = uri
         requireActivity().startActivity(intent)
     }
-
-
 
 }

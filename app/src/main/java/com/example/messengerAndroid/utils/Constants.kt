@@ -34,4 +34,8 @@ object Constants {
     const val KEY_SAVE_STATE_JOB = "editTextJob"
     const val KEY_SAVE_STATE_PHOTO_URI = "avatarPhotoUri"
 
+    // fragment tags
+
+    const val TAG_ADD_CONTACT_DIALOG = "TAG_ADD_CONTACT_DIALOG"
+
 }

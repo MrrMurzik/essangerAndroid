@@ -24,11 +24,11 @@ import com.example.messengerAndroid.databinding.DialogDeniedPermissionBinding
 import com.example.messengerAndroid.ui.myContacts.adapter.ContactsAdapter
 import com.example.messengerAndroid.ui.myContacts.adapter.UserActionListener
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.ContactsViewModel
-import com.example.messengerAndroid.ui.myContacts.contactsViewModel.SwipeToDeleteCallback
-import com.example.messengerAndroid.ui.myContacts.contactsViewModel.UsersDataSelector
+import com.example.messengerAndroid.ui.myContacts.contactsViewModel.contract.UsersDataSelector
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.factory.ContactsViewModelFactory
 import com.example.messengerAndroid.utils.Constants.IS_FETCHING_REQUIRED_KEY
 import com.example.messengerAndroid.utils.Constants.SETTINGS_PACKAGE_SCHEME
+import com.example.messengerAndroid.utils.Constants.TAG_ADD_CONTACT_DIALOG
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -96,6 +96,7 @@ class MyContactsActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
         requestReadContactsPermissionLauncher.unregister()
@@ -139,7 +140,7 @@ class MyContactsActivity : AppCompatActivity() {
                     viewModel.addNewUser(name, job, photo)
                 }
             })
-                .show(supportFragmentManager, "lol")
+                .show(supportFragmentManager, TAG_ADD_CONTACT_DIALOG)
 
         }
 

@@ -1,15 +1,14 @@
 package com.example.messengerAndroid.ui.myContacts.contactsViewModel
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
-import com.example.messengerAndroid.data.contactsRepository.UsersListGenerator
+import com.example.messengerAndroid.ui.myContacts.contactsViewModel.contract.UsersDataSelector
 import com.example.messengerAndroid.utils.UniqueIdGenerator.getUniqueId
 
 
-class ContactsViewModel(private val usersDataSelector: UsersDataSelector) : ViewModel() {
+class ContactsViewModel(usersDataSelector: UsersDataSelector) : ViewModel() {
 
     private val _contactsLiveData = MutableLiveData<List<User>>()
     val contactsLiveData: LiveData<List<User>> = _contactsLiveData
@@ -42,9 +41,7 @@ class ContactsViewModel(private val usersDataSelector: UsersDataSelector) : View
         return contactsLiveData.value?.indexOf(user) ?: -1
     }
 
-    fun getUser(position: Int): User? {
-        return contactsLiveData.value?.toMutableList()?.get(position)
-    }
+
 
 
 }
