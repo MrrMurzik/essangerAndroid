@@ -14,7 +14,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.messengerAndroid.databinding.DialogAddContactBinding
-import com.example.messengerAndroid.databinding.DialogDeniedPermissionBinding
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.ContactsViewModel
 import com.example.messengerAndroid.utils.Constants
 import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_JOB
@@ -25,16 +24,13 @@ class ImagePickerFragmentDialog : DialogFragment() {
 
     private var uri = Uri.EMPTY
     private lateinit var dialogBinding: DialogAddContactBinding
-    private lateinit var listener: DialogListener
 
     private val viewModel: ContactsViewModel by activityViewModels()
 
     private val requestGalleryAccessPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ){
-        if (!it) {
-            showPermissionDeniedDialog()
-        } else {
+        if (it) {
             launchPickPhoto()
         }
     }
@@ -81,7 +77,12 @@ class ImagePickerFragmentDialog : DialogFragment() {
         val listener = View.OnClickListener {
             if (requireContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED) {
-                requestGalleryAccessPermission()
+
+                if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE))
+                    requestGalleryAccessPermission()
+                else
+                    openAppSettings()
+
             } else {
                 launchPickPhoto()
             }
@@ -98,12 +99,6 @@ class ImagePickerFragmentDialog : DialogFragment() {
         pickMediaLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
-    fun setListener(listener: DialogListener): DialogFragment {
-        this.listener = listener
-        return this
-    }
-
-
     private fun getAddUserDialogListener(): View.OnClickListener {
 
         return View.OnClickListener {
@@ -113,32 +108,6 @@ class ImagePickerFragmentDialog : DialogFragment() {
             dialog?.dismiss()
         }
 
-    }
-
-    private fun showPermissionDeniedDialog() {
-        val deniedDialogBinding = DialogDeniedPermissionBinding.inflate(requireActivity().layoutInflater)
-        val dialog = AlertDialog.Builder(requireContext())
-            .setView(dialogBinding.root)
-            .create()
-        dialog.show()
-        setPermissionDeniedDialogListeners(deniedDialogBinding, dialog)
-    }
-
-    private fun setPermissionDeniedDialogListeners(
-        deniedDialogBinding: DialogDeniedPermissionBinding,
-        dialog: AlertDialog
-    ) {
-        deniedDialogBinding.buttonGrantPermission.setOnClickListener {
-            if (requireActivity().shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
-                requestGalleryAccessPermission()
-            } else {
-                openAppSettings()
-            }
-            dialog.dismiss()
-        }
-        deniedDialogBinding.buttonCancel.setOnClickListener {
-            dialog.dismiss()
-        }
     }
 
     private fun openAppSettings() {

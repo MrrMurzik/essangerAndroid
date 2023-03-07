@@ -134,13 +134,7 @@ class MyContactsActivity : AppCompatActivity() {
 
     private fun setListeners() {
         binding.textViewAddContacts.setOnClickListener {
-            ImagePickerFragmentDialog()
-                .setListener(listener = object : DialogListener {
-                override fun onDialogPositiveClick(name: String, job: String, photo: String) {
-                    viewModel.addNewUser(name, job, photo)
-                }
-            })
-                .show(supportFragmentManager, TAG_ADD_CONTACT_DIALOG)
+            ImagePickerFragmentDialog().show(supportFragmentManager, TAG_ADD_CONTACT_DIALOG)
 
         }
 
