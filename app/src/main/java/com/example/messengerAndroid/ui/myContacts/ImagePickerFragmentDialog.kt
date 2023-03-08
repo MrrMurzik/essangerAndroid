@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
@@ -75,16 +76,35 @@ class ImagePickerFragmentDialog : DialogFragment() {
     private fun setListenerForAddImageViews(dialogBinding: DialogAddContactBinding) {
 
         val listener = View.OnClickListener {
-            if (requireContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 
-                if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE))
-                    requestGalleryAccessPermission()
-                else
-                    openAppSettings()
+                if (requireContext().checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) !=
+                    PackageManager.PERMISSION_GRANTED
+                ) {
 
+                    if (shouldShowRequestPermissionRationale(Manifest.permission.READ_MEDIA_IMAGES)) {
+                        openAppSettings()
+                    } else {
+                        requestGalleryAccessPermission()
+                    }
+
+
+                } else {
+                    launchPickPhoto()
+                }
             } else {
-                launchPickPhoto()
+                if (requireContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                    PackageManager.PERMISSION_GRANTED
+                ) {
+
+                    if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE))
+                        requestGalleryAccessPermission()
+                    else
+                        openAppSettings()
+
+                } else {
+                    launchPickPhoto()
+                }
             }
         }
         dialogBinding.textViewAddPhoto.setOnClickListener(listener)
@@ -92,7 +112,11 @@ class ImagePickerFragmentDialog : DialogFragment() {
     }
 
     private fun requestGalleryAccessPermission() {
-        requestGalleryAccessPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestGalleryAccessPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+        } else {
+            requestGalleryAccessPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
     }
 
     private fun launchPickPhoto() {
