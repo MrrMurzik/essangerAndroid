@@ -20,8 +20,8 @@ class UsersListGenerator {
         }.toMutableList()
     }
 
-    fun getUsers() : MutableList<User> {
-        return users
+    fun getUsers() : List<User> {
+        return users.toList()
     }
 
 

@@ -24,7 +24,7 @@ class SignUpActivity : AppCompatActivity() {
 
         SharedPreferencesHelper.init(this)
 
-        if (SharedPreferencesHelper.get() != "") {
+        if (SharedPreferencesHelper.get().isNotEmpty()) {
             goMyProfileActivity(SharedPreferencesHelper.get())
         }
 

@@ -7,7 +7,7 @@ import com.example.messengerAndroid.utils.UniqueIdGenerator.getUniqueId
 
 class ContactFetcher {
 
-    fun fetchContacts(context: Context): MutableList<User> {
+    fun fetchContacts(context: Context): List<User> {
         val contacts = mutableListOf<User>()
         val cursor = context.contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
@@ -28,6 +28,6 @@ class ContactFetcher {
                 contacts.add(contact)
             }
         }
-        return contacts
+        return contacts.toList()
     }
 }

@@ -26,8 +26,9 @@ class ContactsViewModel(usersDataSelector: UsersDataSelector) : ViewModel() {
 
     fun addExistingUser(user: User?, position: Int) {
         _contactsLiveData.value = _contactsLiveData.value?.toMutableList()?.apply {
-            if (user != null)
+            if (user != null) {
                 add(position, user)
+            }
         }
     }
 

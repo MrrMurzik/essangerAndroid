@@ -42,7 +42,7 @@ class MyContactsActivity : AppCompatActivity() {
     private val viewModel: ContactsViewModel by viewModels {
         ContactsViewModelFactory(usersDataSelector = object : UsersDataSelector {
 
-            override fun getUsers(): MutableList<User> {
+            override fun getUsers(): List<User> {
                 return if (isCheckedFetching &&
                     checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
                 ) {
@@ -174,6 +174,9 @@ class MyContactsActivity : AppCompatActivity() {
     private fun showUndoSnackbar(
         user: User?, position: Int, viewModel: ContactsViewModel, binding: ActivityMyContactsBinding
     ) {
+        if (position == -1) {
+            return
+        }
         Snackbar.make(
             binding.root, R.string.deletion_snackbar_message, Snackbar.LENGTH_LONG
         ).setAction(R.string.undo_delete_action) { viewModel.addExistingUser(user, position) }
