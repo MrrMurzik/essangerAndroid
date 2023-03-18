@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.myContacts.MyContactsFragment">
+
+    <View
+        android:id="@+id/viewUpperBlock"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHeight_percent="0.2"
+        android:background="?attr/colorPrimary"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/imageButtonArrowBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textViewContacts"
+        android:layout_marginTop="@dimen/bigMargin"
+        android:layout_marginStart="@dimen/bigMargin"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewContacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contacts"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="@dimen/largeFontSize"
+        app:layout_constraintBottom_toBottomOf="@id/imageButtonArrowBack"
+        app:layout_constraintEnd_toStartOf="@id/imageButtonSearch"
+        app:layout_constraintStart_toEndOf="@id/imageButtonArrowBack"
+        app:layout_constraintTop_toTopOf="@id/imageButtonArrowBack"
+        android:fontFamily="@font/montserrat_medium"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/imageButtonSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_search"
+        app:layout_constraintStart_toEndOf="@id/textViewContacts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageButtonArrowBack"
+        app:layout_constraintBottom_toBottomOf="@id/imageButtonArrowBack"
+        android:layout_marginEnd="@dimen/bigMargin"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAddContacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bigMargin"
+        android:clickable="true"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/add_contact"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="@dimen/smallFontSize"
+        app:layout_constraintBottom_toBottomOf="@id/viewUpperBlock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageButtonArrowBack"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerContacts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewUpperBlock"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/item_contact" />
+
+</com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout>

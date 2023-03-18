@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:paddingStart="@dimen/SignUpPagePadding"
+    android:paddingEnd="@dimen/SignUpPagePadding">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewGetAcquainted"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Headline"
+
+        android:text="@string/get_acquainted"
+        app:layout_constraintBottom_toTopOf="@id/textViewSmallInvite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewSmallInvite"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
+
+        android:textColor="?attr/colorOnSecondary"
+
+        android:text="@string/fill_text_invite"
+        app:layout_constraintBottom_toBottomOf="@id/inputLayoutEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewGetAcquainted" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+
+        app:boxBackgroundColor="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorOnPrimaryContainer"
+        android:textColorHint="?attr/colorOnPrimaryContainer"
+        app:hintTextColor="?attr/colorOnPrimaryContainer"
+
+        app:errorEnabled="true"
+        android:hint="@string/e_mail"
+
+        app:layout_constraintBottom_toTopOf="@id/inputLayoutPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSmallInvite">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/TextInputEditTextStyle"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+
+        app:boxBackgroundColor="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorOnPrimaryContainer"
+        android:textColorHint="?attr/colorOnPrimaryContainer"
+        app:hintTextColor="?attr/colorOnPrimaryContainer"
+        android:hint="@string/password"
+
+        app:endIconMode="password_toggle"
+        app:endIconTint="?attr/colorOnPrimaryContainer"
+
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/checkBoxRememberMe"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/TextInputEditTextStyle"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/checkBoxRememberMe"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/checkbox_height"
+        android:layout_marginStart="@dimen/margin_for_input"
+        android:button="@drawable/checkbox_selector"
+        android:checked="false"
+        android:paddingStart="@dimen/smallMargin"
+        android:text="@string/remember_me"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="@dimen/smallFontSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutPassword"
+        app:layout_constraintBottom_toTopOf="@id/textViewOr"/>
+
+    <com.example.messengerAndroid.ui.customView.CustomGoogleButton
+        android:id="@+id/buttonGoogle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_width_height"
+        app:layout_constraintBottom_toTopOf="@id/textViewAgree"
+        app:layout_constraintEnd_toStartOf="@id/textViewOr"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkBoxRememberMe" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewOr"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Headline2"
+
+        android:layout_marginStart="@dimen/landscape_margin_or"
+        android:layout_marginEnd="@dimen/landscape_margin_or"
+        android:layout_marginBottom="@dimen/smallMargin"
+        android:text="@string/or"
+        app:layout_constraintBottom_toBottomOf="@id/buttonGoogle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonRegister"
+        app:layout_constraintStart_toEndOf="@id/buttonGoogle"
+        app:layout_constraintTop_toTopOf="@id/buttonGoogle" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonRegister"
+        android:layout_width="0dp"
+
+        android:layout_height="@dimen/button_width_height"
+        android:background="@drawable/rounded_corner_and_stroke"
+        android:padding="@dimen/inner_button_padding"
+        android:text="@string/register"
+        android:textAppearance="@style/MyTextAppearance.MainBottomButton"
+        app:layout_constraintBottom_toBottomOf="@id/buttonGoogle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textViewOr"
+        app:layout_constraintTop_toTopOf="@id/buttonGoogle"
+ />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAgree"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
+
+        android:gravity="center"
+        android:text="@string/agree_land"
+        android:textSize="@dimen/smallestFontSize"
+        app:layout_constraintBottom_toTopOf="@id/textViewAlreadyHaveAcc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAlreadyHaveAcc"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
+
+        android:layout_marginEnd="@dimen/smallPlusMargin"
+        android:text="@string/already_have_an_account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textViewSignIn"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewSignIn"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
+
+        android:text="@string/sign_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textViewAlreadyHaveAcc" />
+</com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout>

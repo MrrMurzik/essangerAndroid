@@ -1,0 +1,34 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.messengerAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+
+        <item name="colorPrimary">@color/dark_blue</item>
+        <item name="colorOnPrimary">@color/almost_white</item>
+        <item name="colorOnPrimaryContainer">@color/light_grey</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!--Neutral brand colors -->
+        <item name="backgroundColor">@color/white</item>
+        <item name="colorOnBackground">@color/dark_grey</item>
+        <item name="colorOnSurface">@color/middle_grey</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/white</item>
+        <!-- Customize your theme here. -->
+
+        <!-- window transtition -->
+        <!-- enable window content transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@android:transition/explode</item>
+        <item name="android:windowExitTransition">@android:transition/explode</item>
+
+
+    </style>
+
+</resources>

@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.messengerAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+
+        <item name="colorPrimary">@color/almost_black</item>
+        <item name="colorOnPrimary">@color/almost_white</item>
+        <item name="colorOnPrimaryContainer">@color/light_grey</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/light_purple</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!--Neutral brand colors -->
+        <item name="backgroundColor">@color/almost_black_opacity77</item>
+        <item name="colorOnBackground">@color/almost_white</item>
+        <item name="colorOnSurface">@color/middle_grey</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/white</item>
+        <!-- Customize your theme here. -->
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+
+
+
+</resources>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myProfile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.myProfile.MyProfileFragment">
+
+    <View
+        android:id="@+id/viewUpperBlock"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/imageButtonArrowBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/bigMargin"
+        android:layout_marginStart="@dimen/bigMargin"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewHeadline"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Headline"
+
+        android:layout_marginTop="@dimen/settings_margin"
+        android:text="@string/profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewPicture"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:contentDescription="@string/userPhoto"
+        android:src="@drawable/ic_baseline_sentiment_very_satisfied_24"
+        app:layout_constraintBottom_toTopOf="@id/textViewName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewName"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Headline2"
+
+        android:text="@string/Name"
+
+        android:layout_marginTop="@dimen/largeMargin"
+        app:layout_constraintBottom_toBottomOf="@id/textViewJob"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewPicture" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewJob"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
+
+        android:text="@string/job"
+
+        android:layout_marginTop="@dimen/smallMargin"
+        app:layout_constraintBottom_toTopOf="@id/textViewAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewName" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAddress"
+        style="@style/defaultTextView"
+        android:textAppearance="@style/MyTextAppearance.Body"
+
+        android:layout_marginTop="@dimen/mediumMargin"
+        android:text="@string/home_address"
+        app:layout_constraintBottom_toTopOf="@id/viewLowerBlock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewJob" />
+
+    <View
+        android:id="@+id/viewLowerBlock"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/backgroundColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewUpperBlock" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/imageButtonFbLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_fb_logo"
+        app:layout_constraintBottom_toBottomOf="@id/imageButtonLinkednLogo"
+        app:layout_constraintEnd_toStartOf="@id/imageButtonLinkednLogo"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageButtonLinkednLogo" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/imageButtonLinkednLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_between_socials"
+        android:layout_marginEnd="@dimen/margin_between_socials"
+        android:background="@drawable/ic_linkedn_logo"
+        app:layout_constraintBottom_toTopOf="@id/buttonMessage"
+        app:layout_constraintEnd_toStartOf="@id/imageButtonInstLogo"
+        app:layout_constraintStart_toEndOf="@id/imageButtonFbLogo"
+        app:layout_constraintTop_toTopOf="@id/viewLowerBlock" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/imageButtonInstLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_inst_logo"
+        app:layout_constraintBottom_toBottomOf="@id/imageButtonLinkednLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageButtonLinkednLogo"
+        app:layout_constraintTop_toTopOf="@id/imageButtonLinkednLogo" />
+
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonMessage"
+        style="@style/MainBottomButton"
+        android:textAppearance="@style/MyTextAppearance.MainBottomButton"
+
+        android:text="@string/message"
+
+        android:layout_margin="@dimen/mediumMargin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout>
