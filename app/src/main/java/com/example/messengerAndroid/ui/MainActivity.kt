@@ -2,17 +2,17 @@ package com.example.messengerAndroid.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navOptions
 import com.example.messengerAndroid.R
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.data.preferences.SharedPreferencesHelper
-import com.example.messengerAndroid.ui.myContacts.MyContactsFragment
-import com.example.messengerAndroid.ui.myContacts.contactDetails.ViewDetailsFragment
-import com.example.messengerAndroid.ui.myProfile.MyProfileFragment
+import com.example.messengerAndroid.ui.myContacts.MyContactsFragmentDirections
+import com.example.messengerAndroid.ui.myProfile.MyProfileFragmentDirections
 import com.example.messengerAndroid.ui.navigation.Navigator
-import com.example.messengerAndroid.ui.signUp.SignUpFragment
+import com.example.messengerAndroid.ui.signUp.SignUpFragmentDirections
 
 class MainActivity : AppCompatActivity(), Navigator {
 
@@ -22,42 +22,45 @@ class MainActivity : AppCompatActivity(), Navigator {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         SharedPreferencesHelper.init(this)
-
-        showFirstScreen(savedInstanceState)
-
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+        navController = navHostFragment.navController
     }
 
+    override fun onSupportNavigateUp(): Boolean = navController.navigateUp() || super.onSupportNavigateUp()
 
-    private fun showFirstScreen(savedInstanceState: Bundle?) {
-        if (savedInstanceState == null) {
-            if (SharedPreferencesHelper.getName().isNotEmpty()) {
-                supportFragmentManager.commit {
-                    val fragment = MyProfileFragment()
-                    add(R.id.fragment_container, fragment)
-                }
-            } else {
-                supportFragmentManager.commit {
-                    val fragment = SignUpFragment()
-                    add(R.id.fragment_container, fragment)
-                }
-            }
-        }
-    }
+
+//    private fun showFirstScreen(savedInstanceState: Bundle?) {
+//
+//        if (savedInstanceState == null) {
+//
+//            if (SharedPreferencesHelper.getName().isNotEmpty()) {
+//                showMyProfileScreen()
+//            } else {
+//                showSignUpScreen()
+//            }
+//
+//        }
+//
+//    }
 
 
 
     override fun showSignUpScreen() {
-        launchFragment(SignUpFragment())
+        val direction = MyProfileFragmentDirections.actionMyProfileFragmentToSignUpFragment()
+        launchDestination(direction)
 
     }
 
     override fun showMyContactsScreen(isFetched: Boolean) {
-        launchFragment(MyContactsFragment.getInstance(isFetched))
 
+        val direction = MyProfileFragmentDirections.actionMyProfileFragmentToMyContactsFragment(isFetched)
+        launchDestination(direction)
     }
 
     override fun showMyProfileScreen() {
-        launchFragment(MyProfileFragment())
+        val direction = SignUpFragmentDirections.actionSignUpFragmentToMyProfileFragment()
+        launchDestination(direction)
     }
 
     override fun signOut() {
@@ -66,16 +69,24 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun showViewDetails(user: User) {
-        launchFragment(ViewDetailsFragment.getInstance(user))
+        val direction = MyContactsFragmentDirections.actionMyContactsFragmentToViewDetailsFragment(user)
+        launchDestination(direction)
 
     }
 
-    private fun launchFragment(fragment: Fragment) {
-        supportFragmentManager.commit {
-            addToBackStack(null)
-            setCustomAnimations(R.anim.slide_in, R.anim.slide_out, R.anim.slide_in, R.anim.slide_out)
-            replace(R.id.fragment_container, fragment)
-        }
+    private fun launchDestination(direction: NavDirections) {
+
+        navController.navigate(
+            direction,
+            navOptions {
+                anim {
+                    R.anim.slide_in
+                    R.anim.slide_out
+                    R.anim.slide_in
+                    R.anim.slide_out
+                }
+            }
+        )
     }
 
 }

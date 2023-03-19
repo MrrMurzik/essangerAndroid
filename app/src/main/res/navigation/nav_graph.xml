@@ -23,13 +23,21 @@
         <action
             android:id="@+id/action_myContactsFragment_to_viewDetailsFragment"
             app:destination="@id/viewDetailsFragment" />
+        <argument
+            android:name="isFetched"
+            app:argType="boolean" />
     </fragment>
 
     <fragment
         android:id="@+id/viewDetailsFragment"
-        android:name="com.example.messengerAndroid.ui.myContacts.contactDetails.ViewDetailsFragment"
+        android:name="com.example.messengerAndroid.ui.contactDetails.ViewDetailsFragment"
         tools:layout="@layout/fragment_view_details"
-        android:label="ViewDetailsFragment" />
+        android:label="ViewDetailsFragment" >
+        <argument
+            android:name="user"
+            app:argType="com.example.messengerAndroid.data.contactsRepository.contactModel.User"
+            app:nullable="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/myProfileFragment"
@@ -37,10 +45,10 @@
         android:label="fragment_view_details"
         tools:layout="@layout/fragment_view_details" >
         <action
-            android:id="@+id/action_myProfileFragment_to_signUpFragment2"
-            app:destination="@id/signUpFragment" />
-        <action
             android:id="@+id/action_myProfileFragment_to_myContactsFragment"
             app:destination="@id/myContactsFragment" />
+        <action
+            android:id="@+id/action_myProfileFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
     </fragment>
 </navigation>

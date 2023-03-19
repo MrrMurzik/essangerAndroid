@@ -14,6 +14,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +31,6 @@ import com.example.messengerAndroid.ui.myContacts.adapter.UserActionListener
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.ContactsViewModel
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.contract.UsersDataSelector
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.factory.ContactsViewModelFactory
-import com.example.messengerAndroid.utils.Constants.ARG_BOOLEAN_IS_FETCHED
 import com.example.messengerAndroid.utils.Constants.TAG_ADD_CONTACT_DIALOG
 import com.google.android.material.snackbar.Snackbar
 
@@ -39,17 +40,14 @@ class MyContactsFragment : Fragment() {
     private var _binding: FragmentMyContactsBinding? = null
     private val binding get() = _binding!!
 
-    private val isCheckedFetching: Boolean by lazy {
-        requireArguments().getBoolean(ARG_BOOLEAN_IS_FETCHED)
-    }
-
+    private val args: MyContactsFragmentArgs by navArgs()
 
 
     private val viewModel: ContactsViewModel by viewModels {
         ContactsViewModelFactory(usersDataSelector = object : UsersDataSelector {
 
             override fun getUsers(): List<User> {
-                return if (isCheckedFetching &&
+                return if (args.isFetched &&
                     context?.checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
                 ) {
                     ContactFetcher().fetchContacts(requireContext())
@@ -60,7 +58,6 @@ class MyContactsFragment : Fragment() {
 
         })
     }
-
 
 
     private val adapterContacts: ContactsAdapter by lazy {
@@ -95,7 +92,7 @@ class MyContactsFragment : Fragment() {
     ): View {
         _binding = FragmentMyContactsBinding.inflate(layoutInflater)
 
-        if (isCheckedFetching && context?.checkSelfPermission(READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+        if (args.isFetched && context?.checkSelfPermission(READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             requestReadContactsPermission()
         } else {
             setupRecyclerView()
@@ -105,7 +102,11 @@ class MyContactsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if (checkSelfPermission(requireContext(), READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+        if (checkSelfPermission(
+                requireContext(),
+                READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             setupRecyclerView()
         }
     }
@@ -158,10 +159,9 @@ class MyContactsFragment : Fragment() {
         }
 
         binding.imageButtonArrowBack.setOnClickListener {
-            navigate().showMyProfileScreen()
+            findNavController().navigateUp()
         }
     }
-
 
 
     private fun setObservers() {
@@ -243,18 +243,4 @@ class MyContactsFragment : Fragment() {
 
         }
     }
-
-    companion object {
-
-        @JvmStatic
-        fun getInstance(isFetched: Boolean): MyContactsFragment {
-            val args = Bundle().apply {
-                putBoolean(ARG_BOOLEAN_IS_FETCHED, isFetched)
-            }
-            val fragment = MyContactsFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
 }
