@@ -1,44 +1,40 @@
 package com.example.messengerAndroid.ui.signUp
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.messengerAndroid.R
 import com.example.messengerAndroid.data.preferences.SharedPreferencesHelper
 import com.example.messengerAndroid.databinding.FragmentSignUpBinding
 import com.example.messengerAndroid.extensions.navigate
+import com.example.messengerAndroid.ui.base.BaseFragment
 import com.example.messengerAndroid.utils.Constants.EMAIL_DIVIDER_PATTERN
 import com.example.messengerAndroid.utils.Validator
 
 
-class SignUpFragment : Fragment() {
+class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
 
-    private var _binding: FragmentSignUpBinding? = null
-    private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSignUpBinding.inflate(layoutInflater)
 
-        SharedPreferencesHelper.init(context)
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//
+////        SharedPreferencesHelper.init(context)
+//        super.onCreateView(inflater, container, savedInstanceState)
+//
+//        return binding.root
+//    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (SharedPreferencesHelper.getName().isNotEmpty()) {
             navigate().showMyProfileScreen()
         }
 
         setListeners()
-        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
 
     private fun setListeners() {

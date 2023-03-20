@@ -5,14 +5,11 @@ import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.checkSelfPermission
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -26,6 +23,7 @@ import com.example.messengerAndroid.databinding.DialogDeniedPermissionBinding
 import com.example.messengerAndroid.databinding.FragmentMyContactsBinding
 import com.example.messengerAndroid.extensions.navigate
 import com.example.messengerAndroid.extensions.openAppSettings
+import com.example.messengerAndroid.ui.base.BaseFragment
 import com.example.messengerAndroid.ui.myContacts.adapter.ContactsAdapter
 import com.example.messengerAndroid.ui.myContacts.adapter.UserActionListener
 import com.example.messengerAndroid.ui.myContacts.contactsViewModel.ContactsViewModel
@@ -35,10 +33,9 @@ import com.example.messengerAndroid.utils.Constants.TAG_ADD_CONTACT_DIALOG
 import com.google.android.material.snackbar.Snackbar
 
 
-class MyContactsFragment : Fragment() {
+class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyContactsBinding::inflate) {
 
-    private var _binding: FragmentMyContactsBinding? = null
-    private val binding get() = _binding!!
+
 
     private val args: MyContactsFragmentArgs by navArgs()
 
@@ -85,19 +82,13 @@ class MyContactsFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMyContactsBinding.inflate(layoutInflater)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (args.isFetched && context?.checkSelfPermission(READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             requestReadContactsPermission()
         } else {
             setupRecyclerView()
         }
-        return binding.root
     }
 
     override fun onStart() {
@@ -111,10 +102,6 @@ class MyContactsFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
 
     override fun onDestroy() {

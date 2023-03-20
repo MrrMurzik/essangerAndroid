@@ -1,38 +1,25 @@
 package com.example.messengerAndroid.ui.myProfile
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.messengerAndroid.R
 import com.example.messengerAndroid.data.preferences.SharedPreferencesHelper
 import com.example.messengerAndroid.databinding.FragmentMyProfileBinding
 import com.example.messengerAndroid.extensions.cropPhoto
 import com.example.messengerAndroid.extensions.navigate
+import com.example.messengerAndroid.ui.base.BaseFragment
 
-class MyProfileFragment : Fragment() {
-
-    private var _binding: FragmentMyProfileBinding? = null
-    private val binding get() = _binding!!
+class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfileBinding::inflate) {
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMyProfileBinding.inflate(layoutInflater)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setUserInfo()
         setListeners()
-        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 
     private fun setUserInfo() {
         with(binding) {
