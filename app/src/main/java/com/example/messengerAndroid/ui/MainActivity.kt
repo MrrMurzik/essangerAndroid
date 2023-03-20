@@ -30,21 +30,6 @@ class MainActivity : AppCompatActivity(), Navigator {
     override fun onSupportNavigateUp(): Boolean = navController.navigateUp() || super.onSupportNavigateUp()
 
 
-//    private fun showFirstScreen(savedInstanceState: Bundle?) {
-//
-//        if (savedInstanceState == null) {
-//
-//            if (SharedPreferencesHelper.getName().isNotEmpty()) {
-//                showMyProfileScreen()
-//            } else {
-//                showSignUpScreen()
-//            }
-//
-//        }
-//
-//    }
-
-
 
     override fun showSignUpScreen() {
         val direction = MyProfileFragmentDirections.actionMyProfileFragmentToSignUpFragment()
