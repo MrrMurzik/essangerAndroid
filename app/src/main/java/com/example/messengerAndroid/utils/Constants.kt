@@ -29,10 +29,8 @@ object Constants {
 
     const val TAG_ADD_CONTACT_DIALOG = "TAG_ADD_CONTACT_DIALOG"
 
-    // arguments key
+    // number of pages in viewPager
 
-    const val ARG_BOOLEAN_IS_FETCHED = "ARG_BOOLEAN_IS_FETCHED"
-
-    const val ARG_USER_KEY = "ARG_USER_KEY"
+    const val NUM_TABS = 2
 
 }

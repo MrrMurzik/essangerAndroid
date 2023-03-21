@@ -45,6 +45,10 @@
     <!-- universal strings for all alert dialogs-->
     <string name="action_confirmed">Підтвердити</string>
     <string name="action_cancelled">Відмінити</string>
+    <string name="action_grant_permission">Дозволити</string>
+    <string name="action_deny_permission">Хардкодний список</string>
+
+
 
     <string name="toast_cancelled_deletion">Видалення скасовано</string>
 

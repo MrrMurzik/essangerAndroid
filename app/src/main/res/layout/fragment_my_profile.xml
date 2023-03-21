@@ -165,23 +165,9 @@
         android:text="@string/view_my_contacts"
 
         android:layout_margin="@dimen/mediumMargin"
-        app:layout_constraintBottom_toTopOf="@id/checkBoxFetchContacts"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/checkBoxFetchContacts"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/checkbox_height"
-        android:layout_marginStart="@dimen/margin_for_input"
-        android:checked="false"
-        android:paddingStart="@dimen/littlePadding"
-        android:text="@string/fetch_phone_contacts"
-        android:textSize="@dimen/smallFontSize"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="@dimen/smallMargin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 </com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout>

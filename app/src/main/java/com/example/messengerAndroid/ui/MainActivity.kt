@@ -9,10 +9,10 @@ import androidx.navigation.navOptions
 import com.example.messengerAndroid.R
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.data.preferences.SharedPreferencesHelper
-import com.example.messengerAndroid.ui.myContacts.MyContactsFragmentDirections
 import com.example.messengerAndroid.ui.myProfile.MyProfileFragmentDirections
 import com.example.messengerAndroid.ui.navigation.Navigator
 import com.example.messengerAndroid.ui.signUp.SignUpFragmentDirections
+import com.example.messengerAndroid.ui.viewPager.ViewPagerFragmentDirections
 
 class MainActivity : AppCompatActivity(), Navigator {
 
@@ -32,29 +32,34 @@ class MainActivity : AppCompatActivity(), Navigator {
 
 
     override fun showSignUpScreen() {
-        val direction = MyProfileFragmentDirections.actionMyProfileFragmentToSignUpFragment()
+        val direction = ViewPagerFragmentDirections.actionViewPagerFragmentToSignUpFragment()
         launchDestination(direction)
 
     }
 
-    override fun showMyContactsScreen(isFetched: Boolean) {
+    override fun showMyContactsScreen() {
 
-        val direction = MyProfileFragmentDirections.actionMyProfileFragmentToMyContactsFragment(isFetched)
+        val direction = MyProfileFragmentDirections.actionMyProfileFragmentToMyContactsFragment()
         launchDestination(direction)
     }
-
-    override fun showMyProfileScreen() {
-        val direction = SignUpFragmentDirections.actionSignUpFragmentToMyProfileFragment()
-        launchDestination(direction)
-    }
+//
+//    override fun showMyProfileScreen() {
+//        val direction = SignUpFragmentDirections.actionSignUpFragmentToMyProfileFragment()
+//        launchDestination(direction)
+//    }
 
     override fun signOut() {
         SharedPreferencesHelper.clearPrefs()
         showSignUpScreen()
     }
 
+    override fun showViewPager() {
+        val direction = SignUpFragmentDirections.actionSignUpFragmentToViewPagerFragment()
+        launchDestination(direction)
+    }
+
     override fun showViewDetails(user: User) {
-        val direction = MyContactsFragmentDirections.actionMyContactsFragmentToViewDetailsFragment(user)
+        val direction = ViewPagerFragmentDirections.actionViewPagerFragmentToViewDetailsFragment(user)
         launchDestination(direction)
 
     }

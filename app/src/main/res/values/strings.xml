@@ -49,12 +49,14 @@
     <!-- universal strings for all alert dialogs-->
     <string name="action_confirmed">Confirm</string>
     <string name="action_cancelled">Cancel</string>
+    <string name="action_grant_permission">Grant permission</string>
+    <string name="action_deny_permission">Hardcoded list</string>
 
     <string name="toast_cancelled_deletion">Deletion has cancelled</string>
     <!--string for permission dialog-->
     <string name="opss">Opss..</string>
     <string name="permission_denied_button">Permission denied</string>
-    <string name="reasonable_permission_text">You need to confirm permission to import your contacts into app\nWe dont collect your personal data.\nDude, we dont have even server…</string>
+    <string name="reasonable_permission_text">You need to confirm permission to import your contacts into app\nWe dont collect your personal data. If you dont want to share your contact, app will show hardcoded list</string>
     <string name="apply_permission">Apply permission</string>
     <string name="add_photo">Add photo</string>
     <string name="sign_out">Sign out</string>

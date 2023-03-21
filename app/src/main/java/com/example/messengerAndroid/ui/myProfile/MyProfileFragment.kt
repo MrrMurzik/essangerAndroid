@@ -8,6 +8,7 @@ import com.example.messengerAndroid.databinding.FragmentMyProfileBinding
 import com.example.messengerAndroid.extensions.cropPhoto
 import com.example.messengerAndroid.extensions.navigate
 import com.example.messengerAndroid.ui.base.BaseFragment
+import com.example.messengerAndroid.ui.viewPager.ViewPagerFragment
 
 class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfileBinding::inflate) {
 
@@ -29,15 +30,14 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
     }
 
     private fun setListeners() {
-        binding.buttonContacts.setOnClickListener {
-            val isFetched = binding.checkBoxFetchContacts?.isChecked ?: false
-            navigate().showMyContactsScreen(isFetched)
-        }
 
         binding.buttonSignOut.setOnClickListener {
             navigate().signOut()
         }
 
+        binding.buttonContacts.setOnClickListener {
+            (parentFragment as ViewPagerFragment).viewPager.currentItem = 1
+        }
     }
 
 }

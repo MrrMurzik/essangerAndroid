@@ -11,22 +11,15 @@
         android:name="com.example.messengerAndroid.ui.signUp.SignUpFragment"
         android:label="SignUpFragment" >
         <action
-            android:id="@+id/action_signUpFragment_to_myProfileFragment"
-            app:destination="@id/myProfileFragment" />
+            android:id="@+id/action_signUpFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/myContactsFragment"
         android:name="com.example.messengerAndroid.ui.myContacts.MyContactsFragment"
         android:label="fragment_my_contacts"
-        tools:layout="@layout/fragment_my_contacts" >
-        <action
-            android:id="@+id/action_myContactsFragment_to_viewDetailsFragment"
-            app:destination="@id/viewDetailsFragment" />
-        <argument
-            android:name="isFetched"
-            app:argType="boolean" />
-    </fragment>
+        tools:layout="@layout/fragment_my_contacts" />
 
     <fragment
         android:id="@+id/viewDetailsFragment"
@@ -47,8 +40,17 @@
         <action
             android:id="@+id/action_myProfileFragment_to_myContactsFragment"
             app:destination="@id/myContactsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        tools:layout="@layout/fragment_profile_view_pager"
+        android:name="com.example.messengerAndroid.ui.viewPager.ViewPagerFragment"
+        android:label="ViewPagerFragment" >
         <action
-            android:id="@+id/action_myProfileFragment_to_signUpFragment"
+            android:id="@+id/action_viewPagerFragment_to_viewDetailsFragment"
+            app:destination="@id/viewDetailsFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
     </fragment>
 </navigation>

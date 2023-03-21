@@ -29,7 +29,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (SharedPreferencesHelper.getName().isNotEmpty()) {
-            navigate().showMyProfileScreen()
+            navigate().showViewPager()
         }
 
         setListeners()
@@ -50,7 +50,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
             if (binding.checkBoxRememberMe.isChecked) {
                 SharedPreferencesHelper.setName(name)
             }
-            navigate().showMyProfileScreen()
+            navigate().showViewPager()
         } else {
             showError(email, password)
         }

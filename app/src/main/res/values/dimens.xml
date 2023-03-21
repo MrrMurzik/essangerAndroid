@@ -38,5 +38,6 @@
     <dimen name="button_width_height">50dp</dimen>
 
     <dimen name="hint_offset">4dp</dimen>
+    <dimen name="checkbox_size">20dp</dimen>
 
 </resources>

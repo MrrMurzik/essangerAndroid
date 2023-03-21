@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             style="@style/MyTextAppearance.SecondaryBottomButton"
             android:layout_gravity="center"
-            android:text="@string/action_cancelled"
+            android:text="@string/action_deny_permission"
             android:layout_marginEnd="@dimen/very_big_margin"/>
 
         <androidx.appcompat.widget.AppCompatButton

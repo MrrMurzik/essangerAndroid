@@ -12,7 +12,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,15 +35,11 @@ import com.google.android.material.snackbar.Snackbar
 class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyContactsBinding::inflate) {
 
 
-
-    private val args: MyContactsFragmentArgs by navArgs()
-
-
     private val viewModel: ContactsViewModel by viewModels {
         ContactsViewModelFactory(usersDataSelector = object : UsersDataSelector {
 
             override fun getUsers(): List<User> {
-                return if (args.isFetched &&
+                return if (
                     context?.checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
                 ) {
                     ContactFetcher().fetchContacts(requireContext())
@@ -84,7 +79,7 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (args.isFetched && context?.checkSelfPermission(READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+        if (context?.checkSelfPermission(READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             requestReadContactsPermission()
         } else {
             setupRecyclerView()
@@ -226,8 +221,7 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
         }
         dialogBinding.buttonCancel.setOnClickListener {
             dialog.dismiss()
-            navigate().showMyProfileScreen()
-
+            setupRecyclerView()
         }
     }
 }

@@ -6,12 +6,14 @@ interface Navigator {
 
     fun showSignUpScreen()
 
-    fun showMyContactsScreen(isFetched: Boolean)
-
-    fun showMyProfileScreen()
+    fun showMyContactsScreen()
+//
+//    fun showMyProfileScreen()
 
     fun signOut()
 
     fun showViewDetails(user: User)
+
+    fun showViewPager()
 
 }
