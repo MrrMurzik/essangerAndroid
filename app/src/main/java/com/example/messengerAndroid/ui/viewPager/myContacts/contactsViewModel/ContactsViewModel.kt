@@ -1,21 +1,21 @@
-package com.example.messengerAndroid.ui.myContacts.contactsViewModel
+package com.example.messengerAndroid.ui.viewPager.myContacts.contactsViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.messengerAndroid.data.contactsRepository.UsersService
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
-import com.example.messengerAndroid.ui.myContacts.contactsViewModel.contract.UsersDataSelector
 import com.example.messengerAndroid.utils.UniqueIdGenerator.getUniqueId
 
 
-class ContactsViewModel(usersDataSelector: UsersDataSelector) : ViewModel() {
+class ContactsViewModel(usersService: UsersService) : ViewModel() {
 
     private val _contactsLiveData = MutableLiveData<List<User>>()
     val contactsLiveData: LiveData<List<User>> = _contactsLiveData
 
 
     init {
-        _contactsLiveData.value = usersDataSelector.getUsers()
+        _contactsLiveData.value = usersService.getUsers()
     }
 
     fun deleteUser(user: User?) {

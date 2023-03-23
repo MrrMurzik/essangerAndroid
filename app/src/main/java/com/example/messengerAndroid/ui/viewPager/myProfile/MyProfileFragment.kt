@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.ui.myProfile
+package com.example.messengerAndroid.ui.viewPager.myProfile
 
 import android.os.Bundle
 import android.view.View

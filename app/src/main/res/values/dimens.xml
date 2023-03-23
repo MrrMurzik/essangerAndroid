@@ -39,5 +39,6 @@
 
     <dimen name="hint_offset">4dp</dimen>
     <dimen name="checkbox_size">20dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

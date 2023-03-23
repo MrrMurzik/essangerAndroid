@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.ui.myContacts
+package com.example.messengerAndroid.ui.viewPager.myContacts
 
 import android.Manifest
 import android.app.Dialog
@@ -14,7 +14,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.example.messengerAndroid.databinding.DialogAddContactBinding
 import com.example.messengerAndroid.extensions.openAppSettings
-import com.example.messengerAndroid.ui.myContacts.contactsViewModel.ContactsViewModel
+import com.example.messengerAndroid.ui.viewPager.myContacts.contactsViewModel.ContactsViewModel
 import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_JOB
 import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_NAME
 import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_PHONE_NUMBER

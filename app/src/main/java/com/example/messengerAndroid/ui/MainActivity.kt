@@ -7,9 +7,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
 import com.example.messengerAndroid.R
-import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.data.preferences.SharedPreferencesHelper
-import com.example.messengerAndroid.ui.myProfile.MyProfileFragmentDirections
 import com.example.messengerAndroid.ui.navigation.Navigator
 import com.example.messengerAndroid.ui.signUp.SignUpFragmentDirections
 import com.example.messengerAndroid.ui.viewPager.ViewPagerFragmentDirections
@@ -37,16 +35,6 @@ class MainActivity : AppCompatActivity(), Navigator {
 
     }
 
-    override fun showMyContactsScreen() {
-
-        val direction = MyProfileFragmentDirections.actionMyProfileFragmentToMyContactsFragment()
-        launchDestination(direction)
-    }
-//
-//    override fun showMyProfileScreen() {
-//        val direction = SignUpFragmentDirections.actionSignUpFragmentToMyProfileFragment()
-//        launchDestination(direction)
-//    }
 
     override fun signOut() {
         SharedPreferencesHelper.clearPrefs()
@@ -58,8 +46,8 @@ class MainActivity : AppCompatActivity(), Navigator {
         launchDestination(direction)
     }
 
-    override fun showViewDetails(user: User) {
-        val direction = ViewPagerFragmentDirections.actionViewPagerFragmentToViewDetailsFragment(user)
+    override fun showViewDetails(id: String) {
+        val direction = ViewPagerFragmentDirections.actionViewPagerFragmentToViewDetailsFragment(id)
         launchDestination(direction)
 
     }

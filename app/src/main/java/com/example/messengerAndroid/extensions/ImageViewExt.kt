@@ -3,12 +3,11 @@ package com.example.messengerAndroid.extensions
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.messengerAndroid.R
-import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 
-fun ImageView.addPhoto(user: User) {
-    if (user.photo.isNotBlank()) {
+fun ImageView.addPhoto(photoUri: String) {
+    if (photoUri.isNotBlank()) {
         Glide.with(this)
-            .load(user.photo)
+            .load(photoUri)
             .circleCrop()
             .placeholder(R.drawable.ic_baseline_sentiment_very_satisfied_24)
             .error(R.drawable.ic_baseline_sentiment_very_satisfied_24)

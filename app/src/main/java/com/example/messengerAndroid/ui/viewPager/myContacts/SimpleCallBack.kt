@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.ui.myContacts
+package com.example.messengerAndroid.ui.viewPager.myContacts
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

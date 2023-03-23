@@ -1,43 +1,34 @@
 package com.example.messengerAndroid.ui.contactDetails
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.databinding.FragmentViewDetailsBinding
 import com.example.messengerAndroid.extensions.addPhoto
+import com.example.messengerAndroid.extensions.factory
+import com.example.messengerAndroid.ui.base.BaseFragment
 
-class ViewDetailsFragment : Fragment() {
+class ViewDetailsFragment : BaseFragment<FragmentViewDetailsBinding>(FragmentViewDetailsBinding::inflate) {
 
-    private lateinit var binding: FragmentViewDetailsBinding
-    private lateinit var user: User
+
+    private val viewModel: ViewDetailsViewModel by viewModels{ factory() }
     private val args: ViewDetailsFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        user = args.user ?: User("", "", "", "", "", "")
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentViewDetailsBinding.inflate(layoutInflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.loadUser(args.id)
         setUserInfo()
         setListeners()
-        return binding.root
     }
 
     private fun setUserInfo() {
         with(binding) {
-            textViewName.text = user.name
-            imageViewPicture.addPhoto(user)
-            textViewAddress.text = user.address
-            textViewJob.text = user.job
+            textViewName.text = viewModel.usersDetails.value?.name
+            imageViewPicture.addPhoto(viewModel.usersDetails.value?.photo?: "")
+            textViewAddress.text = viewModel.usersDetails.value?.address
+            textViewJob.text = viewModel.usersDetails.value?.job
         }
     }
 

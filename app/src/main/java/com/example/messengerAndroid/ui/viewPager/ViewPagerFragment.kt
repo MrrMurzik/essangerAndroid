@@ -7,8 +7,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.messengerAndroid.databinding.FragmentProfileViewPagerBinding
 import com.example.messengerAndroid.ui.base.BaseFragment
-import com.example.messengerAndroid.ui.myContacts.MyContactsFragment
-import com.example.messengerAndroid.ui.myProfile.MyProfileFragment
+import com.example.messengerAndroid.ui.viewPager.myContacts.MyContactsFragment
+import com.example.messengerAndroid.ui.viewPager.myProfile.MyProfileFragment
 import com.example.messengerAndroid.utils.Constants.NUM_TABS
 import com.google.android.material.tabs.TabLayoutMediator
 

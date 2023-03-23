@@ -28,5 +28,12 @@
 
 
     </style>
+    <style name="Theme.messengerAndroid.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.messengerAndroid.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.messengerAndroid.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

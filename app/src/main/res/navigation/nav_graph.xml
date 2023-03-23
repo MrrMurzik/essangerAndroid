@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/myContactsFragment"
-        android:name="com.example.messengerAndroid.ui.myContacts.MyContactsFragment"
+        android:name="com.example.messengerAndroid.ui.viewPager.myContacts.MyContactsFragment"
         android:label="fragment_my_contacts"
         tools:layout="@layout/fragment_my_contacts" />
 
@@ -27,14 +27,13 @@
         tools:layout="@layout/fragment_view_details"
         android:label="ViewDetailsFragment" >
         <argument
-            android:name="user"
-            app:argType="com.example.messengerAndroid.data.contactsRepository.contactModel.User"
-            app:nullable="true" />
+            android:name="id"
+            app:argType="string" />
     </fragment>
 
     <fragment
         android:id="@+id/myProfileFragment"
-        android:name="com.example.messengerAndroid.ui.myProfile.MyProfileFragment"
+        android:name="com.example.messengerAndroid.ui.viewPager.myProfile.MyProfileFragment"
         android:label="fragment_view_details"
         tools:layout="@layout/fragment_view_details" >
         <action

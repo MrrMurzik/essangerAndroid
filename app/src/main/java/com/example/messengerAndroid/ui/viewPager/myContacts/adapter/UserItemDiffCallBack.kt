@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.ui.myContacts.adapter
+package com.example.messengerAndroid.ui.viewPager.myContacts.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User

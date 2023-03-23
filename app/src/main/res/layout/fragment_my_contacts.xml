@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.myContacts.MyContactsFragment">
+    tools:context=".ui.viewPager.myContacts.MyContactsFragment">
 
     <View
         android:id="@+id/viewUpperBlock"
@@ -75,5 +75,15 @@
         app:layout_constraintTop_toBottomOf="@id/viewUpperBlock"
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_contact_default" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionDeletionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/floating_action_button_delete"
+        android:layout_margin="16dp" />
+
 
 </com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout>

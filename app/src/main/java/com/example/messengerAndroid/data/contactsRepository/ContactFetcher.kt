@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.ui.myContacts
+package com.example.messengerAndroid.data.contactsRepository
 
 import android.content.Context
 import android.provider.ContactsContract
