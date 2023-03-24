@@ -210,6 +210,7 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
     private fun showPermissionDeniedDialog() {
         val dialogBinding = DialogDeniedPermissionBinding.inflate(layoutInflater)
         val dialog = AlertDialog.Builder(requireContext())
+            .setCancelable(false)
             .setView(dialogBinding.root)
             .create()
         dialog.show()
