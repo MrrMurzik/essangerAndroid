@@ -13,20 +13,6 @@ import com.example.messengerAndroid.utils.Validator
 
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
 
-
-
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//
-////        SharedPreferencesHelper.init(context)
-//        super.onCreateView(inflater, container, savedInstanceState)
-//
-//        return binding.root
-//    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (SharedPreferencesHelper.getName().isNotEmpty()) {
             navigate().showViewPager()

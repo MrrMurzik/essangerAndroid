@@ -7,15 +7,58 @@ import com.example.messengerAndroid.data.contactsRepository.UsersService
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.utils.UniqueIdGenerator.getUniqueId
 
+data class MultiSelectUser (
+    val user: User,
+    val isSelected: Boolean
+)
 
 class ContactsViewModel(usersService: UsersService) : ViewModel() {
+    
+    private val _multiSelectLiveData = MutableLiveData<Boolean>()
+    val multiSelectLiveData: LiveData<Boolean> = _multiSelectLiveData
 
     private val _contactsLiveData = MutableLiveData<List<User>>()
     val contactsLiveData: LiveData<List<User>> = _contactsLiveData
 
+    private val _contactsSelectModeLiveData = MutableLiveData<List<MultiSelectUser>>()
+    val contactsSelectModeLiveData: LiveData<List<MultiSelectUser>> = _contactsSelectModeLiveData
 
     init {
         _contactsLiveData.value = usersService.getUsers()
+        _multiSelectLiveData.value = false
+    }
+
+    fun changeMode(position: Int) {
+
+        if (multiSelectLiveData.value == false) {
+            _multiSelectLiveData.value = true
+            val list = mutableListOf<MultiSelectUser>()
+            contactsLiveData.value?.forEach {
+                list.add(MultiSelectUser(it, false))
+            }
+            _contactsSelectModeLiveData.value = list.toList()
+            selectUser(position)
+        } else {
+            _multiSelectLiveData.value = true
+            val list = mutableListOf<User>()
+            contactsSelectModeLiveData.value?.forEach {
+                list.add(it.user)
+            }
+            _contactsLiveData.value = list.toList()
+        }
+
+    }
+
+    fun selectUser(position: Int) {
+        _contactsSelectModeLiveData.value = _contactsSelectModeLiveData.value?.toMutableList()?.apply {
+            this[position] = MultiSelectUser(this[position].user, true)
+        }
+    }
+
+    fun unSelectUser(position: Int) {
+        _contactsSelectModeLiveData.value = _contactsSelectModeLiveData.value?.toMutableList()?.apply {
+            this[position] = MultiSelectUser(this[position].user, false)
+        }
     }
 
     fun deleteUser(user: User?) {

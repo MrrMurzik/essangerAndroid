@@ -12,12 +12,9 @@ import com.example.messengerAndroid.extensions.addPhoto
 class ContactsAdapter (private val actionListener: UserActionListener)
     : ListAdapter<User, RecyclerView.ViewHolder>(UserItemDiffCallback()) {
 
-    var isMultiselectMode = false
-    val checkedUsers = mutableListOf<User>()
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (isMultiselectMode) {
+        if (viewModel.) {
             val newHolder = holder as ContactsViewHolderSelectMode
             newHolder.bindTo(getItem(position))
         } else {

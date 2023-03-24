@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -128,13 +130,13 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
             findNavController().navigateUp()
         }
 
-        binding.floatingActionDeletionButton.setOnClickListener {
-            adapterContacts.checkedUsers.forEach {
-                viewModel.deleteUser(it)
-            }
-            adapterContacts.isMultiselectMode = false
-            binding.recyclerContacts.adapter = adapterContacts
-        }
+//        binding.floatingActionDeletionButton.setOnClickListener {
+//            adapterContacts.checkedUsers.forEach {
+//                viewModel.deleteUser(it)
+//            }
+//            adapterContacts.isMultiselectMode = false
+//            binding.recyclerContacts.adapter = adapterContacts
+//        }
     }
 
 
@@ -142,6 +144,21 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
         viewModel.contactsLiveData.observe(viewLifecycleOwner) {
             adapterContacts.submitList(it.toMutableList())
         }
+
+        viewModel.multiSelectLiveData.observe(viewLifecycleOwner) { it ->
+            if (it) {
+                binding.floatingActionDeletionButton.visibility = VISIBLE
+                viewModel.contactsLiveData.observe(viewLifecycleOwner) { list ->
+                    adapterContacts.submitList(list.toMutableList())
+                }
+            } else {
+                binding.floatingActionDeletionButton.visibility = GONE
+                viewModel.contactsSelectModeLiveData.observe(viewLifecycleOwner) { list ->
+                    adapterContacts.submitList(list.toMutableList())
+                }
+            }
+        }
+
     }
 
 
