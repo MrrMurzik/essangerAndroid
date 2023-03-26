@@ -1,28 +1,33 @@
 package com.example.messengerAndroid.data.contactsRepository
 
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
+import com.example.messengerAndroid.data.contactsRepository.contactModel.UserWithState
 import com.example.messengerAndroid.utils.UniqueIdGenerator.getUniqueId
 import com.github.javafaker.Faker
 
 class UsersListGenerator {
 
-    private var users = mutableListOf<User>()
+    private var users = mutableListOf<UserWithState>()
 
     init {
         val faker = Faker.instance()
         users = (1..20).map {
-            User(
-            id = getUniqueId(),
-            name = faker.name().name(),
-            job = faker.company().name(),
-            photo = IMAGES[it % IMAGES.size],
-                phone = faker.phoneNumber().cellPhone(),
-                address = faker.address().fullAddress()
+            UserWithState(
+                User(
+                    id = getUniqueId(),
+                    name = faker.name().name(),
+                    job = faker.company().name(),
+                    photo = IMAGES[it % IMAGES.size],
+                    phone = faker.phoneNumber().cellPhone(),
+                    address = faker.address().fullAddress()
+                ),
+                isMultiselectMode = false,
+                isChecked = false
             )
         }.toMutableList()
     }
 
-    fun getUsers() : List<User> {
+    fun getUsers(): List<UserWithState> {
         return users.toList()
     }
 

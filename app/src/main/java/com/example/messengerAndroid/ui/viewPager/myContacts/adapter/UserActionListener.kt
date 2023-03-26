@@ -1,12 +1,14 @@
 package com.example.messengerAndroid.ui.viewPager.myContacts.adapter
 
-import com.example.messengerAndroid.data.contactsRepository.contactModel.User
+import com.example.messengerAndroid.data.contactsRepository.contactModel.UserWithState
 
 interface UserActionListener {
-    fun onUserDelete (user: User)
+    fun onUserDelete (userWithState: UserWithState)
 
-    fun onItemClicked(user: User)
+    fun onItemClicked(user: UserWithState)
 
-    fun updateRecycler()
+    fun onChangeMode()
+
+    fun onItemClickedChooseMode(userWithState: UserWithState)
 
 }

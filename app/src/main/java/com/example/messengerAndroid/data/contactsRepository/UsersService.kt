@@ -3,13 +3,13 @@ package com.example.messengerAndroid.data.contactsRepository
 import android.Manifest.permission.READ_CONTACTS
 import android.app.Application
 import android.content.pm.PackageManager
-import com.example.messengerAndroid.data.contactsRepository.contactModel.User
+import com.example.messengerAndroid.data.contactsRepository.contactModel.UserWithState
 
 class UsersService(private val appContext: Application) {
 
-    var usersList = listOf<User>()
+    var usersList = listOf<UserWithState>()
 
-    fun getUsers(): List<User> {
+    fun getUsers(): List<UserWithState> {
         if (appContext.checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             setUsersFromPhone()
         } else {

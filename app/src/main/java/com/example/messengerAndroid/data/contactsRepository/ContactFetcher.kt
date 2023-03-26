@@ -3,12 +3,13 @@ package com.example.messengerAndroid.data.contactsRepository
 import android.content.Context
 import android.provider.ContactsContract
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
+import com.example.messengerAndroid.data.contactsRepository.contactModel.UserWithState
 import com.example.messengerAndroid.utils.UniqueIdGenerator.getUniqueId
 
 class ContactFetcher {
 
-    fun fetchContacts(context: Context): List<User> {
-        val contacts = mutableListOf<User>()
+    fun fetchContacts(context: Context): List<UserWithState> {
+        val contacts = mutableListOf<UserWithState>()
         val cursor = context.contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
             null,
@@ -28,7 +29,10 @@ class ContactFetcher {
                 val job = ""
                 val postalAddress = ""
 
-                val contact = User(getUniqueId(), photo?: "", name, job, phone, postalAddress)
+                val contact = UserWithState(User(getUniqueId(), photo?: "", name, job, phone, postalAddress),
+                    isMultiselectMode = false,
+                    isChecked = false
+                )
                 contacts.add(contact)
             }
         }

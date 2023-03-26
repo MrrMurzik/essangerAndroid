@@ -25,6 +25,10 @@
 
     <!-- secondary colors -->
     <color name="light_purple">#BB86FC</color>
+    
+    <!-- color for item in multiselection-->
+    
+    <color name="soft_grey">#E7E7E7</color>
 
 
 

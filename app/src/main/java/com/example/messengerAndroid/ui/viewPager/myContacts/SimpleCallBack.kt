@@ -21,5 +21,4 @@ abstract class SwipeToDeleteCallback : ItemTouchHelper.Callback() {
         return false
     }
 
-
 }

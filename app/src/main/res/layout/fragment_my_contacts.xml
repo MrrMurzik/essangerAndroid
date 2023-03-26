@@ -66,6 +66,22 @@
         app:layout_constraintTop_toBottomOf="@id/imageButtonArrowBack"
         app:layout_constraintVertical_bias="0.7" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewSelectAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bigMargin"
+        android:visibility="gone"
+        android:clickable="true"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/select_all"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="@dimen/smallFontSize"
+        app:layout_constraintBottom_toBottomOf="@id/viewUpperBlock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageButtonArrowBack"
+        app:layout_constraintVertical_bias="0.7" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerContacts"
         android:layout_width="match_parent"
@@ -74,7 +90,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewUpperBlock"
         app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/item_contact_default" />
+        tools:listitem="@layout/item_contact" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionDeletionButton"

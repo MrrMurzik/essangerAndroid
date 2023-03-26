@@ -9,4 +9,10 @@ data class User (
     val address: String
 )
 
+data class UserWithState(
+    val user: User,
+    val isMultiselectMode: Boolean,
+    val isChecked: Boolean
+)
+
 

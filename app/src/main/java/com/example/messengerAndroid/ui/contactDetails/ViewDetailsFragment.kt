@@ -25,10 +25,10 @@ class ViewDetailsFragment : BaseFragment<FragmentViewDetailsBinding>(FragmentVie
 
     private fun setUserInfo() {
         with(binding) {
-            textViewName.text = viewModel.usersDetails.value?.name
-            imageViewPicture.addPhoto(viewModel.usersDetails.value?.photo?: "")
-            textViewAddress.text = viewModel.usersDetails.value?.address
-            textViewJob.text = viewModel.usersDetails.value?.job
+            textViewName.text = viewModel.usersDetails.value?.user?.name
+            imageViewPicture.addPhoto(viewModel.usersDetails.value?.user?.photo?: "")
+            textViewAddress.text = viewModel.usersDetails.value?.user?.address
+            textViewJob.text = viewModel.usersDetails.value?.user?.job
         }
     }
 

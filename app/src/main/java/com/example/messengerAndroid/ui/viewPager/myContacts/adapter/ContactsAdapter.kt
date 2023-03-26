@@ -1,99 +1,87 @@
 package com.example.messengerAndroid.ui.viewPager.myContacts.adapter
 
 import android.view.LayoutInflater
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.messengerAndroid.data.contactsRepository.contactModel.User
-import com.example.messengerAndroid.databinding.ItemContactDefaultBinding
-import com.example.messengerAndroid.databinding.ItemContactSelectionModeBinding
+import com.example.messengerAndroid.data.contactsRepository.contactModel.UserWithState
+import com.example.messengerAndroid.databinding.ItemContactBinding
 import com.example.messengerAndroid.extensions.addPhoto
 
-class ContactsAdapter (private val actionListener: UserActionListener)
-    : ListAdapter<User, RecyclerView.ViewHolder>(UserItemDiffCallback()) {
+class ContactsAdapter (private val actionListener: UserActionListener,
+private val backgroundColorSelector: BackgroundColorSelector)
+    : ListAdapter<UserWithState, ContactsAdapter.ContactsViewHolder>(UserItemDiffCallback()) {
 
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (viewModel.) {
-            val newHolder = holder as ContactsViewHolderSelectMode
-            newHolder.bindTo(getItem(position))
-        } else {
-            val newHolder = holder as ContactsViewHolderDefault
-            newHolder.bindTo(getItem(position))
-        }
+
+    override fun onBindViewHolder(holder: ContactsViewHolder, position: Int) {
+        holder.bindTo(getItem(position))
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return if (isMultiselectMode) {
-            val binding = ItemContactSelectionModeBinding.inflate(inflater, parent, false)
-            ContactsViewHolderSelectMode(binding)
-        } else {
-            val binding = ItemContactDefaultBinding.inflate(inflater, parent, false)
-            ContactsViewHolderDefault(binding)
-        }
+        val binding = ItemContactBinding.inflate(inflater, parent, false)
+        return ContactsViewHolder(binding)
     }
 
 
-    inner class ContactsViewHolderDefault (private val binding: ItemContactDefaultBinding) :
+
+
+    inner class ContactsViewHolder (private val binding: ItemContactBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-        fun bindTo(user: User) {
+        fun bindTo(userWithState: UserWithState) {
             with (binding) {
-                tvName.text = user.name
-                tvPhone.text = user.phone
-                binding.ivAvatar.addPhoto(user.photo)
-                setListeners(user)
-            }
-        }
-
-        private fun setListeners(user: User) {
-            binding.ibTrash.setOnClickListener {
-                actionListener.onUserDelete(user)
-            }
-
-            binding.root.setOnClickListener {
-                actionListener.onItemClicked(user)
-            }
-
-            binding.root.setOnLongClickListener {
-                isMultiselectMode = !isMultiselectMode
-                actionListener.updateRecycler()
-                true
-            }
-        }
-    }
-
-    inner class ContactsViewHolderSelectMode (private val binding: ItemContactSelectionModeBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bindTo(user: User) {
-            with (binding) {
-                tvName.text = user.name
-                tvPhone.text = user.phone
-                binding.ivAvatar.addPhoto(user.photo)
-                setListeners(user)
-            }
-        }
-
-        private fun setListeners(user: User) {
-
-            binding.root.setOnClickListener {
-                binding.checkBoxSelected.isChecked = !binding.checkBoxSelected.isChecked
-                if(binding.checkBoxSelected.isChecked) {
-                    checkedUsers.add(user)
+                tvName.text = userWithState.user.name
+                tvPhone.text = userWithState.user.phone
+                ivAvatar.addPhoto(userWithState.user.photo)
+                if (userWithState.isMultiselectMode) {
+                    checkBoxSelected.visibility = VISIBLE
+                    checkBoxSelected.isChecked = userWithState.isChecked
+                    ibTrash.visibility = GONE
+                    root.background = backgroundColorSelector.setBackgroundSelectionDrawable()
+                    setListenersForMultiselectMode(userWithState)
                 } else {
-                    checkedUsers.remove(user)
+                    root.background = backgroundColorSelector.setBackgroundDefaultDrawable()
+                    checkBoxSelected.visibility = GONE
+                    ibTrash.visibility = VISIBLE
+                    setListenersForDefaultMode(userWithState)
                 }
             }
+
+        }
+
+        private fun setListenersForDefaultMode(userWithState: UserWithState) {
+            binding.ibTrash.setOnClickListener {
+                actionListener.onUserDelete(userWithState)
+            }
+
+            binding.root.setOnClickListener {
+                actionListener.onItemClicked(userWithState)
+            }
+
             binding.root.setOnLongClickListener {
-                isMultiselectMode = !isMultiselectMode
-                checkedUsers.clear()
-                actionListener.updateRecycler()
+                actionListener.onChangeMode()
                 true
             }
         }
+
+        private fun setListenersForMultiselectMode(userWithState: UserWithState) {
+
+            binding.root.setOnClickListener {
+                actionListener.onItemClickedChooseMode(userWithState)
+            }
+
+            binding.root.setOnLongClickListener {
+                actionListener.onChangeMode()
+                true
+            }
+
+            binding.checkBoxSelected.setOnClickListener {
+                actionListener.onItemClickedChooseMode(userWithState)
+            }
+        }
     }
-
-
 }
