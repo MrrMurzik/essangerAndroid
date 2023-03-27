@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.ui.base
+package com.example.messengerAndroid.foundation.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

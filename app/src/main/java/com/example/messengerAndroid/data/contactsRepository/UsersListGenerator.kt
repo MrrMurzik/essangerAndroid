@@ -2,7 +2,7 @@ package com.example.messengerAndroid.data.contactsRepository
 
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.data.contactsRepository.contactModel.UserWithState
-import com.example.messengerAndroid.utils.UniqueIdGenerator.getUniqueId
+import com.example.messengerAndroid.foundation.utils.UniqueIdGenerator.getUniqueId
 import com.github.javafaker.Faker
 
 class UsersListGenerator {

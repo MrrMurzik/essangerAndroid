@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.ui.navigation
+package com.example.messengerAndroid.foundation.navigation
 
 
 interface Navigator {

@@ -7,7 +7,7 @@ import com.example.messengerAndroid.data.preferences.SharedPreferencesHelper
 import com.example.messengerAndroid.databinding.FragmentMyProfileBinding
 import com.example.messengerAndroid.extensions.cropPhoto
 import com.example.messengerAndroid.extensions.navigate
-import com.example.messengerAndroid.ui.base.BaseFragment
+import com.example.messengerAndroid.foundation.base.BaseFragment
 import com.example.messengerAndroid.ui.viewPager.ViewPagerFragment
 
 class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfileBinding::inflate) {

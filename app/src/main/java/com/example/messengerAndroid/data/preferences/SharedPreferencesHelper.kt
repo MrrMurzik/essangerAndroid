@@ -2,8 +2,8 @@ package com.example.messengerAndroid.data.preferences
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.messengerAndroid.utils.Constants.APP_PREFERENCES
-import com.example.messengerAndroid.utils.Constants.USER_NAME_KEY
+import com.example.messengerAndroid.Constants.APP_PREFERENCES
+import com.example.messengerAndroid.Constants.USER_NAME_KEY
 
 
 object SharedPreferencesHelper {

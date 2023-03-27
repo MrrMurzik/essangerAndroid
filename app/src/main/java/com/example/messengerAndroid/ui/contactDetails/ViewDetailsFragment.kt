@@ -8,7 +8,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.messengerAndroid.databinding.FragmentViewDetailsBinding
 import com.example.messengerAndroid.extensions.addPhoto
 import com.example.messengerAndroid.extensions.factory
-import com.example.messengerAndroid.ui.base.BaseFragment
+import com.example.messengerAndroid.foundation.base.BaseFragment
 
 class ViewDetailsFragment : BaseFragment<FragmentViewDetailsBinding>(FragmentViewDetailsBinding::inflate) {
 

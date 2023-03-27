@@ -28,12 +28,12 @@ import com.example.messengerAndroid.databinding.FragmentMyContactsBinding
 import com.example.messengerAndroid.extensions.factory
 import com.example.messengerAndroid.extensions.navigate
 import com.example.messengerAndroid.extensions.openAppSettings
-import com.example.messengerAndroid.ui.base.BaseFragment
+import com.example.messengerAndroid.foundation.base.BaseFragment
 import com.example.messengerAndroid.ui.viewPager.myContacts.adapter.BackgroundColorSelector
 import com.example.messengerAndroid.ui.viewPager.myContacts.adapter.ContactsAdapter
 import com.example.messengerAndroid.ui.viewPager.myContacts.adapter.UserActionListener
 import com.example.messengerAndroid.ui.viewPager.myContacts.contactsViewModel.ContactsViewModel
-import com.example.messengerAndroid.utils.Constants.TAG_ADD_CONTACT_DIALOG
+import com.example.messengerAndroid.Constants.TAG_ADD_CONTACT_DIALOG
 import com.google.android.material.snackbar.Snackbar
 
 

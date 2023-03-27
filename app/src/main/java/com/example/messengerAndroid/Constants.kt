@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.utils
+package com.example.messengerAndroid
 
 object Constants {
 

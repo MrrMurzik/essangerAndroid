@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.ui.customView
+package com.example.messengerAndroid.foundation.customView
 
 import android.content.Context
 import android.graphics.*

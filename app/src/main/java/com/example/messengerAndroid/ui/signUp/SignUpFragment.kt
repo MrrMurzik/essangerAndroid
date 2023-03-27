@@ -6,9 +6,9 @@ import com.example.messengerAndroid.R
 import com.example.messengerAndroid.data.preferences.SharedPreferencesHelper
 import com.example.messengerAndroid.databinding.FragmentSignUpBinding
 import com.example.messengerAndroid.extensions.navigate
-import com.example.messengerAndroid.ui.base.BaseFragment
-import com.example.messengerAndroid.utils.Constants.EMAIL_DIVIDER_PATTERN
-import com.example.messengerAndroid.utils.Validator
+import com.example.messengerAndroid.foundation.base.BaseFragment
+import com.example.messengerAndroid.Constants.EMAIL_DIVIDER_PATTERN
+import com.example.messengerAndroid.foundation.utils.Validator
 
 
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {

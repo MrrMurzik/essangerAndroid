@@ -1,7 +1,7 @@
-package com.example.messengerAndroid.utils
+package com.example.messengerAndroid.foundation.utils
 
 import android.util.Patterns
-import com.example.messengerAndroid.utils.Constants.PASSWORD_PATTERN
+import com.example.messengerAndroid.Constants.PASSWORD_PATTERN
 
 object Validator {
 

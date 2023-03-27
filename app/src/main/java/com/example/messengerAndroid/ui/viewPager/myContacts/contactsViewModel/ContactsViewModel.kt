@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.messengerAndroid.data.contactsRepository.UsersService
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.data.contactsRepository.contactModel.UserWithState
-import com.example.messengerAndroid.utils.UniqueIdGenerator.getUniqueId
+import com.example.messengerAndroid.foundation.utils.UniqueIdGenerator.getUniqueId
 
 
 class ContactsViewModel(usersService: UsersService) : ViewModel() {

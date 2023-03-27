@@ -15,11 +15,11 @@ import androidx.fragment.app.viewModels
 import com.example.messengerAndroid.databinding.DialogAddContactBinding
 import com.example.messengerAndroid.extensions.openAppSettings
 import com.example.messengerAndroid.ui.viewPager.myContacts.contactsViewModel.ContactsViewModel
-import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_JOB
-import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_NAME
-import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_PHONE_NUMBER
-import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_PHOTO_URI
-import com.example.messengerAndroid.utils.Constants.KEY_SAVE_STATE_POSTAL_ADDRESS
+import com.example.messengerAndroid.Constants.KEY_SAVE_STATE_JOB
+import com.example.messengerAndroid.Constants.KEY_SAVE_STATE_NAME
+import com.example.messengerAndroid.Constants.KEY_SAVE_STATE_PHONE_NUMBER
+import com.example.messengerAndroid.Constants.KEY_SAVE_STATE_PHOTO_URI
+import com.example.messengerAndroid.Constants.KEY_SAVE_STATE_POSTAL_ADDRESS
 
 class AddContactFragmentDialog : DialogFragment() {
 
