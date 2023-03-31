@@ -68,6 +68,11 @@
     <string name="profile">Profile</string>
     <string name="message">Message</string>
     <string name="select_all">Select all</string>
+    <string name="forward">forward</string>
+    <string name="your_profile_data">Your profile data</string>
+    <string name="subheader_text">Fill out the profile and go to the application!</string>
+    <string name="user_name">User name</string>
+    <string name="mobile_phone">Mobile phone</string>
     <!-- Strings used for fragments for navigation -->
 
 

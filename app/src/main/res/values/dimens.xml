@@ -25,6 +25,7 @@
 
     <dimen name="bigPadding">22dp</dimen>
     <dimen name="mediumPadding">16dp</dimen>
+    <dimen name="constraintPadding">16dp</dimen>
     <dimen name="SignUpPagePadding">16dp</dimen>
     <dimen name="inner_button_padding">14dp</dimen>
     <dimen name="defaultPadding">12dp</dimen>

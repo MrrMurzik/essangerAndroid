@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/margin_from_start"
     android:background="?attr/colorPrimary"
-    android:padding="@dimen/SignUpPagePadding">
+    android:padding="@dimen/constraintPadding">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewGetAcquainted"

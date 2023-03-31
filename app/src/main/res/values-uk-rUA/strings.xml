@@ -66,4 +66,11 @@
     <string name="profile">Профіль</string>
     <string name="message">Повідомлення</string>
     <string name="select_all">Вибрати всіх</string>
+
+    <string name="forward">вперед</string>
+    <string name="your_profile_data">Дані профіля</string>
+    <string name="subheader_text">Заповни профіль і користуйся застсунком!</string>
+
+    <string name="user_name">Ім\'я</string>
+    <string name="mobile_phone">номер телефону</string>
 </resources>

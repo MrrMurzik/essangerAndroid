@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun showViewDetails(id: String) {
-        val direction = ViewPagerFragmentDirections.actionViewPagerFragmentToViewDetailsFragment(id)
+        val direction = ViewPagerFragmentDirections.actionViewPagerFragmentToViewDetailsFragment(   id)
         launchDestination(direction)
 
     }
