@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -197,6 +196,18 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
 
         binding.imageButtonCancelSearch.setOnClickListener {
             viewModel.enableDefaultMode()
+            disableSearchMode()
+        }
+    }
+
+    private fun disableSearchMode() {
+        with(binding) {
+            imageButtonSearch.visibility = VISIBLE
+            imageButtonCancelSearch.visibility = GONE
+            textInputSearch.visibility = GONE
+            textInputTextSearch.visibility = GONE
+            textViewContacts.visibility = VISIBLE
+            imageButtonArrowBack.visibility = VISIBLE
         }
     }
 
@@ -214,7 +225,7 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
     }
 
     private fun observeTextChanging() {
-        binding.textInputTextSearch.doOnTextChanged { text, start, before, count ->
+        binding.textInputTextSearch.doOnTextChanged { text, _, _, _ ->
             viewModel.searchInList(text.toString())
         }
     }
@@ -226,8 +237,13 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
         }
 
         viewModel.noResultLiveData.observe(viewLifecycleOwner) {
-            binding.textViewNoResults.visibility = VISIBLE
-            binding.textViewNoResultsExplanation.visibility = VISIBLE
+            if (it) {
+                binding.textViewNoResults.visibility = VISIBLE
+                binding.textViewNoResultsExplanation.visibility = VISIBLE
+            } else {
+                binding.textViewNoResults.visibility = GONE
+                binding.textViewNoResultsExplanation.visibility = GONE
+            }
         }
     }
 

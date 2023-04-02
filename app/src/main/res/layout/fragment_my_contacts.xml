@@ -40,16 +40,18 @@
         app:layout_constraintStart_toEndOf="@id/imageButtonArrowBack"
         app:layout_constraintTop_toTopOf="@id/imageButtonArrowBack" />
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputSearch"
         android:layout_width="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_height="@dimen/text_input_height"
         android:layout_marginStart="@dimen/mediumMargin"
         app:endIconDrawable="@drawable/ic_end_search"
         app:endIconMode="custom"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2"
+        app:boxBackgroundColor="#18181f"
         android:layout_marginEnd="@dimen/smallMargin"
         app:layout_constraintBottom_toBottomOf="@id/viewUpperBlock"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,10 +61,10 @@
             android:id="@+id/textInputTextSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="sldjfldsj"
+            android:padding="0dp"
             android:inputType="text"
             android:textSize="14sp"
-            android:textColor="#000000" />
+            android:textColor="?attr/colorOnSecondary" />
 
 
     </com.google.android.material.textfield.TextInputLayout>

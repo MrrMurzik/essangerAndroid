@@ -102,13 +102,12 @@ class ContactsViewModel(private val usersService: UsersService) : ViewModel() {
         _contactsLiveData.value = _contactsLiveData.value?.filter {
             it.user.name.contains(input)
         }
-        if (_contactsLiveData.value?.isEmpty() == true) {
-            _noResultLiveData.value = _noResultLiveData.value?.not()
-        }
+        _noResultLiveData.value = _contactsLiveData.value?.isEmpty() == true
     }
 
     fun enableDefaultMode() {
         _contactsLiveData.value = usersService.getUsers()
+        _noResultLiveData.value = false
     }
 
 
