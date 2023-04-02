@@ -8,8 +8,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
 import com.example.messengerAndroid.R
 import com.example.messengerAndroid.data.preferences.SharedPreferencesHelper
-import com.example.messengerAndroid.foundation.navigation.Navigator
-import com.example.messengerAndroid.ui.signUp.SignUpFragmentDirections
+import com.example.messengerAndroid.ui.auth.signUp.SignUpExtendedFragmentDirections
+import com.example.messengerAndroid.ui.auth.signUp.SignUpFragmentDirections
+import com.example.messengerAndroid.ui.navigation.Navigator
 import com.example.messengerAndroid.ui.viewPager.ViewPagerFragmentDirections
 
 class MainActivity : AppCompatActivity(), Navigator {

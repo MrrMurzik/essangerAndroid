@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messengerAndroid.data.contactsRepository.contactModel.UserWithState
 import com.example.messengerAndroid.databinding.ItemContactBinding
-import com.example.messengerAndroid.extensions.addPhoto
+import com.example.messengerAndroid.foundation.extensions.addPhoto
 
 class ContactsAdapter (private val actionListener: UserActionListener,
 private val backgroundColorSelector: BackgroundColorSelector)

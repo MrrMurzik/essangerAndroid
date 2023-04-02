@@ -1,4 +1,4 @@
-package com.example.messengerAndroid.extensions
+package com.example.messengerAndroid.foundation.extensions
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

@@ -73,6 +73,8 @@
     <string name="subheader_text">Fill out the profile and go to the application!</string>
     <string name="user_name">User name</string>
     <string name="mobile_phone">Mobile phone</string>
+    <string name="no_results_found">No results found</string>
+    <string name="no_result_explanation">You can see more contacts in recommendation</string>
     <!-- Strings used for fragments for navigation -->
 
 

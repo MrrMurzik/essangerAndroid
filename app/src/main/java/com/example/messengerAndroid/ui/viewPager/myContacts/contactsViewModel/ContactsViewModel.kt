@@ -9,17 +9,19 @@ import com.example.messengerAndroid.data.contactsRepository.contactModel.UserWit
 import com.example.messengerAndroid.foundation.utils.UniqueIdGenerator.getUniqueId
 
 
-class ContactsViewModel(usersService: UsersService) : ViewModel() {
+class ContactsViewModel(private val usersService: UsersService) : ViewModel() {
 
 
     private val _contactsLiveData = MutableLiveData<List<UserWithState>>()
     val contactsLiveData: LiveData<List<UserWithState>> = _contactsLiveData
 
+    private val _noResultLiveData = MutableLiveData(false)
+    val noResultLiveData: LiveData<Boolean> = _noResultLiveData
+
 
     init {
         _contactsLiveData.value = usersService.getUsers()
     }
-
 
     fun deleteUser(userWithState: UserWithState?) {
         _contactsLiveData.value = _contactsLiveData.value?.toMutableList()?.apply {
@@ -93,6 +95,20 @@ class ContactsViewModel(usersService: UsersService) : ViewModel() {
         _contactsLiveData.value = _contactsLiveData.value?.map {
             UserWithState(it.user, isMultiselectMode = true, isChecked = true)
         }
+    }
+
+
+    fun searchInList(input: String) {
+        _contactsLiveData.value = _contactsLiveData.value?.filter {
+            it.user.name.contains(input)
+        }
+        if (_contactsLiveData.value?.isEmpty() == true) {
+            _noResultLiveData.value = _noResultLiveData.value?.not()
+        }
+    }
+
+    fun enableDefaultMode() {
+        _contactsLiveData.value = usersService.getUsers()
     }
 
 

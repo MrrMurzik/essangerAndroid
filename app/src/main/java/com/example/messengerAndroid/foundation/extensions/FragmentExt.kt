@@ -1,11 +1,11 @@
-package com.example.messengerAndroid.extensions
+package com.example.messengerAndroid.foundation.extensions
 
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import androidx.fragment.app.Fragment
 import com.example.messengerAndroid.App
-import com.example.messengerAndroid.foundation.navigation.Navigator
+import com.example.messengerAndroid.ui.navigation.Navigator
 import com.example.messengerAndroid.Constants
 import com.example.messengerAndroid.foundation.viewModelFactory.ViewModelFactory
 

@@ -2,7 +2,6 @@ package com.example.messengerAndroid.ui.viewPager.myContacts
 
 import android.Manifest
 import android.app.Dialog
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -13,7 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.example.messengerAndroid.databinding.DialogAddContactBinding
-import com.example.messengerAndroid.extensions.openAppSettings
+import com.example.messengerAndroid.foundation.extensions.openAppSettings
 import com.example.messengerAndroid.ui.viewPager.myContacts.contactsViewModel.ContactsViewModel
 import com.example.messengerAndroid.Constants.KEY_SAVE_STATE_JOB
 import com.example.messengerAndroid.Constants.KEY_SAVE_STATE_NAME
@@ -29,14 +28,6 @@ class AddContactFragmentDialog : DialogFragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ContactsViewModel by viewModels({requireParentFragment()})
-
-    private val requestGalleryAccessPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ){
-        if (it) {
-            launchPickPhoto()
-        }
-    }
 
     private val pickMediaLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         this.uri = uri?: Uri.EMPTY
@@ -99,47 +90,10 @@ class AddContactFragmentDialog : DialogFragment() {
     private fun setListenerForAddImageViews(dialogBinding: DialogAddContactBinding) {
 
         val listener = View.OnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-
-                if (requireContext().checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) !=
-                    PackageManager.PERMISSION_GRANTED
-                ) {
-
-                    if (shouldShowRequestPermissionRationale(Manifest.permission.READ_MEDIA_IMAGES)) {
-                        openAppSettings()
-                    } else {
-                        requestGalleryAccessPermission()
-                    }
-
-
-                } else {
-                    launchPickPhoto()
-                }
-            } else {
-                if (requireContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                    PackageManager.PERMISSION_GRANTED
-                ) {
-
-                    if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE))
-                        requestGalleryAccessPermission()
-                    else
-                        openAppSettings()
-
-                } else {
-                    launchPickPhoto()
-                }
-            }
+            launchPickPhoto()
         }
         dialogBinding.textViewAddPhoto.setOnClickListener(listener)
         dialogBinding.imageViewAvatar.setOnClickListener(listener)
-    }
-
-    private fun requestGalleryAccessPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requestGalleryAccessPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
-        } else {
-            requestGalleryAccessPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
     }
 
     private fun launchPickPhoto() {

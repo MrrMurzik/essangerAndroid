@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -14,31 +15,33 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.messengerAndroid.Constants.TAG_ADD_CONTACT_DIALOG
 import com.example.messengerAndroid.R
 import com.example.messengerAndroid.data.contactsRepository.contactModel.User
 import com.example.messengerAndroid.data.contactsRepository.contactModel.UserWithState
 import com.example.messengerAndroid.databinding.DialogDeniedPermissionBinding
 import com.example.messengerAndroid.databinding.FragmentMyContactsBinding
-import com.example.messengerAndroid.extensions.factory
-import com.example.messengerAndroid.extensions.navigate
-import com.example.messengerAndroid.extensions.openAppSettings
 import com.example.messengerAndroid.foundation.base.BaseFragment
+import com.example.messengerAndroid.foundation.extensions.factory
+import com.example.messengerAndroid.foundation.extensions.navigate
+import com.example.messengerAndroid.foundation.extensions.openAppSettings
 import com.example.messengerAndroid.ui.viewPager.myContacts.adapter.BackgroundColorSelector
 import com.example.messengerAndroid.ui.viewPager.myContacts.adapter.ContactsAdapter
 import com.example.messengerAndroid.ui.viewPager.myContacts.adapter.UserActionListener
 import com.example.messengerAndroid.ui.viewPager.myContacts.contactsViewModel.ContactsViewModel
-import com.example.messengerAndroid.Constants.TAG_ADD_CONTACT_DIALOG
 import com.google.android.material.snackbar.Snackbar
 
 
 class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyContactsBinding::inflate) {
 
     private val viewModel: ContactsViewModel by viewModels { factory() }
+
 
     private var actionListener: UserActionListener? = object : UserActionListener {
         override fun onUserDelete(userWithState: UserWithState) {
@@ -100,13 +103,17 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (context?.checkSelfPermission(READ_CONTACTS) != PackageManager.PERMISSION_GRANTED &&
-            !shouldShowRequestPermissionRationale(READ_CONTACTS)
-        ) {
+
+        if (requireContext().checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_DENIED &&
+            shouldShowRequestPermissionRationale(READ_CONTACTS)) {
+
             requestReadContactsPermission()
+
+        } else if (requireContext().checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_DENIED &&
+            !shouldShowRequestPermissionRationale(READ_CONTACTS)) {
+            showPermissionDeniedDialog()
         }
     }
 
@@ -116,16 +123,9 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
         setupRecyclerView()
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (context?.checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED)
-            setupRecyclerView()
-    }
-
 
 
     override fun onDestroyView() {
-        requestReadContactsPermissionLauncher.unregister()
         actionListener = null
         backgroundColorSelector = null
         if (viewModel.getCurrentMode()) {
@@ -134,6 +134,7 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
         }
         super.onDestroyView()
     }
+
 
     private fun setupRecyclerView() {
         initRecycler()
@@ -189,12 +190,44 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
         binding.textViewSelectAll.setOnClickListener {
             viewModel.selectAllUsers()
         }
+
+        binding.imageButtonSearch.setOnClickListener {
+            enableSearchMode()
+        }
+
+        binding.imageButtonCancelSearch.setOnClickListener {
+            viewModel.enableDefaultMode()
+        }
+    }
+
+    private fun enableSearchMode() {
+        with(binding) {
+            imageButtonSearch.visibility = GONE
+            imageButtonCancelSearch.visibility = VISIBLE
+            textInputSearch.visibility = VISIBLE
+            textInputTextSearch.visibility = VISIBLE
+            textViewContacts.visibility = GONE
+            imageButtonArrowBack.visibility = GONE
+        }
+        observeTextChanging()
+
+    }
+
+    private fun observeTextChanging() {
+        binding.textInputTextSearch.doOnTextChanged { text, start, before, count ->
+            viewModel.searchInList(text.toString())
+        }
     }
 
 
     private fun setObservers() {
         viewModel.contactsLiveData.observe(viewLifecycleOwner) {
             adapterContacts.submitList(it)
+        }
+
+        viewModel.noResultLiveData.observe(viewLifecycleOwner) {
+            binding.textViewNoResults.visibility = VISIBLE
+            binding.textViewNoResultsExplanation.visibility = VISIBLE
         }
     }
 
@@ -260,9 +293,9 @@ class MyContactsFragment : BaseFragment<FragmentMyContactsBinding>(FragmentMyCon
     ) {
         dialogBinding.buttonGrantPermission.setOnClickListener {
             if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-                requestReadContactsPermission()
-            } else {
                 openAppSettings()
+            } else {
+                requestReadContactsPermission()
             }
             dialog.dismiss()
         }

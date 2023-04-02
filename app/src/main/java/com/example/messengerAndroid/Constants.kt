@@ -12,6 +12,10 @@ object Constants {
     const val APP_PREFERENCES = "login_preferences"
 
     const val USER_NAME_KEY = "name"
+    const val EMAIL_KEY = "EMAIL_KEY"
+    const val PASSWORD_KEY = "PASSWORD_KEY"
+    const val PHONE_KEY = "PHONE_KEY"
+    const val PHOTO_KEY = "PHOTO_KEY"
 
     // constants for packages
 

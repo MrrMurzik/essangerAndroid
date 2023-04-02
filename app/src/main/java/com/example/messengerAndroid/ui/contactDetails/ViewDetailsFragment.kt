@@ -1,13 +1,15 @@
 package com.example.messengerAndroid.ui.contactDetails
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.messengerAndroid.databinding.FragmentViewDetailsBinding
-import com.example.messengerAndroid.extensions.addPhoto
-import com.example.messengerAndroid.extensions.factory
+import com.example.messengerAndroid.foundation.extensions.addPhoto
+import com.example.messengerAndroid.foundation.extensions.factory
 import com.example.messengerAndroid.foundation.base.BaseFragment
 
 class ViewDetailsFragment : BaseFragment<FragmentViewDetailsBinding>(FragmentViewDetailsBinding::inflate) {
@@ -31,6 +33,7 @@ class ViewDetailsFragment : BaseFragment<FragmentViewDetailsBinding>(FragmentVie
             textViewJob.text = viewModel.usersDetails.value?.user?.job
         }
     }
+
 
     private fun setListeners() {
         binding.imageButtonArrowBack.setOnClickListener {

@@ -20,6 +20,7 @@ abstract class BaseFragment<B : ViewBinding>(
         savedInstanceState: Bundle?
     ): View {
         _binding = this.inflater.invoke(inflater, container, false)
+
         return binding.root
     }
 
@@ -27,6 +28,8 @@ abstract class BaseFragment<B : ViewBinding>(
         super.onDestroyView()
         _binding = null
     }
+
+
 
 
 }

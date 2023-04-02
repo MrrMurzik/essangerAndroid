@@ -8,8 +8,11 @@
     <fragment
         android:id="@+id/signUpFragment"
         tools:layout="@layout/fragment_sign_up"
-        android:name="com.example.messengerAndroid.ui.signUp.SignUpFragment"
+        android:name="com.example.messengerAndroid.ui.auth.signUp.SignUpFragment"
         android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpExtendedFragment"
+            app:destination="@id/signUpExtendedFragment" />
         <action
             android:id="@+id/action_signUpFragment_to_viewPagerFragment"
             app:destination="@id/viewPagerFragment" />
@@ -51,5 +54,13 @@
         <action
             android:id="@+id/action_viewPagerFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpExtendedFragment"
+        android:name="com.example.messengerAndroid.ui.auth.signUp.SignUpExtendedFragment"
+        android:label="SignUpExtendedFragment" >
+        <action
+            android:id="@+id/action_signUpExtendedFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
     </fragment>
 </navigation>
