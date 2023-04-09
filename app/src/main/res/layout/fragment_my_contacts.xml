@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.messengerAndroid.foundation.customView.DismissableKeyboardConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.messengerAndroid.app.foundation.customView.DismissableKeyboardConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.viewPager.myContacts.MyContactsFragment">
+    tools:context=".app.ui.viewPager.myContacts.MyContactsFragment">
 
     <View
         android:id="@+id/viewUpperBlock"
@@ -171,5 +171,8 @@
         android:src="@drawable/floating_action_button_delete"
         android:layout_margin="16dp" />
 
+    <include
+        layout="@layout/part_result"/>
 
-</com.example.messengerAndroid.foundation.customView.DismissableKeyboardConstraintLayout>
+
+</com.example.messengerAndroid.app.foundation.customView.DismissableKeyboardConstraintLayout>

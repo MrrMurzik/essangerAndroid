@@ -156,5 +156,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <include
+        layout="@layout/part_result"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

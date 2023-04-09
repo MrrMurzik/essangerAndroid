@@ -43,7 +43,7 @@
     <!-- snackBar after deletion contact-->
     <string name="deletion_snackbar_message">User has been deleted</string>
     <string name="undo_delete_action">Undo</string>
-    <!-- Add user alert dialog -->
+    <!-- Add contact alert dialog -->
     <string name="add_contact_title">Add contact</string>
 
     <!-- universal strings for all alert dialogs-->
@@ -75,6 +75,13 @@
     <string name="mobile_phone">Mobile phone</string>
     <string name="no_results_found">No results found</string>
     <string name="no_result_explanation">You can see more contacts in recommendation</string>
+    <string name="error_please_try_again">Error! Please, try again</string>
+
+    <string name="try_again_button">try again</string>
+    <string name="email_already_exists">This email already exists</string>
+    <string name="connection_error" translatable="false">Please check your internet connection</string>
+    <string name="backend_error" translatable="false">backend exception</string>
+    <string name="parse_backend_error" translatable="false">parse backend exception</string>
     <!-- Strings used for fragments for navigation -->
 
 
