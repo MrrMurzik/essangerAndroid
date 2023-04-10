@@ -11,7 +11,9 @@ import com.example.messengerAndroid.app.data.preferences.SharedPreferencesHelper
 import com.example.messengerAndroid.app.ui.auth.signUp.SignUpFragmentDirections
 import com.example.messengerAndroid.app.ui.navigation.Navigator
 import com.example.messengerAndroid.app.ui.viewPager.ViewPagerFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), Navigator {
 
     private lateinit var navController: NavController

@@ -8,21 +8,25 @@ import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.messengerAndroid.R
+import com.example.messengerAndroid.app.data.model.user.UserRepository
 import com.example.messengerAndroid.app.data.preferences.SharedPreferencesHelper
 import com.example.messengerAndroid.app.foundation.extensions.navigate
 import com.example.messengerAndroid.app.foundation.base.BaseFragment
 import com.example.messengerAndroid.app.foundation.extensions.factory
 import com.example.messengerAndroid.databinding.FragmentSignUpBinding
 import com.example.messengerAndroid.databinding.PartResultBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
 
 
-    private val viewModel: SignUpViewModel by viewModels{ factory() }
+    private val viewModel: SignUpViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        Log.d("myTag", "")
         if (SharedPreferencesHelper.getName().isNotEmpty())
             navigate().showViewPager()
 

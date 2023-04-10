@@ -6,9 +6,12 @@ import com.example.messengerAndroid.source.BaseRetrofitSource
 import com.example.messengerAndroid.source.RetrofitConfig
 import com.example.messengerAndroid.source.user.entities.CreateUserRequestEntity
 import com.example.messengerAndroid.source.user.entities.EditUserEntity
-import com.example.messengerAndroid.source.user.entities.toQueryMap
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RetrofitUserNetworkSource(config: RetrofitConfig) : BaseRetrofitSource(config), UserNetworkSource {
+@Singleton
+class RetrofitUserNetworkSource @Inject constructor(config: RetrofitConfig)
+    : BaseRetrofitSource(config), UserNetworkSource {
 
     private val userApi = retrofit.create(UserApi::class.java)
 

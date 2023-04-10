@@ -3,9 +3,12 @@ package com.example.messengerAndroid.app.data.model.user
 import com.example.messengerAndroid.app.data.result.Result
 import com.example.messengerAndroid.app.data.result.SuccessResult
 import com.example.messengerAndroid.source.user.entities.CreateUserResponseEntity
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
-class UserRepository(
+@Singleton
+class UserRepository @Inject constructor(
     private val userNetworkSource: UserNetworkSource
 ) {
 

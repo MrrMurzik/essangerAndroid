@@ -20,9 +20,6 @@ class ViewModelFactory(private val app: App) : ViewModelProvider.Factory {
                 ViewDetailsViewModel(app.usersService)
             }
 
-            SignUpViewModel::class.java -> {
-                SignUpViewModel(app.userRepository)
-            }
 
             else -> {
                 throw IllegalArgumentException("Unknown ViewModel class")

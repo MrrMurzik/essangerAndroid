@@ -4,8 +4,9 @@ buildscript {
     ext.nav_version = "2.5.3"
     ext.glide_version="4.14.2"
     ext.recycler_version="1.3.0"
-    ext.okhttp_version="4.9.3"
+    ext.okhttp_version="5.0.0-alpha.11"
     ext.retrofit_version="2.9.0"
+    ext.hilt_version="2.44"
 
     repositories {
         google()
@@ -13,12 +14,13 @@ buildscript {
     dependencies {
 
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
     }
 }
 
 plugins {
     id 'com.android.application' version '7.3.1' apply false
     id 'com.android.library' version '7.3.1' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.20' apply false
+    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
 }
 

@@ -13,9 +13,12 @@ import com.example.messengerAndroid.app.data.result.SuccessResult
 import com.example.messengerAndroid.app.data.result.SystemErrorResult
 import com.example.messengerAndroid.app.foundation.exceptions.*
 import com.example.messengerAndroid.app.foundation.utils.Validator
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignUpViewModel(
+@HiltViewModel
+class SignUpViewModel @Inject constructor(
     private val userRepository: UserRepository
 ): ViewModel() {
 

@@ -9,8 +9,9 @@ import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.JsonEncodingException
 import okio.IOException
 import retrofit2.HttpException
+import javax.inject.Inject
 
-open class BaseRetrofitSource(retrofitConfig: RetrofitConfig) {
+open class BaseRetrofitSource @Inject constructor(retrofitConfig: RetrofitConfig) {
 
     val retrofit = retrofitConfig.retrofit
 

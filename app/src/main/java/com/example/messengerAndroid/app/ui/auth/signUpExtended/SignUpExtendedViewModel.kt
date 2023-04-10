@@ -12,8 +12,8 @@ class SignUpExtendedViewModel : ViewModel() {
     val navigationLiveData: LiveData<NavDirections> = _navigationLiveData
 
     fun registerNameAndPhone(name: String, phone: String) {
-        SharedPreferencesHelper.setName(name)
-        SharedPreferencesHelper.setPhone(phone)
+//        SharedPreferencesHelper.setName(name)
+//        SharedPreferencesHelper.setPhone(phone)
     }
 
     fun updateDirection() {
@@ -22,7 +22,7 @@ class SignUpExtendedViewModel : ViewModel() {
     }
 
     fun registerUserPhoto(photoUri: String) {
-        SharedPreferencesHelper.setPhoto(photoUri)
+//        SharedPreferencesHelper.setPhoto(photoUri)
     }
 
 }
