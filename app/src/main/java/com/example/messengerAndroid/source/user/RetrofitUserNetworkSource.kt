@@ -1,7 +1,7 @@
 package com.example.messengerAndroid.source.user
 
-import com.example.messengerAndroid.app.data.model.user.User
 import com.example.messengerAndroid.app.data.model.user.UserNetworkSource
+import com.example.messengerAndroid.app.data.preferences.SharedPreferencesHelper
 import com.example.messengerAndroid.source.BaseRetrofitSource
 import com.example.messengerAndroid.source.RetrofitConfig
 import com.example.messengerAndroid.source.user.entities.CreateUserRequestEntity
@@ -21,17 +21,17 @@ class RetrofitUserNetworkSource @Inject constructor(config: RetrofitConfig)
         userApi.createUser(createUserRequestEntity)
     }
 
-    override suspend fun editUser(user: User): EditUserEntity {
-        TODO("Not yet implemented")
+    //todo loading image
+    override suspend fun editUser(
+        name: String,
+        phone: String,
+        photo: String?): EditUserEntity = wrapRetrofitExceptions {
+        val id = SharedPreferencesHelper.getNetworkId()
+        val token = SharedPreferencesHelper.getToken()
+        val accessToken = "Bearer $token"
+        val editUserEntity = EditUserEntity(name = name, phone = phone)
+        userApi.editUser(id, editUserEntity, accessToken = accessToken)
+
     }
 
-//    override suspend fun editUser(user: User): EditUserEntity = wrapRetrofitExceptions {
-////        val editUserRequestEntity = EditUserEntity(
-////            name = user.name,
-////            phone = user.phone
-////        )
-////        userApi.editUser(
-////            editUserEntity = editUserRequestEntity, )
-//
-//    }
 }

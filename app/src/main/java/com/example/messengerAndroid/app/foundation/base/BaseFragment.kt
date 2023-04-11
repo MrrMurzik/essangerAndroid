@@ -33,17 +33,17 @@ abstract class BaseFragment<B : ViewBinding>(
         _binding = null
     }
 
-    fun <T> renderResult(root: ViewGroup,
-                         partRoot: View,
-                         result: Result<T>,
-                         onPending: () -> Unit,
-                         onSystemErrorResult: (Error) -> Unit,
-                         onActionErrorResult: (Error) -> Unit,
-                         onSuccess: (T) -> Unit) {
+    fun <T> renderResult(
+        root: ViewGroup,
+        result: Result<T>,
+        onPending: () -> Unit,
+        onSystemErrorResult: (Error) -> Unit,
+        onActionErrorResult: (Error) -> Unit,
+        onSuccess: (T) -> Unit
+    ) {
         root.children.forEach {
             it.visibility = GONE
         }
-        (partRoot as ViewGroup).children.forEach { it.visibility = GONE }
         when (result) {
             is SuccessResult -> onSuccess(result.data)
             is SystemErrorResult -> onSystemErrorResult(result.error)

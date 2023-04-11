@@ -3,20 +3,18 @@ package com.example.messengerAndroid.app.ui.auth.signUp
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.messengerAndroid.R
-import com.example.messengerAndroid.app.data.model.user.UserRepository
 import com.example.messengerAndroid.app.data.preferences.SharedPreferencesHelper
-import com.example.messengerAndroid.app.foundation.extensions.navigate
 import com.example.messengerAndroid.app.foundation.base.BaseFragment
-import com.example.messengerAndroid.app.foundation.extensions.factory
+import com.example.messengerAndroid.app.foundation.extensions.navigate
 import com.example.messengerAndroid.databinding.FragmentSignUpBinding
 import com.example.messengerAndroid.databinding.PartResultBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
@@ -26,8 +24,8 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        Log.d("myTag", "")
-        if (SharedPreferencesHelper.getName().isNotEmpty())
+        if (SharedPreferencesHelper.getToken().isNotEmpty())
+            //todo
             navigate().showViewPager()
 
         setListeners()
@@ -40,12 +38,12 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
             val resultBinding = PartResultBinding.bind(binding.root)
             renderResult(
                 root = binding.root,
-                partRoot = resultBinding.root,
                 result = result,
                 onPending = {
                     resultBinding.progressBar.visibility = VISIBLE
                 },
                 onSystemErrorResult = {
+                    resultBinding.progressBar.visibility = GONE
                     when (it) {
                         Error.CONNECTION_EXCEPTION -> {
                             resultBinding.textViewError.text = getString(R.string.connection_error)
@@ -66,6 +64,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                 },
                 onActionErrorResult = {error ->
                     binding.root.children.forEach { it.visibility = VISIBLE }
+                    resultBinding.progressBar.visibility = GONE
                     when (error) {
                         Error.INVALID_PASSWORD -> {
                             binding.inputLayoutPassword.error = getString(R.string.invalid_password)
@@ -78,12 +77,11 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                         }
                         else -> throw IllegalStateException()
                     }
-                },
-                onSuccess = {navDirection ->
-                    binding.root.children.forEach { it.visibility = VISIBLE }
-                    findNavController().navigate(navDirection)
                 }
-            )
+            ) { navDirection ->
+                binding.root.children.forEach { it.visibility = VISIBLE }
+                findNavController().navigate(navDirection)
+            }
         }
 
     }
@@ -98,6 +96,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                 binding.checkBoxRememberMe.isChecked
                 )
         }
+
     }
 
 

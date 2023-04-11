@@ -23,6 +23,10 @@ interface UserNetworkSource {
      * @throws BackendException
      * @throws ParseBackendResponseException
      */
-    suspend fun editUser(user: User): EditUserEntity
+    suspend fun editUser(
+        name: String,
+        phone: String,
+        photo: String?
+    ): EditUserEntity
 
 }
