@@ -1,5 +1,6 @@
 package com.example.messengerAndroid.source.user
 
+import android.util.Log
 import com.example.messengerAndroid.app.data.model.user.UserNetworkSource
 import com.example.messengerAndroid.app.data.preferences.SharedPreferencesHelper
 import com.example.messengerAndroid.source.BaseRetrofitSource
@@ -18,18 +19,22 @@ class RetrofitUserNetworkSource @Inject constructor(config: RetrofitConfig)
 
     override suspend fun createUser(email: String, password: String) = wrapRetrofitExceptions {
         val createUserRequestEntity = CreateUserRequestEntity(email = email, password = password)
-        userApi.createUser(createUserRequestEntity)
+        val response = userApi.createUser(createUserRequestEntity)
+        Log.d("myTag", "response in network: $response")
+        response
     }
 
     //todo loading image
     override suspend fun editUser(
         name: String,
         phone: String,
-        photo: String?): EditUserEntity = wrapRetrofitExceptions {
+        photo: String?
+    ): EditUserEntity = wrapRetrofitExceptions {
         val id = SharedPreferencesHelper.getNetworkId()
         val token = SharedPreferencesHelper.getToken()
         val accessToken = "Bearer $token"
         val editUserEntity = EditUserEntity(name = name, phone = phone)
+        Log.d("myTag", "id: $id")
         userApi.editUser(id, editUserEntity, accessToken = accessToken)
 
     }

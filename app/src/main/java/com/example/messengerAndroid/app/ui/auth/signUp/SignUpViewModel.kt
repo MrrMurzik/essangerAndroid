@@ -1,5 +1,6 @@
 package com.example.messengerAndroid.app.ui.auth.signUp
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +15,7 @@ import com.example.messengerAndroid.app.data.result.SystemErrorResult
 import com.example.messengerAndroid.app.foundation.exceptions.*
 import com.example.messengerAndroid.app.foundation.utils.Validator
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,14 +35,15 @@ class SignUpViewModel @Inject constructor(
         if (checkInputValidity(email, password)) {
             try {
                 val result = userRepository.createUser(email, password)
+                if (result is SuccessResult) {
+                    Log.d("myTag", "result.data.id: ${result.data}")
+                    SharedPreferencesHelper.setToken(result.data.data.accessToken)
+                    Log.d("myTag", "result.data.accessToken: ${result.data.data.accessToken}")
+                    Log.d("myTag", "result.data.id: ${result.data.data.user.id}")
+                    SharedPreferencesHelper.setNetworkId(result.data.data.user.id.toString())
+                }
                 _resultLiveData.value =
                     SuccessResult(SignUpFragmentDirections.actionSignUpFragmentToSignUpExtendedFragment())
-                if (isChecked) {
-                    if (result is SuccessResult) {
-                        SharedPreferencesHelper.setToken(result.data.accessToken)
-                        SharedPreferencesHelper.setNetworkId(result.data.id)
-                    }
-                }
             } catch (e: AccountAlreadyExistsException) {
                 _resultLiveData.value = ActionErrorResult(Error.ACCOUNT_ALREADY_EXIST)
             } catch (e: ConnectionException) {

@@ -13,11 +13,11 @@ interface UserApi {
     ) : CreateUserResponseEntity
 
 
-    @PUT("/users/{userId}")
-    @Headers("Content-type: multipart/form-data")
+    @PUT("users/{userId}")
     suspend fun editUser(
         @Path("userId") userId: String,
         @Body editUserEntity: EditUserEntity,
+        @Header ("Content-type") contentType: String = "application/json",
         @Header("Authorization") accessToken: String,
     ) : EditUserEntity
 
