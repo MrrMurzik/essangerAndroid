@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.messengerAndroid.app.foundation.customView.DismissableKeyboardConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -102,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@id/inputLayoutPassword"
         app:layout_constraintBottom_toTopOf="@id/textViewOr"/>
 
-    <com.example.messengerAndroid.ui.customView.CustomGoogleButton
+    <com.example.messengerAndroid.app.foundation.customView.CustomGoogleButton
         android:id="@+id/buttonGoogle"
         android:layout_width="0dp"
         android:layout_height="@dimen/button_width_height"
@@ -175,4 +175,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textViewAlreadyHaveAcc" />
-</com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout>
+</com.example.messengerAndroid.app.foundation.customView.DismissableKeyboardConstraintLayout>

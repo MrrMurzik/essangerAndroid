@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:padding="@dimen/constraintPadding">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.16" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewPicture"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:src="@drawable/ic_baseline_sentiment_very_satisfied_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewAddPhoto"
+        android:layout_width="@dimen/avatar_diameter"
+        android:layout_height="@dimen/avatar_diameter"
+        android:contentDescription="@string/userPhoto"
+        android:src="@drawable/ic_add_photo"
+
+        app:layout_constraintBottom_toBottomOf="@id/imageViewPicture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@id/imageViewPicture"
+        app:layout_constraintTop_toTopOf="@id/imageViewPicture" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/mediumMargin"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/your_profile_data"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="@dimen/largeFontSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewPicture" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewSubHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/subheader_text"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="@dimen/smallestFontSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewHeader" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="@dimen/smallMargin"
+
+        android:hint="@string/user_name"
+        android:textColorHint="?attr/colorOnPrimaryContainer"
+        app:boxBackgroundColor="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorOnPrimaryContainer"
+
+        app:errorEnabled="true"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+
+        app:hintTextColor="?attr/colorOnPrimaryContainer"
+        app:layout_constraintBottom_toTopOf="@id/inputLayoutPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSubHeader">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/TextInputEditTextStyle"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="@dimen/smallMargin"
+
+        android:hint="@string/mobile_phone"
+        android:textColorHint="?attr/colorOnPrimaryContainer"
+        app:boxBackgroundColor="?attr/colorPrimary"
+        app:boxStrokeColor="?attr/colorOnPrimaryContainer"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+
+        app:hintTextColor="?attr/colorOnPrimaryContainer"
+        app:layout_constraintBottom_toTopOf="@id/guidelineBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/TextInputEditTextStyle"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.66" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/mediumMargin"
+
+        android:background="@drawable/medium_rounded_corner_light"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/action_cancelled"
+        android:textAllCaps="false"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="@dimen/smallFontSize"
+        app:layout_constraintBottom_toTopOf="@id/buttonForward" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonForward"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/slightly_rounded_corner"
+
+        android:backgroundTint="?attr/colorSecondary"
+        android:fontFamily="@font/open_sans_semibold"
+        android:padding="@dimen/SignUpPagePadding"
+        android:text="@string/forward"
+        android:textAllCaps="true"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="@dimen/mediumFontSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        layout="@layout/part_result"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

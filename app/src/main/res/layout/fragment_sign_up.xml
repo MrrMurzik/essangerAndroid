@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.messengerAndroid.app.foundation.customView.DismissableKeyboardConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/margin_from_start"
     android:background="?attr/colorPrimary"
-    android:padding="@dimen/SignUpPagePadding">
+    android:padding="@dimen/constraintPadding">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewGetAcquainted"
@@ -112,7 +111,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inputLayoutPassword" />
 
-    <com.example.messengerAndroid.ui.customView.CustomGoogleButton
+    <com.example.messengerAndroid.app.foundation.customView.CustomGoogleButton
         android:id="@+id/buttonGoogle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -190,4 +189,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textViewAlreadyHaveAcc"
         app:layout_constraintTop_toTopOf="@id/textViewAlreadyHaveAcc" />
-</com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout>
+
+    <include
+        android:id="@+id/part_result"
+        layout="@layout/part_result"/>
+
+</com.example.messengerAndroid.app.foundation.customView.DismissableKeyboardConstraintLayout>

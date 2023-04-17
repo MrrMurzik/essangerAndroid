@@ -8,22 +8,25 @@
     <fragment
         android:id="@+id/signUpFragment"
         tools:layout="@layout/fragment_sign_up"
-        android:name="com.example.messengerAndroid.ui.signUp.SignUpFragment"
+        android:name="com.example.messengerAndroid.app.ui.auth.signUp.SignUpFragment"
         android:label="SignUpFragment" >
         <action
             android:id="@+id/action_signUpFragment_to_viewPagerFragment"
             app:destination="@id/viewPagerFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpExtendedFragment"
+            app:destination="@id/signUpExtendedFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/myContactsFragment"
-        android:name="com.example.messengerAndroid.ui.viewPager.myContacts.MyContactsFragment"
+        android:name="com.example.messengerAndroid.app.ui.viewPager.myContacts.MyContactsFragment"
         android:label="fragment_my_contacts"
         tools:layout="@layout/fragment_my_contacts" />
 
     <fragment
         android:id="@+id/viewDetailsFragment"
-        android:name="com.example.messengerAndroid.ui.contactDetails.ViewDetailsFragment"
+        android:name="com.example.messengerAndroid.app.ui.contactDetails.ViewDetailsFragment"
         tools:layout="@layout/fragment_view_details"
         android:label="ViewDetailsFragment" >
         <argument
@@ -33,7 +36,7 @@
 
     <fragment
         android:id="@+id/myProfileFragment"
-        android:name="com.example.messengerAndroid.ui.viewPager.myProfile.MyProfileFragment"
+        android:name="com.example.messengerAndroid.app.ui.viewPager.myProfile.MyProfileFragment"
         android:label="fragment_view_details"
         tools:layout="@layout/fragment_view_details" >
         <action
@@ -43,7 +46,7 @@
     <fragment
         android:id="@+id/viewPagerFragment"
         tools:layout="@layout/fragment_profile_view_pager"
-        android:name="com.example.messengerAndroid.ui.viewPager.ViewPagerFragment"
+        android:name="com.example.messengerAndroid.app.ui.viewPager.ViewPagerFragment"
         android:label="ViewPagerFragment" >
         <action
             android:id="@+id/action_viewPagerFragment_to_viewDetailsFragment"
@@ -51,5 +54,13 @@
         <action
             android:id="@+id/action_viewPagerFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpExtendedFragment"
+        android:name="com.example.messengerAndroid.app.ui.auth.signUpExtended.SignUpExtendedFragment"
+        android:label="SignUpExtendedFragment" >
+        <action
+            android:id="@+id/action_signUpExtendedFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
     </fragment>
 </navigation>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.messengerAndroid.app.foundation.customView.DismissableKeyboardConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/myProfile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.viewPager.myProfile.MyProfileFragment">
+    tools:context=".app.ui.viewPager.myProfile.MyProfileFragment">
 
     <View
         android:id="@+id/viewUpperBlock"
@@ -167,4 +167,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/buttonEditProfile"
         app:layout_constraintStart_toStartOf="parent" />
-</com.example.messengerAndroid.ui.customView.DismissableKeyboardConstraintLayout>
+</com.example.messengerAndroid.app.foundation.customView.DismissableKeyboardConstraintLayout>
